@@ -1,0 +1,36 @@
+name: ProductHouse
+description: A new Flutter project.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.0
+  flutter_sfsymbols: ^1.0.0
+  freezed_annotation: ^0.12.0
+  json_serializable: ^3.5.1
+  auto_size_text: ^2.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  build_runner: ^1.10.9
+  freezed: ^0.12.7
+  lint: ^1.1.1
+
+flutter:
+  assets:
+    - assets/images/
+
+  uses-material-design: true
+
+  fonts:
+    - family: sficonsets
+      fonts:
+        - asset: packages/flutter_sfsymbols/fonts/sficonsets.ttf
