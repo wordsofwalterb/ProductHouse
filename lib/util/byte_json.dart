@@ -1,5 +1,3 @@
-import 'package:ProductHouse/models/byte.dart';
-
 const byteJson = [
   {
     "title": "10/10/10 Approach",
@@ -13,7 +11,7 @@ const byteJson = [
             "Developed by Suzy Welch, the 10-10-10 approach weighs decisions in the short and long-term thinking."
       },
       {
-        "Emphasis":
+        "emphasis":
             "This is an example of emphasis and how it should be displayed"
       },
       {

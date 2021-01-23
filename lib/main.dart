@@ -2,7 +2,6 @@ import 'package:ProductHouse/home_screen.dart';
 import 'package:ProductHouse/util/theme.dart';
 import 'package:flutter/material.dart';
 
-import 'screens/overview_screen.dart';
 import 'util/router.dart';
 
 void main() {

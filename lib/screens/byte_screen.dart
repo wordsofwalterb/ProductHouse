@@ -1,5 +1,8 @@
 import 'package:ProductHouse/models/byte.dart';
 import 'package:ProductHouse/widgets/button.dart';
+import 'package:ProductHouse/widgets/emphasis.dart';
+import 'package:ProductHouse/widgets/image.dart';
+import 'package:ProductHouse/widgets/paragraph.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sfsymbols/flutter_sfsymbols.dart';
 
@@ -11,16 +14,9 @@ class PHByteScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      persistentFooterButtons: [
-        PHButton('Mark Read'),
-        PHButton('Bookmark'),
-      ],
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            // bottom: AppBar(
-            //   title: Text('title'),
-            // ),
             leading: Row(
               children: [
                 SizedBox(
@@ -56,27 +52,54 @@ class PHByteScreen extends StatelessWidget {
               ],
             ),
           ),
+          // Overview Text
           SliverToBoxAdapter(
             child: Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 12.0, vertical: 20),
+                  const EdgeInsets.symmetric(horizontal: 14.0, vertical: 20),
               child: Text(
                 byte.overview,
                 style: TextStyle(
-                  fontFamily: 'SFProText-Semibold',
-                  fontSize: 18,
-                  color: const Color(0xff5d59f3),
-                  height: 1.6666666666666667,
-                ),
-                textAlign: TextAlign.left,
+                    fontSize: 18,
+                    color: Theme.of(context).primaryColor,
+                    height: 1.6666666666666667,
+                    fontWeight: FontWeight.w700),
               ),
             ),
           ),
+          // Body of Byte
           SliverPadding(
             padding: EdgeInsets.symmetric(horizontal: 16),
             sliver: SliverToBoxAdapter(child: _buildByteBody()),
           ),
         ],
+      ),
+      //Bottom Nav Bar
+      bottomNavigationBar: Container(
+        height: MediaQuery.of(context).padding.bottom +
+            (MediaQuery.of(context).size.height * .06),
+        decoration: BoxDecoration(
+          border: Border(
+            top: BorderSide(width: .5, color: Colors.grey),
+          ),
+        ),
+        child: Padding(
+          padding:
+              EdgeInsets.only(bottom: MediaQuery.of(context).size.height * .02),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              PHButton(
+                'Mark Read',
+                icon: Icons.check,
+              ),
+              SizedBox(
+                width: 18,
+              ),
+              PHButton('Bookmark', icon: Icons.bookmark),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -84,59 +107,27 @@ class PHByteScreen extends StatelessWidget {
   Widget _buildByteBody() {
     List<Widget> bodyWidgets = [];
     for (Map<String, String> element in byte.body) {
-      if (element.containsKey("paragraph")) {
-        bodyWidgets.add(_paragraph(element["paragraph"]));
-      } else if (element.containsKey("emphasis")) {
-        bodyWidgets.add(_emphasis(element["emphasis"]));
-      } else if (element.containsKey("image")) {
-        if (element.containsKey("image_caption")) {
-          bodyWidgets.add(_image(element["image"], element["image_caption"]));
-        } else {
-          bodyWidgets.add(_image(element["image"]));
-        }
-      }
-    }
-    return Column(children: [...bodyWidgets]);
-  }
-
-  Widget _paragraph(String text) {
-    return Text(
-      text,
-      style: TextStyle(
-        fontSize: 18,
-        color: const Color(0xff222222),
-        letterSpacing: 0.19999999237060545,
-        height: 1.6666666666666667,
-      ),
-      textAlign: TextAlign.left,
-    );
-  }
-
-  Widget _emphasis(String text) {
-    return Row(
-      children: [
-        Container(
-          height: 20,
-          width: 5,
-          color: Colors.black,
-        ),
+      bodyWidgets.addAll([
+        if (element.containsKey("paragraph")) ...{
+          PHParagraph(element["paragraph"])
+        } else if (element.containsKey("emphasis")) ...{
+          PHEmphasis(element["emphasis"])
+        } else if (element.containsKey("image")) ...{
+          PHImage(element["image"], caption: element["imageCaption"])
+        },
+        // Always adds a sizedBox for height spacing
         SizedBox(
-          width: 20,
+          height: 25,
         ),
-        Text(
-          text,
-          style: TextStyle(
-            fontFamily: 'SFProText-Semibold',
-            fontSize: 22,
-            color: const Color(0xff000000),
-          ),
-          textAlign: TextAlign.left,
+      ]);
+    }
+    return Column(
+      children: [
+        ...bodyWidgets,
+        SizedBox(
+          height: 20,
         ),
       ],
     );
-  }
-
-  Widget _image(String imageUrl, [String imageCaption]) {
-    return Image.network(imageUrl);
   }
 }
