@@ -1,5 +1,6 @@
 import 'package:ProductHouse/models/user.dart';
 import 'package:ProductHouse/services/user_repository.dart';
+import 'package:ProductHouse/util/result.dart';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -23,12 +24,25 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   }
 
   Stream<UserState> _mapLoginAnonymouslyToState() async* {
-    if (await _userRepository.isSignedIn()) {
-      final PHUser currentUser = await _userRepository.getUser();
+    yield const UserState.authenticating();
 
-      yield UserState.authenticatedAnonymously(user: currentUser);
+    if (_userRepository.isSignedIn()) {
+      final PHResult<PHUser> userResult = await _userRepository.getUser();
+
+      if (userResult.hasError) {
+        yield const UserState.authenticationFailure();
+      } else {
+        yield UserState.authenticatedAnonymously(user: userResult.data);
+      }
     } else {
-      yield const UserState.authenticationFailure();
+      final PHResult<PHUser> userResult =
+          await _userRepository.createAnonymousUser();
+
+      if (userResult.hasError) {
+        yield const UserState.authenticationFailure();
+      } else {
+        yield UserState.authenticatedAnonymously(user: userResult.data);
+      }
     }
   }
 }

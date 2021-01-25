@@ -18,15 +18,27 @@ class _$PHUserTearOff {
 
 // ignore: unused_element
   _PHUser call(
-      {@required String userID,
-      @required List<String> bookmarks,
-      @required List<String> recent,
-      @required List<String> read}) {
+      {@required
+          String userID,
+      @required
+          List<String> bookmarks,
+      @required
+          List<String> recent,
+      @required
+          List<String> read,
+      @required
+      @JsonKey(fromJson: PHFunctions.dateTimeFromTimestamp, toJson: PHFunctions.dateTimeAsIs)
+          DateTime creationDate,
+      @required
+      @JsonKey(fromJson: PHFunctions.dateTimeFromTimestamp, toJson: PHFunctions.dateTimeAsIs)
+          DateTime lastOpenDate}) {
     return _PHUser(
       userID: userID,
       bookmarks: bookmarks,
       recent: recent,
       read: read,
+      creationDate: creationDate,
+      lastOpenDate: lastOpenDate,
     );
   }
 
@@ -54,6 +66,18 @@ mixin _$PHUser {
   /// List of references to all the read Bytes
   List<String> get read;
 
+  /// When the account was created
+  @JsonKey(
+      fromJson: PHFunctions.dateTimeFromTimestamp,
+      toJson: PHFunctions.dateTimeAsIs)
+  DateTime get creationDate;
+
+  /// The last time the user opened the app
+  @JsonKey(
+      fromJson: PHFunctions.dateTimeFromTimestamp,
+      toJson: PHFunctions.dateTimeAsIs)
+  DateTime get lastOpenDate;
+
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
   $PHUserCopyWith<PHUser> get copyWith;
@@ -67,7 +91,11 @@ abstract class $PHUserCopyWith<$Res> {
       {String userID,
       List<String> bookmarks,
       List<String> recent,
-      List<String> read});
+      List<String> read,
+      @JsonKey(fromJson: PHFunctions.dateTimeFromTimestamp, toJson: PHFunctions.dateTimeAsIs)
+          DateTime creationDate,
+      @JsonKey(fromJson: PHFunctions.dateTimeFromTimestamp, toJson: PHFunctions.dateTimeAsIs)
+          DateTime lastOpenDate});
 }
 
 /// @nodoc
@@ -84,6 +112,8 @@ class _$PHUserCopyWithImpl<$Res> implements $PHUserCopyWith<$Res> {
     Object bookmarks = freezed,
     Object recent = freezed,
     Object read = freezed,
+    Object creationDate = freezed,
+    Object lastOpenDate = freezed,
   }) {
     return _then(_value.copyWith(
       userID: userID == freezed ? _value.userID : userID as String,
@@ -91,6 +121,12 @@ class _$PHUserCopyWithImpl<$Res> implements $PHUserCopyWith<$Res> {
           bookmarks == freezed ? _value.bookmarks : bookmarks as List<String>,
       recent: recent == freezed ? _value.recent : recent as List<String>,
       read: read == freezed ? _value.read : read as List<String>,
+      creationDate: creationDate == freezed
+          ? _value.creationDate
+          : creationDate as DateTime,
+      lastOpenDate: lastOpenDate == freezed
+          ? _value.lastOpenDate
+          : lastOpenDate as DateTime,
     ));
   }
 }
@@ -104,7 +140,11 @@ abstract class _$PHUserCopyWith<$Res> implements $PHUserCopyWith<$Res> {
       {String userID,
       List<String> bookmarks,
       List<String> recent,
-      List<String> read});
+      List<String> read,
+      @JsonKey(fromJson: PHFunctions.dateTimeFromTimestamp, toJson: PHFunctions.dateTimeAsIs)
+          DateTime creationDate,
+      @JsonKey(fromJson: PHFunctions.dateTimeFromTimestamp, toJson: PHFunctions.dateTimeAsIs)
+          DateTime lastOpenDate});
 }
 
 /// @nodoc
@@ -122,6 +162,8 @@ class __$PHUserCopyWithImpl<$Res> extends _$PHUserCopyWithImpl<$Res>
     Object bookmarks = freezed,
     Object recent = freezed,
     Object read = freezed,
+    Object creationDate = freezed,
+    Object lastOpenDate = freezed,
   }) {
     return _then(_PHUser(
       userID: userID == freezed ? _value.userID : userID as String,
@@ -129,6 +171,12 @@ class __$PHUserCopyWithImpl<$Res> extends _$PHUserCopyWithImpl<$Res>
           bookmarks == freezed ? _value.bookmarks : bookmarks as List<String>,
       recent: recent == freezed ? _value.recent : recent as List<String>,
       read: read == freezed ? _value.read : read as List<String>,
+      creationDate: creationDate == freezed
+          ? _value.creationDate
+          : creationDate as DateTime,
+      lastOpenDate: lastOpenDate == freezed
+          ? _value.lastOpenDate
+          : lastOpenDate as DateTime,
     ));
   }
 }
@@ -138,14 +186,26 @@ class __$PHUserCopyWithImpl<$Res> extends _$PHUserCopyWithImpl<$Res>
 /// @nodoc
 class _$_PHUser with DiagnosticableTreeMixin implements _PHUser {
   const _$_PHUser(
-      {@required this.userID,
-      @required this.bookmarks,
-      @required this.recent,
-      @required this.read})
+      {@required
+          this.userID,
+      @required
+          this.bookmarks,
+      @required
+          this.recent,
+      @required
+          this.read,
+      @required
+      @JsonKey(fromJson: PHFunctions.dateTimeFromTimestamp, toJson: PHFunctions.dateTimeAsIs)
+          this.creationDate,
+      @required
+      @JsonKey(fromJson: PHFunctions.dateTimeFromTimestamp, toJson: PHFunctions.dateTimeAsIs)
+          this.lastOpenDate})
       : assert(userID != null),
         assert(bookmarks != null),
         assert(recent != null),
-        assert(read != null);
+        assert(read != null),
+        assert(creationDate != null),
+        assert(lastOpenDate != null);
 
   factory _$_PHUser.fromJson(Map<String, dynamic> json) =>
       _$_$_PHUserFromJson(json);
@@ -166,10 +226,24 @@ class _$_PHUser with DiagnosticableTreeMixin implements _PHUser {
 
   /// List of references to all the read Bytes
   final List<String> read;
+  @override
+
+  /// When the account was created
+  @JsonKey(
+      fromJson: PHFunctions.dateTimeFromTimestamp,
+      toJson: PHFunctions.dateTimeAsIs)
+  final DateTime creationDate;
+  @override
+
+  /// The last time the user opened the app
+  @JsonKey(
+      fromJson: PHFunctions.dateTimeFromTimestamp,
+      toJson: PHFunctions.dateTimeAsIs)
+  final DateTime lastOpenDate;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PHUser(userID: $userID, bookmarks: $bookmarks, recent: $recent, read: $read)';
+    return 'PHUser(userID: $userID, bookmarks: $bookmarks, recent: $recent, read: $read, creationDate: $creationDate, lastOpenDate: $lastOpenDate)';
   }
 
   @override
@@ -180,7 +254,9 @@ class _$_PHUser with DiagnosticableTreeMixin implements _PHUser {
       ..add(DiagnosticsProperty('userID', userID))
       ..add(DiagnosticsProperty('bookmarks', bookmarks))
       ..add(DiagnosticsProperty('recent', recent))
-      ..add(DiagnosticsProperty('read', read));
+      ..add(DiagnosticsProperty('read', read))
+      ..add(DiagnosticsProperty('creationDate', creationDate))
+      ..add(DiagnosticsProperty('lastOpenDate', lastOpenDate));
   }
 
   @override
@@ -195,7 +271,13 @@ class _$_PHUser with DiagnosticableTreeMixin implements _PHUser {
             (identical(other.recent, recent) ||
                 const DeepCollectionEquality().equals(other.recent, recent)) &&
             (identical(other.read, read) ||
-                const DeepCollectionEquality().equals(other.read, read)));
+                const DeepCollectionEquality().equals(other.read, read)) &&
+            (identical(other.creationDate, creationDate) ||
+                const DeepCollectionEquality()
+                    .equals(other.creationDate, creationDate)) &&
+            (identical(other.lastOpenDate, lastOpenDate) ||
+                const DeepCollectionEquality()
+                    .equals(other.lastOpenDate, lastOpenDate)));
   }
 
   @override
@@ -204,7 +286,9 @@ class _$_PHUser with DiagnosticableTreeMixin implements _PHUser {
       const DeepCollectionEquality().hash(userID) ^
       const DeepCollectionEquality().hash(bookmarks) ^
       const DeepCollectionEquality().hash(recent) ^
-      const DeepCollectionEquality().hash(read);
+      const DeepCollectionEquality().hash(read) ^
+      const DeepCollectionEquality().hash(creationDate) ^
+      const DeepCollectionEquality().hash(lastOpenDate);
 
   @JsonKey(ignore: true)
   @override
@@ -219,10 +303,20 @@ class _$_PHUser with DiagnosticableTreeMixin implements _PHUser {
 
 abstract class _PHUser implements PHUser {
   const factory _PHUser(
-      {@required String userID,
-      @required List<String> bookmarks,
-      @required List<String> recent,
-      @required List<String> read}) = _$_PHUser;
+      {@required
+          String userID,
+      @required
+          List<String> bookmarks,
+      @required
+          List<String> recent,
+      @required
+          List<String> read,
+      @required
+      @JsonKey(fromJson: PHFunctions.dateTimeFromTimestamp, toJson: PHFunctions.dateTimeAsIs)
+          DateTime creationDate,
+      @required
+      @JsonKey(fromJson: PHFunctions.dateTimeFromTimestamp, toJson: PHFunctions.dateTimeAsIs)
+          DateTime lastOpenDate}) = _$_PHUser;
 
   factory _PHUser.fromJson(Map<String, dynamic> json) = _$_PHUser.fromJson;
 
@@ -242,6 +336,20 @@ abstract class _PHUser implements PHUser {
 
   /// List of references to all the read Bytes
   List<String> get read;
+  @override
+
+  /// When the account was created
+  @JsonKey(
+      fromJson: PHFunctions.dateTimeFromTimestamp,
+      toJson: PHFunctions.dateTimeAsIs)
+  DateTime get creationDate;
+  @override
+
+  /// The last time the user opened the app
+  @JsonKey(
+      fromJson: PHFunctions.dateTimeFromTimestamp,
+      toJson: PHFunctions.dateTimeAsIs)
+  DateTime get lastOpenDate;
   @override
   @JsonKey(ignore: true)
   _$PHUserCopyWith<_PHUser> get copyWith;

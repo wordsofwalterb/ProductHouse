@@ -12,6 +12,10 @@ _$_PHUser _$_$_PHUserFromJson(Map<String, dynamic> json) {
     bookmarks: (json['bookmarks'] as List)?.map((e) => e as String)?.toList(),
     recent: (json['recent'] as List)?.map((e) => e as String)?.toList(),
     read: (json['read'] as List)?.map((e) => e as String)?.toList(),
+    creationDate:
+        PHFunctions.dateTimeFromTimestamp(json['creationDate'] as Timestamp),
+    lastOpenDate:
+        PHFunctions.dateTimeFromTimestamp(json['lastOpenDate'] as Timestamp),
   );
 }
 
@@ -20,4 +24,6 @@ Map<String, dynamic> _$_$_PHUserToJson(_$_PHUser instance) => <String, dynamic>{
       'bookmarks': instance.bookmarks,
       'recent': instance.recent,
       'read': instance.read,
+      'creationDate': PHFunctions.dateTimeAsIs(instance.creationDate),
+      'lastOpenDate': PHFunctions.dateTimeAsIs(instance.lastOpenDate),
     };

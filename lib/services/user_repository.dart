@@ -1,66 +1,73 @@
 import 'package:ProductHouse/models/user.dart';
+import 'package:ProductHouse/util/result.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ProductHouse/util/global.dart';
 
 class UserRepository {
   final FirebaseAuth _firebaseAuth;
-  final FirebaseFirestore _firestore;
 
-  UserRepository({FirebaseAuth firebaseAuth, FirebaseFirestore firestore})
-      : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
-        _firestore = firestore ?? FirebaseFirestore.instance;
-
-  /// Signs the user in
-  Future<void> signIn() async {
-    try {
-      if (await isSignedIn()) {
-        return _firebaseAuth.currentUser;
-      } else {
-        await _firebaseAuth.signInAnonymously();
-        await setupAnonymousUser();
-      }
-    } catch (error) {
-      throw 'Unable to sign in Anonymously';
-    }
-  }
+  UserRepository({FirebaseAuth firebaseAuth})
+      : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance;
 
   /// Creates document in firestore for an anonymous user
-  Future<void> setupAnonymousUser() async {
+  Future<PHResult<PHUser>> createAnonymousUser() async {
     try {
-      final currentUser = _firebaseAuth.currentUser;
+      final firebaseUser = (await _firebaseAuth.signInAnonymously()).user;
 
-      await PHGlobal.userRef.doc(currentUser.uid).set({
-        'userID': currentUser.uid,
+      final userMap = {
+        'userID': firebaseUser.uid,
         'bookmarked': [],
         'recent': [],
         'read': [],
-      });
+        'creationDate': Timestamp.now(),
+        'lastOpenDate': Timestamp.now(),
+      };
+
+      await PHGlobal.userRef.doc(firebaseUser.uid).set(userMap);
+
+      return PHResult.success(PHUser.fromJson(userMap));
     } catch (error) {
-      print('Unable to setup user: $error');
-      throw 'There was an unexpected error connecting to the database';
+      return PHResult.failure(
+          errorCode: error.toString(),
+          errorMessage: 'There was a problem setting up your account.');
     }
   }
 
-  Future<void> updateUser(PHUser updatedUser) async {
-    final User currentUser = _firebaseAuth.currentUser;
-    await PHGlobal.userRef
-        .doc(currentUser.uid)
-        .set(updatedUser.toJson(), SetOptions(merge: true));
+  Future<PHResult<PHUser>> updateUser(PHUser updatedUser) async {
+    try {
+      final User firebaseUser = _firebaseAuth.currentUser;
+
+      await PHGlobal.userRef
+          .doc(firebaseUser.uid)
+          .set(updatedUser.toJson(), SetOptions(merge: true));
+
+      return PHResult.success(updatedUser);
+    } catch (error) {
+      return PHResult.failure(
+          errorCode: error.toString(),
+          errorMessage: 'There was a problem updating the user account.');
+    }
   }
 
-  Future<bool> isSignedIn() async {
+  bool isSignedIn() {
     final User currentUser = _firebaseAuth.currentUser;
     return currentUser != null;
   }
 
-  Future<PHUser> getUser() async {
-    final User currentUser = _firebaseAuth.currentUser;
-    final DocumentSnapshot userDoc =
-        await PHGlobal.userRef.doc(currentUser.uid).get();
+  Future<PHResult<PHUser>> getUser() async {
+    try {
+      final User currentUser = _firebaseAuth.currentUser;
+      final DocumentSnapshot userDoc =
+          await PHGlobal.userRef.doc(currentUser.uid).get();
 
-    return PHUser.fromJson(
-      userDoc.data(),
-    );
+      return PHResult.success(
+        PHUser.fromJson(userDoc.data()),
+      );
+    } catch (error) {
+      return PHResult.failure(
+          errorCode: error.toString(),
+          errorMessage: 'There was a problem retrieving your account');
+    }
   }
 }
