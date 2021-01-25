@@ -18,9 +18,8 @@ class PHByteSquare extends StatelessWidget {
       ),
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(4.0),
-          color: const Color(0xff5d59f3),
-        ),
+            borderRadius: BorderRadius.circular(4.0),
+            color: Theme.of(context).primaryColor),
         padding: EdgeInsets.all(11),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

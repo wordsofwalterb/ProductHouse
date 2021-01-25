@@ -31,7 +31,7 @@ class UserRepository {
       final currentUser = _firebaseAuth.currentUser;
 
       await PHGlobal.userRef.doc(currentUser.uid).set({
-        'userId': currentUser.uid,
+        'userID': currentUser.uid,
         'bookmarked': [],
         'recent': [],
         'read': [],
@@ -60,10 +60,7 @@ class UserRepository {
         await PHGlobal.userRef.doc(currentUser.uid).get();
 
     return PHUser.fromJson(
-      userDoc.data()
-        ..addAll(
-          {'id': userDoc.id},
-        ),
+      userDoc.data(),
     );
   }
 }

@@ -4,7 +4,6 @@ import 'package:ProductHouse/util/theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'util/router.dart';
@@ -13,37 +12,20 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  final prefs = await SharedPreferences.getInstance();
+  // final prefs = await SharedPreferences.getInstance();
 
-  if (prefs.getBool('first_run') ?? false) {
-    print('Clearing cache');
-    const FlutterSecureStorage storage = FlutterSecureStorage();
-    await FirebaseAuth.instance.signOut();
+  // if (prefs.getBool('first_run') ?? false) {
+  //   print('Clearing cache');
 
-    await storage.deleteAll();
+  //   await FirebaseAuth.instance.signOut();
 
-    await prefs.setBool('first_run', false);
-  }
+  //   await prefs.setBool('first_run', false);
+  // }
 
   runApp(PHApp());
 }
 
-class PHApp extends StatefulWidget {
-  @override
-  _PHAppState createState() => _PHAppState();
-}
-
-class _PHAppState extends State<PHApp> {
-  Future<void> _startApp() async {
-    await UserRepository().signIn();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _startApp();
-  }
-
+class PHApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
