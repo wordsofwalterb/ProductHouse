@@ -10,7 +10,8 @@ class UserRepository {
   UserRepository({FirebaseAuth firebaseAuth})
       : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance;
 
-  /// Creates document in firestore for an anonymous user
+  /// Creates document in firestore for an anonymous user and initializes the
+  /// user locally through [FirebaseAuth].
   Future<PHResult<PHUser>> createAnonymousUser() async {
     try {
       final firebaseUser = (await _firebaseAuth.signInAnonymously()).user;
@@ -34,7 +35,10 @@ class UserRepository {
     }
   }
 
+  /// Updates the firestore document for the [PHUser] by sending all
+  /// data within the passed [PHUser] to merge with data in firestore.
   Future<PHResult<PHUser>> updateUser(PHUser updatedUser) async {
+    assert(updatedUser != null, 'updateUser must not be null');
     try {
       final User firebaseUser = _firebaseAuth.currentUser;
 
@@ -50,12 +54,18 @@ class UserRepository {
     }
   }
 
+  /// Checks if the current user withing the [FirebaseAuth] instance is signed in.
   bool isSignedIn() {
     final User currentUser = _firebaseAuth.currentUser;
     return currentUser != null;
   }
 
+  /// Returns a [PHUser] object from Firestore based on the ID of the currently
+  /// signed in [FirebaseAuth] user uid.
   Future<PHResult<PHUser>> getUser() async {
+    assert(_firebaseAuth.currentUser != null,
+        'There must be a currently signed in user in the firebaseAuth instance.');
+
     try {
       final User currentUser = _firebaseAuth.currentUser;
       final DocumentSnapshot userDoc =

@@ -7,6 +7,8 @@ class PHGlobal {
 
   static final FirebaseAnalytics analytics = FirebaseAnalytics();
 
+  /// userRef points to the collection that stores data related to
+  /// creating [PHUser] objects from Firestore.
   static final CollectionReference userRef =
       FirebaseFirestore.instance.collection('users');
 }
