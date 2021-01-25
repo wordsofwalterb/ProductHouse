@@ -26,23 +26,18 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   Stream<UserState> _mapLoginAnonymouslyToState() async* {
     yield const UserState.authenticating();
 
+    PHResult<PHUser> userResult;
+
     if (_userRepository.isSignedIn()) {
-      final PHResult<PHUser> userResult = await _userRepository.getUser();
-
-      if (userResult.hasError) {
-        yield const UserState.authenticationFailure();
-      } else {
-        yield UserState.authenticatedAnonymously(user: userResult.data);
-      }
+      userResult = await _userRepository.getUser();
     } else {
-      final PHResult<PHUser> userResult =
-          await _userRepository.createAnonymousUser();
+      userResult = await _userRepository.createAnonymousUser();
+    }
 
-      if (userResult.hasError) {
-        yield const UserState.authenticationFailure();
-      } else {
-        yield UserState.authenticatedAnonymously(user: userResult.data);
-      }
+    if (userResult.hasError) {
+      yield const UserState.authenticationFailure();
+    } else {
+      yield UserState.authenticatedAnonymously(user: userResult.data);
     }
   }
 }
