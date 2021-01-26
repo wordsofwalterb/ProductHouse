@@ -15,7 +15,7 @@ class PHButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(15),
+      padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(4.0),
         color: (isActive)
@@ -29,7 +29,7 @@ class PHButton extends StatelessWidget {
               icon,
               color: Colors.white,
             ),
-            SizedBox(
+            const SizedBox(
               width: 7,
             ),
           },
@@ -37,7 +37,7 @@ class PHButton extends StatelessWidget {
             body,
             style: Theme.of(context).textTheme.button,
           ),
-          SizedBox(
+          const SizedBox(
             width: 20,
           )
         ],

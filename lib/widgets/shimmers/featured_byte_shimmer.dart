@@ -1,20 +1,12 @@
-import 'package:ProductHouse/models/byte.dart';
-import 'package:ProductHouse/util/router.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
-class PHFeaturedByte extends StatelessWidget {
-  final PHByte byte;
-
-  const PHFeaturedByte(this.byte);
-
+class PHFeaturedByteShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => Navigator.pushNamed(
-        context,
-        PHRoutes.byteScreen,
-        arguments: byte,
-      ),
+    return Shimmer.fromColors(
+      baseColor: Colors.grey[300],
+      highlightColor: Colors.grey[100],
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 12),
         decoration: BoxDecoration(
@@ -27,7 +19,7 @@ class PHFeaturedByte extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 16.0),
               child: Text(
-                byte.title,
+                'Test',
                 style: TextStyle(
                   fontFamily: 'SFProText-Bold',
                   fontSize: 28,
@@ -41,7 +33,7 @@ class PHFeaturedByte extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: Text(
-                byte.overview,
+                'test',
                 style: TextStyle(
                   fontFamily: 'SFProText-Regular',
                   fontSize: 18,
@@ -56,7 +48,7 @@ class PHFeaturedByte extends StatelessWidget {
                 children: [
                   // Adobe XD layer: 'Behavioral' (text)
                   Text(
-                    byte.tags[0],
+                    'test',
                     style: TextStyle(
                       fontFamily: 'SFProText-Semibold',
                       fontSize: 18,
@@ -70,7 +62,7 @@ class PHFeaturedByte extends StatelessWidget {
                   ),
                   // Adobe XD layer: '2m' (text)
                   Text(
-                    byte.readTime,
+                    'test',
                     style: TextStyle(
                       fontFamily: 'SFProText-Semibold',
                       fontSize: 18,

@@ -17,17 +17,6 @@ class PHByteScreen extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            leading: Row(
-              children: [
-                SizedBox(
-                  width: 10,
-                ),
-                Icon(
-                  SFSymbols.chevron_left_circle_fill,
-                  size: 40,
-                ),
-              ],
-            ),
             expandedHeight: 160,
             flexibleSpace: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,7 +83,7 @@ class PHByteScreen extends StatelessWidget {
                 icon: Icons.check,
               ),
               SizedBox(
-                width: 18,
+                width: 12,
               ),
               PHButton('Bookmark', icon: Icons.bookmark),
             ],

@@ -1,3 +1,7 @@
+import 'dart:math';
+
+import 'package:ProductHouse/models/byte.dart';
+import 'package:ProductHouse/util/byte_json.dart';
 import 'package:ProductHouse/widgets/byte_tile.dart';
 import 'package:ProductHouse/widgets/featured_byte.dart';
 import 'package:ProductHouse/widgets/profile_button.dart';
@@ -57,6 +61,10 @@ class PHOverviewScreen extends StatelessWidget {
   }
 
   Widget _dailyByte() {
+    List<PHByte> byteList = byteJson.map((e) => PHByte.fromJson(e)).toList();
+
+    var featuredIndex = Random.secure().nextInt(byteList.length);
+
     return SliverList(
       delegate: SliverChildListDelegate.fixed([
         Column(
@@ -65,7 +73,7 @@ class PHOverviewScreen extends StatelessWidget {
             SizedBox(height: 24),
             PHSectionTitle('Daily Byte'),
             SizedBox(height: 17.5),
-            PHFeaturedByte(),
+            PHFeaturedByte(byteList[0]),
           ],
         ),
       ]),
