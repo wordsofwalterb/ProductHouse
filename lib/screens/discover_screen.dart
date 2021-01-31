@@ -2,6 +2,7 @@ import 'package:ProductHouse/models/byte.dart';
 import 'package:ProductHouse/widgets/byte_square.dart';
 import 'package:ProductHouse/widgets/category_chip.dart';
 import 'package:ProductHouse/widgets/search_bar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ProductHouse/util/byte_json.dart';
 
@@ -19,55 +20,57 @@ class PHDiscoverScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverPadding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            sliver: SliverToBoxAdapter(
-              child: SizedBox(height: MediaQuery.of(context).viewPadding.top),
-            ),
-          ),
-          SliverPadding(
+      body: CupertinoScrollbar(
+              child: CustomScrollView(
+          slivers: [
+            SliverPadding(
               padding: EdgeInsets.symmetric(horizontal: 16),
-              sliver: _topSection(context)),
-          SliverToBoxAdapter(
-            child: Container(
-              height: 40,
-              child: ListView.separated(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: categoryNames.length,
-                separatorBuilder: (BuildContext context, int index) {
-                  return SizedBox(width: 10);
-                },
-                itemBuilder: (BuildContext context, int index) {
-                  if (index == 0)
-                    return Padding(
-                      padding: const EdgeInsets.only(left: 16.0),
-                      child: PHCategoryChip(
-                        '  All  ',
-                        isActive: true,
-                      ),
-                    );
-                  else if (index == categoryNames.length - 1) {
-                    return SizedBox(
-                      width: 10,
-                    );
-                  } else
-                    return PHCategoryChip(categoryNames[index]);
-                },
+              sliver: SliverToBoxAdapter(
+                child: SizedBox(height: MediaQuery.of(context).viewPadding.top),
               ),
             ),
-          ),
-          SliverToBoxAdapter(
-            child: SizedBox(
-              height: 20,
+            SliverPadding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                sliver: _topSection(context)),
+            SliverToBoxAdapter(
+              child: Container(
+                height: 40,
+                child: ListView.separated(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: categoryNames.length,
+                  separatorBuilder: (BuildContext context, int index) {
+                    return SizedBox(width: 10);
+                  },
+                  itemBuilder: (BuildContext context, int index) {
+                    if (index == 0)
+                      return Padding(
+                        padding: const EdgeInsets.only(left: 16.0),
+                        child: PHCategoryChip(
+                          '  All  ',
+                          isActive: true,
+                        ),
+                      );
+                    else if (index == categoryNames.length - 1) {
+                      return SizedBox(
+                        width: 10,
+                      );
+                    } else
+                      return PHCategoryChip(categoryNames[index]);
+                  },
+                ),
+              ),
             ),
-          ),
-          SliverPadding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              sliver: _byteGrid()),
-        ],
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: 20,
+              ),
+            ),
+            SliverPadding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                sliver: _byteGrid()),
+          ],
+        ),
       ),
     );
   }

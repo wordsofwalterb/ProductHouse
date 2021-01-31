@@ -1,3 +1,5 @@
+import 'package:ProductHouse/models/byte.dart';
+import 'package:ProductHouse/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PHFunctions {
@@ -10,4 +12,13 @@ class PHFunctions {
   static DateTime dateTimeFromTimestamp(Timestamp timestamp) {
     return DateTime.parse(timestamp.toDate().toString());
   }
+}
+
+T parseJson<T>(Map<String, dynamic> data) {
+  final mapper = {
+    PHUser: (Map<String, dynamic> data) => PHUser.fromJson(data),
+    PHByte: (Map<String, dynamic> data) => PHByte.fromJson(data),
+  };
+
+  return mapper[T](data) as T;
 }

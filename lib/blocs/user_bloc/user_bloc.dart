@@ -9,7 +9,7 @@ part 'user_event.dart';
 part 'user_bloc.freezed.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
-  /// The repository that handles the persistent information of the current user.
+  /// The repository that handles the persistent data of the current user.
   final UserRepository _userRepository;
 
   /// Handles state related to current user of the app. Does not handle information
@@ -28,9 +28,9 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     );
   }
 
-  /// Checks if the the current user already is signed in, and if so it retrieves
+  /// Checks if the the current user is already signed in, and if so it retrieves
   /// their information from the repository. If the current user is not signed in,
-  /// a new anonymous account is created.
+  /// a new anonymous account is created in the repository and state.
   ///
   /// Potential outputted states are [UserState.authenticating()],
   /// [UserState.authenticationFailure()], and [UserState.authenticatedAnonymously()]
@@ -46,7 +46,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     }
 
     if (userResult.hasError) {
-      yield const UserState.authenticationFailure();
+      yield const UserState.authenticationFailed();
     } else {
       yield UserState.authenticatedAnonymously(user: userResult.data);
     }

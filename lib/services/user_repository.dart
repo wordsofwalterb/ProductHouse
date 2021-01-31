@@ -1,8 +1,10 @@
 import 'package:ProductHouse/models/user.dart';
+import 'package:ProductHouse/util/functions.dart';
 import 'package:ProductHouse/util/result.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ProductHouse/util/global.dart';
+import 'package:flutter/foundation.dart';
 
 class UserRepository {
   final FirebaseAuth _firebaseAuth;
@@ -27,7 +29,12 @@ class UserRepository {
 
       await PHGlobal.userRef.doc(firebaseUser.uid).set(userMap);
 
-      return PHResult.success(PHUser.fromJson(userMap));
+      return PHResult.success(
+        await compute<Map<String, dynamic>, PHUser>(
+          parseJson,
+          userMap,
+        ),
+      );
     } catch (error) {
       return PHResult.failure(
           errorCode: error.toString(),
@@ -72,7 +79,10 @@ class UserRepository {
           await PHGlobal.userRef.doc(currentUser.uid).get();
 
       return PHResult.success(
-        PHUser.fromJson(userDoc.data()),
+        await compute<Map<String, dynamic>, PHUser>(
+          parseJson,
+          userDoc.data(),
+        ),
       );
     } catch (error) {
       return PHResult.failure(
