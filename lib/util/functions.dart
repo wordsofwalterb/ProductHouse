@@ -26,11 +26,15 @@ T parseJson<T>(Map<String, dynamic> data) {
 }
 
 List<T> parseFirestoreQuery<T>(QuerySnapshot queryList) {
+  if (queryList?.docs == null) {
+    return <T>[];
+  }
   return queryList.docs
-      .map((e) => PHFunctions.jsonMapper[T](e.data()) as T)
+      .map(
+          (e) => PHFunctions.jsonMapper[T](e.data()..addAll({'id': e.id})) as T)
       .toList();
 }
 
 List<T> parseJsonList<T>(List<Map<String, dynamic>> jsonList) {
-  return jsonList.map((e) => PHFunctions.jsonMapper[T](e) as T).toList();
+  return jsonList?.map((e) => PHFunctions.jsonMapper[T](e) as T)?.toList();
 }

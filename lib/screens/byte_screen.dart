@@ -89,12 +89,16 @@ class PHByteScreen extends StatelessWidget {
               ),
               BlocBuilder<BookmarkBloc, BookmarkState>(
                 builder: (context, state) {
-                  state.maybeMap(
-                      loadSuccess: (successState) => PHButton(
-                            'Bookmark',
-                            icon: Icons.bookmark,
-                            isActive: successState.bookmarked.contains(byte),
-                          ));
+                  final bloc = BlocProvider.of<BookmarkBloc>(context);
+                  return state.maybeMap(
+                    loadSuccess: (successState) => PHButton(
+                      'Bookmark',
+                      icon: Icons.bookmark,
+                      isActive: successState.bookmarks.contains(byte),
+                      onTap: () => bloc.add(BookmarkEvent.updateBookmark(byte)),
+                    ),
+                    orElse: () => Container(),
+                  );
                 },
               ),
             ],

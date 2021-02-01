@@ -1,6 +1,7 @@
 import 'package:ProductHouse/models/byte.dart';
 import 'package:ProductHouse/services/byte_repository.dart';
 import 'package:ProductHouse/services/user_repository.dart';
+import 'package:ProductHouse/util/result.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,30 +22,57 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
   @override
   Stream<BookmarkState> mapEventToState(BookmarkEvent event) async* {
     yield* event.map(
-      bookmarkAdded: (_BookmarkAdded event) => mapBookmarkAddedToState(event),
-      bookmarkRemoved: (BookmarkEvent event) => mapBookmarkRemovedToState(),
+      updateBookmark: (_UpdateBookmark event) =>
+          mapUpdateBookmarkToState(event),
+      loadBookmarks: (_LoadBookmarks event) => mapLoadBookmarksToState(event),
     );
   }
 
-  Stream<BookmarkState> mapBookmarkAddedToState(_BookmarkAdded event) {
+  Stream<BookmarkState> mapUpdateBookmarkToState(_UpdateBookmark event) async* {
     final currentState = state;
-    // currentState.maybeMap(
-    //   loadSuccess: () => {},
-    //   orElse: () => {},
-    //   );
-
-    if (currentState == _LoadSuccess) {
-      // add bookmark id from database
+    if (currentState is _LoadSuccess) {
       final String currentUserID = _firebaseAuth.currentUser.uid;
+      PHResult<bool> result;
+      List<PHByte> updatedBookmarks;
 
-      _userRepository.updateUserWithMap(currentUserID, {
-        "bookmarked": FieldValue.arrayUnion([event.byte.id]),
-      });
+      if (currentState.bookmarks.contains(event.byte)) {
+        result = await _userRepository.updateUserWithMap(currentUserID, {
+          "bookmarks": FieldValue.arrayRemove([event.byte.id]),
+        });
+        updatedBookmarks = currentState.bookmarks.toList()..remove(event.byte);
+      } else {
+        result = await _userRepository.updateUserWithMap(currentUserID, {
+          "bookmarks": FieldValue.arrayUnion([event.byte.id]),
+        });
+        updatedBookmarks = currentState.bookmarks.toList()..add(event.byte);
+      }
 
-      // add bookmark id locally
-      // yield* BookmarkState.loadSuccess(currentState.);
+      if (!result.hasError) {
+        yield BookmarkState.loadSuccess(bookmarks: updatedBookmarks);
+      } else {
+        yield BookmarkState.loadFailure(
+          bookmarks: currentState.bookmarks,
+          errorMessage: 'There was a problem updating bookmarks',
+        );
+      }
     }
   }
 
-  Stream<BookmarkState> mapBookmarkRemovedToState() {}
+  Stream<BookmarkState> mapLoadBookmarksToState(_LoadBookmarks event) async* {
+    yield const BookmarkState.loadInProgress();
+
+    PHResult<List<PHByte>> result;
+
+    result = await _byteRepository.getBytesByIDs(event.ids);
+    await Future.delayed(Duration(seconds: 1));
+
+    if (!result.hasError) {
+      yield BookmarkState.loadSuccess(bookmarks: result.data);
+    } else {
+      yield BookmarkState.loadFailure(
+        bookmarks: result.data,
+        errorMessage: 'There was a problem with bookmarks',
+      );
+    }
+  }
 }

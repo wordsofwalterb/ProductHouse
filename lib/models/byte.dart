@@ -7,7 +7,7 @@ part 'byte.g.dart';
 @freezed
 abstract class PHByte with _$PHByte {
   const factory PHByte({
-    String id,
+    @required String id,
     @required String title,
     @required List<String> tags,
     @required String overview,

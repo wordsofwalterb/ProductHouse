@@ -1,4 +1,5 @@
 import 'package:ProductHouse/models/byte.dart';
+import 'package:ProductHouse/services/byte_repository.dart';
 import 'package:ProductHouse/widgets/byte_square.dart';
 import 'package:ProductHouse/widgets/category_chip.dart';
 import 'package:ProductHouse/widgets/search_bar.dart';
@@ -16,12 +17,17 @@ const categoryNames = [
   'Discovery'
 ];
 
-class PHDiscoverScreen extends StatelessWidget {
+class PHDiscoverScreen extends StatefulWidget {
+  @override
+  _PHDiscoverScreenState createState() => _PHDiscoverScreenState();
+}
+
+class _PHDiscoverScreenState extends State<PHDiscoverScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: CupertinoScrollbar(
-              child: CustomScrollView(
+        child: CustomScrollView(
           slivers: [
             SliverPadding(
               padding: EdgeInsets.symmetric(horizontal: 16),
@@ -105,20 +111,27 @@ class PHDiscoverScreen extends StatelessWidget {
   }
 
   Widget _byteGrid() {
-    List<PHByte> byteList = byteJson.map((e) => PHByte.fromJson(e)).toList();
-    return SliverGrid(
-      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-        maxCrossAxisExtent: 200.0,
-        mainAxisSpacing: 10.0,
-        crossAxisSpacing: 10.0,
-        childAspectRatio: 1.0,
-      ),
-      delegate: SliverChildBuilderDelegate(
-        (BuildContext context, int index) {
-          return PHByteSquare(byteList[index]);
-        },
-        childCount: 20,
-      ),
+    return FutureBuilder(
+      future: ByteRepository().getAllBytes(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          final List<PHByte> bytes = snapshot.data.data as List<PHByte>;
+          return SliverGrid(
+            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 200.0,
+              mainAxisSpacing: 10.0,
+              crossAxisSpacing: 10.0,
+              childAspectRatio: 1.0,
+            ),
+            delegate:
+                SliverChildBuilderDelegate((BuildContext context, int index) {
+              return PHByteSquare(bytes[index]);
+            }, childCount: bytes.length),
+          );
+        } else {
+          return SliverPadding(padding: EdgeInsets.zero);
+        }
+      },
     );
   }
 }

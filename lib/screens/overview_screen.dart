@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:ProductHouse/blocs/bookmark_bloc/bookmark_bloc.dart';
 import 'package:ProductHouse/models/byte.dart';
 import 'package:ProductHouse/util/byte_json.dart';
 import 'package:ProductHouse/widgets/byte_tile.dart';
@@ -7,7 +8,9 @@ import 'package:ProductHouse/widgets/featured_byte.dart';
 import 'package:ProductHouse/widgets/profile_button.dart';
 import 'package:ProductHouse/widgets/search_bar.dart';
 import 'package:ProductHouse/widgets/section_title.dart';
+import 'package:ProductHouse/widgets/shimmers/byte_tile_shimmer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PHOverviewScreen extends StatelessWidget {
   @override
@@ -25,7 +28,7 @@ class PHOverviewScreen extends StatelessWidget {
               child: PHSectionTitle('Recent'),
             ),
           ),
-          _recent(),
+          // _recent(),
           SliverPadding(
             padding: EdgeInsets.symmetric(vertical: 22),
             sliver: SliverToBoxAdapter(
@@ -39,7 +42,7 @@ class PHOverviewScreen extends StatelessWidget {
               child: PHSectionTitle('Suggested'),
             ),
           ),
-          _suggested(),
+          // _suggested(),
         ],
       ),
     ));
@@ -80,48 +83,73 @@ class PHOverviewScreen extends StatelessWidget {
     );
   }
 
-  Widget _recent() {
-    return SliverList(
-      delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: PHByteTile(
-            title: 'Hanlons Razor',
-            body: 'This is an example of a product framework',
-            minutes: '2',
-          ),
-        );
-      }, childCount: 2),
-    );
-  }
+  // Widget _recent() {
+  //   return SliverList(
+  //     delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
+  //       return Padding(
+  //         padding: const EdgeInsets.symmetric(vertical: 8.0),
+  //         child: PHByteTile(
+
+  //         ),
+  //       );
+  //     }, childCount: 2),
+  //   );
+  // }
 
   Widget _bookmarks() {
-    return SliverList(
-      delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: PHByteTile(
-            title: 'Hanlons Razor',
-            body: 'This is an example of a product framework',
-            minutes: '2',
-          ),
+    return BlocBuilder<BookmarkBloc, BookmarkState>(
+      builder: (context, state) {
+        return state.when(
+          initial: () => sliverShimmer(),
+          loadInProgress: () => sliverShimmer(),
+          loadFailure: (_, __) => sliverShimmer(),
+          loadSuccess: (byteList) {
+            return SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (BuildContext context, int index) {
+                  return state.when(
+                    initial: () => const ByteTileShimmer(),
+                    loadInProgress: () => const ByteTileShimmer(),
+                    loadSuccess: (bookmarkedBytes) => Padding(
+                      padding: EdgeInsets.only(bottom: 14),
+                      child: PHByteTile(
+                        byte: bookmarkedBytes[index],
+                      ),
+                    ),
+                    loadFailure: (_, __) => Container(),
+                  );
+                },
+                childCount: byteList.length,
+              ),
+            );
+          },
         );
-      }, childCount: 4),
+      },
     );
   }
 
-  Widget _suggested() {
+  Widget sliverShimmer() {
     return SliverList(
-      delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: PHByteTile(
-            title: 'Hanlons Razor',
-            body: 'This is an example of a product framework',
-            minutes: '2',
-          ),
-        );
-      }, childCount: 4),
+      delegate: SliverChildListDelegate.fixed([
+        Container(
+            width: double.infinity,
+            height: 100,
+            child: const ByteTileShimmer()),
+      ]),
     );
   }
+
+//   Widget _suggested() {
+//     return SliverList(
+//       delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
+//         return Padding(
+//           padding: const EdgeInsets.symmetric(vertical: 8.0),
+//           child: PHByteTile(
+
+//           ),
+//         );
+//       }, childCount: 4),
+//     );
+//   }
+// }
 }

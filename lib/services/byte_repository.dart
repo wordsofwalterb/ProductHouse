@@ -8,11 +8,13 @@ import 'package:flutter/foundation.dart';
 class ByteRepository {
   Future<PHResult<List<PHByte>>> getBytesByIDs(List<String> byteIDs) async {
     try {
-      List<Map<String, dynamic>> jsonObjects;
+      List<Map<String, dynamic>> jsonObjects = [];
 
       for (String id in byteIDs) {
         final snapshot = await PHGlobal.byteRef.doc(id).get();
-        jsonObjects.add(snapshot.data());
+        if (snapshot.data() != null) {
+          jsonObjects.add(snapshot.data()..addAll({'id': snapshot.id}));
+        }
       }
 
       return PHResult.success(parseJsonList<PHByte>(jsonObjects));

@@ -4,7 +4,6 @@ import 'package:ProductHouse/util/result.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ProductHouse/util/global.dart';
-import 'package:flutter/foundation.dart';
 
 class UserRepository {
   final FirebaseAuth _firebaseAuth;
@@ -20,7 +19,7 @@ class UserRepository {
 
       final userMap = {
         'userID': firebaseUser.uid,
-        'bookmarked': [],
+        'bookmarks': [],
         'recent': [],
         'read': [],
         'creationDate': Timestamp.now(),
@@ -29,12 +28,7 @@ class UserRepository {
 
       await PHGlobal.userRef.doc(firebaseUser.uid).set(userMap);
 
-      return PHResult.success(
-        await compute<Map<String, dynamic>, PHUser>(
-          parseJson,
-          userMap,
-        ),
-      );
+      return PHResult.success(parseJson(userMap));
     } catch (error) {
       return PHResult.failure(
           errorCode: error.toString(),
@@ -93,12 +87,7 @@ class UserRepository {
       final DocumentSnapshot userDoc =
           await PHGlobal.userRef.doc(currentUser.uid).get();
 
-      return PHResult.success(
-        await compute<Map<String, dynamic>, PHUser>(
-          parseJson,
-          userDoc.data(),
-        ),
-      );
+      return PHResult.success(parseJson(userDoc.data()));
     } catch (error) {
       return PHResult.failure(
           errorCode: error.toString(),
