@@ -18,12 +18,14 @@ class _$PHByteTearOff {
 
 // ignore: unused_element
   _PHByte call(
-      {@required String title,
+      {String id,
+      @required String title,
       @required List<String> tags,
       @required String overview,
       @required String readTime,
       @required List<Map<String, String>> body}) {
     return _PHByte(
+      id: id,
       title: title,
       tags: tags,
       overview: overview,
@@ -44,6 +46,7 @@ const $PHByte = _$PHByteTearOff();
 
 /// @nodoc
 mixin _$PHByte {
+  String get id;
   String get title;
   List<String> get tags;
   String get overview;
@@ -60,7 +63,8 @@ abstract class $PHByteCopyWith<$Res> {
   factory $PHByteCopyWith(PHByte value, $Res Function(PHByte) then) =
       _$PHByteCopyWithImpl<$Res>;
   $Res call(
-      {String title,
+      {String id,
+      String title,
       List<String> tags,
       String overview,
       String readTime,
@@ -77,6 +81,7 @@ class _$PHByteCopyWithImpl<$Res> implements $PHByteCopyWith<$Res> {
 
   @override
   $Res call({
+    Object id = freezed,
     Object title = freezed,
     Object tags = freezed,
     Object overview = freezed,
@@ -84,6 +89,7 @@ class _$PHByteCopyWithImpl<$Res> implements $PHByteCopyWith<$Res> {
     Object body = freezed,
   }) {
     return _then(_value.copyWith(
+      id: id == freezed ? _value.id : id as String,
       title: title == freezed ? _value.title : title as String,
       tags: tags == freezed ? _value.tags : tags as List<String>,
       overview: overview == freezed ? _value.overview : overview as String,
@@ -99,7 +105,8 @@ abstract class _$PHByteCopyWith<$Res> implements $PHByteCopyWith<$Res> {
       __$PHByteCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String title,
+      {String id,
+      String title,
       List<String> tags,
       String overview,
       String readTime,
@@ -117,6 +124,7 @@ class __$PHByteCopyWithImpl<$Res> extends _$PHByteCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object id = freezed,
     Object title = freezed,
     Object tags = freezed,
     Object overview = freezed,
@@ -124,6 +132,7 @@ class __$PHByteCopyWithImpl<$Res> extends _$PHByteCopyWithImpl<$Res>
     Object body = freezed,
   }) {
     return _then(_PHByte(
+      id: id == freezed ? _value.id : id as String,
       title: title == freezed ? _value.title : title as String,
       tags: tags == freezed ? _value.tags : tags as List<String>,
       overview: overview == freezed ? _value.overview : overview as String,
@@ -138,7 +147,8 @@ class __$PHByteCopyWithImpl<$Res> extends _$PHByteCopyWithImpl<$Res>
 /// @nodoc
 class _$_PHByte with DiagnosticableTreeMixin implements _PHByte {
   const _$_PHByte(
-      {@required this.title,
+      {this.id,
+      @required this.title,
       @required this.tags,
       @required this.overview,
       @required this.readTime,
@@ -153,6 +163,8 @@ class _$_PHByte with DiagnosticableTreeMixin implements _PHByte {
       _$_$_PHByteFromJson(json);
 
   @override
+  final String id;
+  @override
   final String title;
   @override
   final List<String> tags;
@@ -165,7 +177,7 @@ class _$_PHByte with DiagnosticableTreeMixin implements _PHByte {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PHByte(title: $title, tags: $tags, overview: $overview, readTime: $readTime, body: $body)';
+    return 'PHByte(id: $id, title: $title, tags: $tags, overview: $overview, readTime: $readTime, body: $body)';
   }
 
   @override
@@ -173,6 +185,7 @@ class _$_PHByte with DiagnosticableTreeMixin implements _PHByte {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'PHByte'))
+      ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('tags', tags))
       ..add(DiagnosticsProperty('overview', overview))
@@ -184,6 +197,8 @@ class _$_PHByte with DiagnosticableTreeMixin implements _PHByte {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _PHByte &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.title, title) ||
                 const DeepCollectionEquality().equals(other.title, title)) &&
             (identical(other.tags, tags) ||
@@ -201,6 +216,7 @@ class _$_PHByte with DiagnosticableTreeMixin implements _PHByte {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(overview) ^
@@ -220,7 +236,8 @@ class _$_PHByte with DiagnosticableTreeMixin implements _PHByte {
 
 abstract class _PHByte implements PHByte {
   const factory _PHByte(
-      {@required String title,
+      {String id,
+      @required String title,
       @required List<String> tags,
       @required String overview,
       @required String readTime,
@@ -228,6 +245,8 @@ abstract class _PHByte implements PHByte {
 
   factory _PHByte.fromJson(Map<String, dynamic> json) = _$_PHByte.fromJson;
 
+  @override
+  String get id;
   @override
   String get title;
   @override

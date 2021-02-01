@@ -12,13 +12,25 @@ class PHFunctions {
   static DateTime dateTimeFromTimestamp(Timestamp timestamp) {
     return DateTime.parse(timestamp.toDate().toString());
   }
-}
 
-T parseJson<T>(Map<String, dynamic> data) {
-  final mapper = {
+  static final jsonMapper = {
     PHUser: (Map<String, dynamic> data) => PHUser.fromJson(data),
     PHByte: (Map<String, dynamic> data) => PHByte.fromJson(data),
   };
+}
 
-  return mapper[T](data) as T;
+// Global Functions for use with compute
+
+T parseJson<T>(Map<String, dynamic> data) {
+  return PHFunctions.jsonMapper[T](data) as T;
+}
+
+List<T> parseFirestoreQuery<T>(QuerySnapshot queryList) {
+  return queryList.docs
+      .map((e) => PHFunctions.jsonMapper[T](e.data()) as T)
+      .toList();
+}
+
+List<T> parseJsonList<T>(List<Map<String, dynamic>> jsonList) {
+  return jsonList.map((e) => PHFunctions.jsonMapper[T](e) as T).toList();
 }

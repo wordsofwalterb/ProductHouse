@@ -54,25 +54,25 @@ const $PHUser = _$PHUserTearOff();
 
 /// @nodoc
 mixin _$PHUser {
-  /// The unique identifier for the user
+  /// The unique identifier for the user, assigned by Firestore automatically.
   String get userID;
 
-  /// List of references to bookmarked Bytes
+  /// List of references(IDs) to byte bookmarked by the user
   List<String> get bookmarks;
 
-  /// List of references to 5 most recent Bytes
+  /// List of references(IDs) to 5 most recent Bytes
   List<String> get recent;
 
-  /// List of references to all the read Bytes
+  /// List of references(IDs) to all the bytes marked read by the user
   List<String> get read;
 
-  /// When the account was created
+  /// When the account was created. Created from firestore [Timestamp].
   @JsonKey(
       fromJson: PHFunctions.dateTimeFromTimestamp,
       toJson: PHFunctions.dateTimeAsIs)
   DateTime get creationDate;
 
-  /// The last time the user opened the app
+  /// The last time the user opened the app. Created from firestore [Timestamp].
   @JsonKey(
       fromJson: PHFunctions.dateTimeFromTimestamp,
       toJson: PHFunctions.dateTimeAsIs)
@@ -212,30 +212,30 @@ class _$_PHUser with DiagnosticableTreeMixin implements _PHUser {
 
   @override
 
-  /// The unique identifier for the user
+  /// The unique identifier for the user, assigned by Firestore automatically.
   final String userID;
   @override
 
-  /// List of references to bookmarked Bytes
+  /// List of references(IDs) to byte bookmarked by the user
   final List<String> bookmarks;
   @override
 
-  /// List of references to 5 most recent Bytes
+  /// List of references(IDs) to 5 most recent Bytes
   final List<String> recent;
   @override
 
-  /// List of references to all the read Bytes
+  /// List of references(IDs) to all the bytes marked read by the user
   final List<String> read;
   @override
 
-  /// When the account was created
+  /// When the account was created. Created from firestore [Timestamp].
   @JsonKey(
       fromJson: PHFunctions.dateTimeFromTimestamp,
       toJson: PHFunctions.dateTimeAsIs)
   final DateTime creationDate;
   @override
 
-  /// The last time the user opened the app
+  /// The last time the user opened the app. Created from firestore [Timestamp].
   @JsonKey(
       fromJson: PHFunctions.dateTimeFromTimestamp,
       toJson: PHFunctions.dateTimeAsIs)
@@ -322,30 +322,30 @@ abstract class _PHUser implements PHUser {
 
   @override
 
-  /// The unique identifier for the user
+  /// The unique identifier for the user, assigned by Firestore automatically.
   String get userID;
   @override
 
-  /// List of references to bookmarked Bytes
+  /// List of references(IDs) to byte bookmarked by the user
   List<String> get bookmarks;
   @override
 
-  /// List of references to 5 most recent Bytes
+  /// List of references(IDs) to 5 most recent Bytes
   List<String> get recent;
   @override
 
-  /// List of references to all the read Bytes
+  /// List of references(IDs) to all the bytes marked read by the user
   List<String> get read;
   @override
 
-  /// When the account was created
+  /// When the account was created. Created from firestore [Timestamp].
   @JsonKey(
       fromJson: PHFunctions.dateTimeFromTimestamp,
       toJson: PHFunctions.dateTimeAsIs)
   DateTime get creationDate;
   @override
 
-  /// The last time the user opened the app
+  /// The last time the user opened the app. Created from firestore [Timestamp].
   @JsonKey(
       fromJson: PHFunctions.dateTimeFromTimestamp,
       toJson: PHFunctions.dateTimeAsIs)

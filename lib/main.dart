@@ -8,7 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'blocs/bookmark_bloc/bookmark_bloc.dart';
 import 'blocs/user_bloc/user_bloc.dart';
+import 'services/byte_repository.dart';
 import 'util/global.dart';
 import 'util/router.dart';
 
@@ -26,10 +28,17 @@ Future<void> main() async {
   //   await prefs.setBool('first_run', false);
   // }
 
-  runApp(BlocProvider(
-      create: (context) => UserBloc(userRepository: UserRepository())
-        ..add(const UserEvent.loginAnonymously()),
-      child: PHApp()));
+  runApp(
+    MultiBlocProvider(providers: [
+      BlocProvider<UserBloc>(
+        create: (context) => UserBloc(userRepository: UserRepository())
+          ..add(const UserEvent.loginAnonymously()),
+      ),
+      BlocProvider<BookmarkBloc>(
+        create: (context) => BookmarkBloc(ByteRepository(), UserRepository()),
+      )
+    ], child: PHApp()),
+  );
 }
 
 class PHApp extends StatelessWidget {

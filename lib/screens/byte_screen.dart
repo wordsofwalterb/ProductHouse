@@ -1,9 +1,11 @@
+import 'package:ProductHouse/blocs/bookmark_bloc/bookmark_bloc.dart';
 import 'package:ProductHouse/models/byte.dart';
 import 'package:ProductHouse/widgets/button.dart';
 import 'package:ProductHouse/widgets/emphasis.dart';
 import 'package:ProductHouse/widgets/image.dart';
 import 'package:ProductHouse/widgets/paragraph.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sfsymbols/flutter_sfsymbols.dart';
 
 class PHByteScreen extends StatelessWidget {
@@ -85,7 +87,16 @@ class PHByteScreen extends StatelessWidget {
               SizedBox(
                 width: 12,
               ),
-              PHButton('Bookmark', icon: Icons.bookmark),
+              BlocBuilder<BookmarkBloc, BookmarkState>(
+                builder: (context, state) {
+                  state.maybeMap(
+                      loadSuccess: (successState) => PHButton(
+                            'Bookmark',
+                            icon: Icons.bookmark,
+                            isActive: successState.bookmarked.contains(byte),
+                          ));
+                },
+              ),
             ],
           ),
         ),

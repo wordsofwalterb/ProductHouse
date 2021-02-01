@@ -12,4 +12,6 @@ class PHGlobal {
   /// creating [PHUser] objects from Firestore.
   static final CollectionReference userRef =
       FirebaseFirestore.instance.collection('users');
+  static final CollectionReference byteRef =
+      FirebaseFirestore.instance.collection('bytes');
 }

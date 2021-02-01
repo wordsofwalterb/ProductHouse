@@ -61,6 +61,21 @@ class UserRepository {
     }
   }
 
+  Future<PHResult<bool>> updateUserWithMap(
+      String id, Map<String, dynamic> data) async {
+    try {
+      final User firebaseUser = _firebaseAuth.currentUser;
+
+      await PHGlobal.userRef.doc(firebaseUser.uid).update(data);
+
+      return PHResult.success(true);
+    } catch (error) {
+      return PHResult.failure(
+          errorCode: error.toString(),
+          errorMessage: 'There was a problem updating the user account.');
+    }
+  }
+
   /// Checks if the current user withing the [FirebaseAuth] instance is signed in.
   bool isSignedIn() {
     final User currentUser = _firebaseAuth.currentUser;
