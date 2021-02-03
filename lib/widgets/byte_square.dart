@@ -1,7 +1,9 @@
+import 'package:ProductHouse/blocs/bookmark_bloc/bookmark_bloc.dart';
 import 'package:ProductHouse/models/byte.dart';
 import 'package:ProductHouse/util/router.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PHByteSquare extends StatelessWidget {
   final PHByte byte;
@@ -10,11 +12,15 @@ class PHByteSquare extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bookmarkBloc = BlocProvider.of<BookmarkBloc>(context);
     return GestureDetector(
       onTap: () => Navigator.pushNamed(
         context,
         PHRoutes.byteScreen,
-        arguments: byte,
+        arguments: ByteScreenArgs(
+          bloc: bookmarkBloc,
+          byte: byte,
+        ),
       ),
       child: Container(
         decoration: BoxDecoration(
@@ -43,10 +49,24 @@ class PHByteSquare extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 4.0),
-                  child: Icon(
-                    Icons.bookmark_border_outlined,
-                    size: 35,
-                    color: Colors.white,
+                  child: BlocBuilder<BookmarkBloc, BookmarkState>(
+                    builder: (context, state) {
+                      return state.maybeWhen(
+                          loadSuccess: (bookmarks) => IconButton(
+                                iconSize: 35,
+                                visualDensity: VisualDensity.compact,
+                                padding: EdgeInsets.zero,
+                                onPressed: () => bookmarkBloc
+                                    .add(BookmarkEvent.updateBookmark(byte)),
+                                icon: Icon(
+                                  (bookmarks.contains(byte))
+                                      ? Icons.bookmark
+                                      : Icons.bookmark_border_outlined,
+                                  color: Colors.white,
+                                ),
+                              ),
+                          orElse: () => Container());
+                    },
                   ),
                 ),
               ],

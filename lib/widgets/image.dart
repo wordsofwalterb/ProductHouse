@@ -10,7 +10,9 @@ class PHImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Image.network(imageUrl),
+        InteractiveViewer(
+          child: Image.network(imageUrl),
+        ),
         if (caption != null) ...{
           Text(
             caption,

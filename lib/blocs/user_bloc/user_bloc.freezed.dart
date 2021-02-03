@@ -31,7 +31,7 @@ class _$UserStateTearOff {
   }
 
 // ignore: unused_element
-  _AuthenticationFailure authenticationFailure() {
+  _AuthenticationFailure authenticationFailed() {
     return const _AuthenticationFailure();
   }
 }
@@ -47,14 +47,14 @@ mixin _$UserState {
     @required TResult unauthenticated(),
     @required TResult authenticating(),
     @required TResult authenticatedAnonymously(PHUser user),
-    @required TResult authenticationFailure(),
+    @required TResult authenticationFailed(),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
     TResult unauthenticated(),
     TResult authenticating(),
     TResult authenticatedAnonymously(PHUser user),
-    TResult authenticationFailure(),
+    TResult authenticationFailed(),
     @required TResult orElse(),
   });
   @optionalTypeArgs
@@ -62,14 +62,14 @@ mixin _$UserState {
     @required TResult unauthenticated(_Unauthenticated value),
     @required TResult authenticating(_Authenticating value),
     @required TResult authenticatedAnonymously(_AuthenticatedAnonymously value),
-    @required TResult authenticationFailure(_AuthenticationFailure value),
+    @required TResult authenticationFailed(_AuthenticationFailure value),
   });
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
     TResult unauthenticated(_Unauthenticated value),
     TResult authenticating(_Authenticating value),
     TResult authenticatedAnonymously(_AuthenticatedAnonymously value),
-    TResult authenticationFailure(_AuthenticationFailure value),
+    TResult authenticationFailed(_AuthenticationFailure value),
     @required TResult orElse(),
   });
 }
@@ -130,12 +130,12 @@ class _$_Unauthenticated implements _Unauthenticated {
     @required TResult unauthenticated(),
     @required TResult authenticating(),
     @required TResult authenticatedAnonymously(PHUser user),
-    @required TResult authenticationFailure(),
+    @required TResult authenticationFailed(),
   }) {
     assert(unauthenticated != null);
     assert(authenticating != null);
     assert(authenticatedAnonymously != null);
-    assert(authenticationFailure != null);
+    assert(authenticationFailed != null);
     return unauthenticated();
   }
 
@@ -145,7 +145,7 @@ class _$_Unauthenticated implements _Unauthenticated {
     TResult unauthenticated(),
     TResult authenticating(),
     TResult authenticatedAnonymously(PHUser user),
-    TResult authenticationFailure(),
+    TResult authenticationFailed(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -161,12 +161,12 @@ class _$_Unauthenticated implements _Unauthenticated {
     @required TResult unauthenticated(_Unauthenticated value),
     @required TResult authenticating(_Authenticating value),
     @required TResult authenticatedAnonymously(_AuthenticatedAnonymously value),
-    @required TResult authenticationFailure(_AuthenticationFailure value),
+    @required TResult authenticationFailed(_AuthenticationFailure value),
   }) {
     assert(unauthenticated != null);
     assert(authenticating != null);
     assert(authenticatedAnonymously != null);
-    assert(authenticationFailure != null);
+    assert(authenticationFailed != null);
     return unauthenticated(this);
   }
 
@@ -176,7 +176,7 @@ class _$_Unauthenticated implements _Unauthenticated {
     TResult unauthenticated(_Unauthenticated value),
     TResult authenticating(_Authenticating value),
     TResult authenticatedAnonymously(_AuthenticatedAnonymously value),
-    TResult authenticationFailure(_AuthenticationFailure value),
+    TResult authenticationFailed(_AuthenticationFailure value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -232,12 +232,12 @@ class _$_Authenticating implements _Authenticating {
     @required TResult unauthenticated(),
     @required TResult authenticating(),
     @required TResult authenticatedAnonymously(PHUser user),
-    @required TResult authenticationFailure(),
+    @required TResult authenticationFailed(),
   }) {
     assert(unauthenticated != null);
     assert(authenticating != null);
     assert(authenticatedAnonymously != null);
-    assert(authenticationFailure != null);
+    assert(authenticationFailed != null);
     return authenticating();
   }
 
@@ -247,7 +247,7 @@ class _$_Authenticating implements _Authenticating {
     TResult unauthenticated(),
     TResult authenticating(),
     TResult authenticatedAnonymously(PHUser user),
-    TResult authenticationFailure(),
+    TResult authenticationFailed(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -263,12 +263,12 @@ class _$_Authenticating implements _Authenticating {
     @required TResult unauthenticated(_Unauthenticated value),
     @required TResult authenticating(_Authenticating value),
     @required TResult authenticatedAnonymously(_AuthenticatedAnonymously value),
-    @required TResult authenticationFailure(_AuthenticationFailure value),
+    @required TResult authenticationFailed(_AuthenticationFailure value),
   }) {
     assert(unauthenticated != null);
     assert(authenticating != null);
     assert(authenticatedAnonymously != null);
-    assert(authenticationFailure != null);
+    assert(authenticationFailed != null);
     return authenticating(this);
   }
 
@@ -278,7 +278,7 @@ class _$_Authenticating implements _Authenticating {
     TResult unauthenticated(_Unauthenticated value),
     TResult authenticating(_Authenticating value),
     TResult authenticatedAnonymously(_AuthenticatedAnonymously value),
-    TResult authenticationFailure(_AuthenticationFailure value),
+    TResult authenticationFailed(_AuthenticationFailure value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -372,12 +372,12 @@ class _$_AuthenticatedAnonymously implements _AuthenticatedAnonymously {
     @required TResult unauthenticated(),
     @required TResult authenticating(),
     @required TResult authenticatedAnonymously(PHUser user),
-    @required TResult authenticationFailure(),
+    @required TResult authenticationFailed(),
   }) {
     assert(unauthenticated != null);
     assert(authenticating != null);
     assert(authenticatedAnonymously != null);
-    assert(authenticationFailure != null);
+    assert(authenticationFailed != null);
     return authenticatedAnonymously(user);
   }
 
@@ -387,7 +387,7 @@ class _$_AuthenticatedAnonymously implements _AuthenticatedAnonymously {
     TResult unauthenticated(),
     TResult authenticating(),
     TResult authenticatedAnonymously(PHUser user),
-    TResult authenticationFailure(),
+    TResult authenticationFailed(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -403,12 +403,12 @@ class _$_AuthenticatedAnonymously implements _AuthenticatedAnonymously {
     @required TResult unauthenticated(_Unauthenticated value),
     @required TResult authenticating(_Authenticating value),
     @required TResult authenticatedAnonymously(_AuthenticatedAnonymously value),
-    @required TResult authenticationFailure(_AuthenticationFailure value),
+    @required TResult authenticationFailed(_AuthenticationFailure value),
   }) {
     assert(unauthenticated != null);
     assert(authenticating != null);
     assert(authenticatedAnonymously != null);
-    assert(authenticationFailure != null);
+    assert(authenticationFailed != null);
     return authenticatedAnonymously(this);
   }
 
@@ -418,7 +418,7 @@ class _$_AuthenticatedAnonymously implements _AuthenticatedAnonymously {
     TResult unauthenticated(_Unauthenticated value),
     TResult authenticating(_Authenticating value),
     TResult authenticatedAnonymously(_AuthenticatedAnonymously value),
-    TResult authenticationFailure(_AuthenticationFailure value),
+    TResult authenticationFailed(_AuthenticationFailure value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -463,7 +463,7 @@ class _$_AuthenticationFailure implements _AuthenticationFailure {
 
   @override
   String toString() {
-    return 'UserState.authenticationFailure()';
+    return 'UserState.authenticationFailed()';
   }
 
   @override
@@ -480,13 +480,13 @@ class _$_AuthenticationFailure implements _AuthenticationFailure {
     @required TResult unauthenticated(),
     @required TResult authenticating(),
     @required TResult authenticatedAnonymously(PHUser user),
-    @required TResult authenticationFailure(),
+    @required TResult authenticationFailed(),
   }) {
     assert(unauthenticated != null);
     assert(authenticating != null);
     assert(authenticatedAnonymously != null);
-    assert(authenticationFailure != null);
-    return authenticationFailure();
+    assert(authenticationFailed != null);
+    return authenticationFailed();
   }
 
   @override
@@ -495,12 +495,12 @@ class _$_AuthenticationFailure implements _AuthenticationFailure {
     TResult unauthenticated(),
     TResult authenticating(),
     TResult authenticatedAnonymously(PHUser user),
-    TResult authenticationFailure(),
+    TResult authenticationFailed(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
-    if (authenticationFailure != null) {
-      return authenticationFailure();
+    if (authenticationFailed != null) {
+      return authenticationFailed();
     }
     return orElse();
   }
@@ -511,13 +511,13 @@ class _$_AuthenticationFailure implements _AuthenticationFailure {
     @required TResult unauthenticated(_Unauthenticated value),
     @required TResult authenticating(_Authenticating value),
     @required TResult authenticatedAnonymously(_AuthenticatedAnonymously value),
-    @required TResult authenticationFailure(_AuthenticationFailure value),
+    @required TResult authenticationFailed(_AuthenticationFailure value),
   }) {
     assert(unauthenticated != null);
     assert(authenticating != null);
     assert(authenticatedAnonymously != null);
-    assert(authenticationFailure != null);
-    return authenticationFailure(this);
+    assert(authenticationFailed != null);
+    return authenticationFailed(this);
   }
 
   @override
@@ -526,12 +526,12 @@ class _$_AuthenticationFailure implements _AuthenticationFailure {
     TResult unauthenticated(_Unauthenticated value),
     TResult authenticating(_Authenticating value),
     TResult authenticatedAnonymously(_AuthenticatedAnonymously value),
-    TResult authenticationFailure(_AuthenticationFailure value),
+    TResult authenticationFailed(_AuthenticationFailure value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
-    if (authenticationFailure != null) {
-      return authenticationFailure(this);
+    if (authenticationFailed != null) {
+      return authenticationFailed(this);
     }
     return orElse();
   }

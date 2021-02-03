@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 
 class PHGlobal {
@@ -11,4 +12,6 @@ class PHGlobal {
   /// creating [PHUser] objects from Firestore.
   static final CollectionReference userRef =
       FirebaseFirestore.instance.collection('users');
+  static final CollectionReference byteRef =
+      FirebaseFirestore.instance.collection('bytes');
 }

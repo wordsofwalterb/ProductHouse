@@ -1,4 +1,4 @@
-part of 'bookmark_bloc.dart';
+part of 'bookmark_cubit.dart';
 
 @freezed
 abstract class BookmarkState with _$BookmarkState {

@@ -1,3 +1,5 @@
+import 'package:ProductHouse/models/byte.dart';
+import 'package:ProductHouse/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PHFunctions {
@@ -10,4 +12,29 @@ class PHFunctions {
   static DateTime dateTimeFromTimestamp(Timestamp timestamp) {
     return DateTime.parse(timestamp.toDate().toString());
   }
+
+  static final jsonMapper = {
+    PHUser: (Map<String, dynamic> data) => PHUser.fromJson(data),
+    PHByte: (Map<String, dynamic> data) => PHByte.fromJson(data),
+  };
+}
+
+// Global Functions for use with compute
+
+T parseJson<T>(Map<String, dynamic> data) {
+  return PHFunctions.jsonMapper[T](data) as T;
+}
+
+List<T> parseFirestoreQuery<T>(QuerySnapshot queryList) {
+  if (queryList?.docs == null) {
+    return <T>[];
+  }
+  return queryList.docs
+      .map(
+          (e) => PHFunctions.jsonMapper[T](e.data()..addAll({'id': e.id})) as T)
+      .toList();
+}
+
+List<T> parseJsonList<T>(List<Map<String, dynamic>> jsonList) {
+  return jsonList?.map((e) => PHFunctions.jsonMapper[T](e) as T)?.toList();
 }

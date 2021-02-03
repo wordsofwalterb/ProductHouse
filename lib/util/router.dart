@@ -1,6 +1,8 @@
+import 'package:ProductHouse/blocs/bookmark_bloc/bookmark_bloc.dart';
 import 'package:ProductHouse/models/byte.dart';
 import 'package:ProductHouse/screens/byte_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../home_screen.dart';
 
@@ -19,10 +21,24 @@ class PHRouter {
       case PHRoutes.home:
         return MaterialPageRoute(builder: (_) => HomeScreen());
       case PHRoutes.byteScreen:
-        return MaterialPageRoute(builder: (_) => PHByteScreen(args as PHByte));
+        if (args is ByteScreenArgs) {
+          return _byteScreenRoute(args);
+        }
+        throw Exception('Invalid arguments for ${settings.name}');
+        break;
+
       default:
         return _errorRoute(settings);
     }
+  }
+
+  static Route<dynamic> _byteScreenRoute(ByteScreenArgs args) {
+    return MaterialPageRoute(
+      builder: (context) => BlocProvider.value(
+        value: args.bloc,
+        child: PHByteScreen(args.byte),
+      ),
+    );
   }
 
 // Moved route generation to this section for brevity in previous section
@@ -34,4 +50,16 @@ class PHRouter {
       ),
     );
   }
+}
+
+//Arguement Classes
+
+class ByteScreenArgs {
+  final BookmarkBloc bloc;
+  final PHByte byte;
+
+  const ByteScreenArgs({
+    @required this.bloc,
+    @required this.byte,
+  });
 }

@@ -8,6 +8,7 @@ part of 'byte.dart';
 
 _$_PHByte _$_$_PHByteFromJson(Map<String, dynamic> json) {
   return _$_PHByte(
+    id: json['id'] as String,
     title: json['title'] as String,
     tags: (json['tags'] as List)?.map((e) => e as String)?.toList(),
     overview: json['overview'] as String,
@@ -21,6 +22,7 @@ _$_PHByte _$_$_PHByteFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$_$_PHByteToJson(_$_PHByte instance) => <String, dynamic>{
+      'id': instance.id,
       'title': instance.title,
       'tags': instance.tags,
       'overview': instance.overview,
