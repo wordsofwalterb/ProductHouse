@@ -18,6 +18,7 @@ _$_PHByte _$_$_PHByteFromJson(Map<String, dynamic> json) {
               (k, e) => MapEntry(k, e as String),
             ))
         ?.toList(),
+    featured: json['featured'] as bool,
   );
 }
 
@@ -28,4 +29,5 @@ Map<String, dynamic> _$_$_PHByteToJson(_$_PHByte instance) => <String, dynamic>{
       'overview': instance.overview,
       'readTime': instance.readTime,
       'body': instance.body,
+      'featured': instance.featured,
     };

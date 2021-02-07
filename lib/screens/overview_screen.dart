@@ -69,7 +69,7 @@ class PHOverviewScreen extends StatelessWidget {
         future: ByteRepository().retrieveFeaturedByte(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            PHResult<PHByte> result = snapshot.data as PHResult<PHByte>;
+            PHByte result = snapshot.data as PHByte;
             return SliverList(
               delegate: SliverChildListDelegate.fixed([
                 Column(
@@ -78,7 +78,7 @@ class PHOverviewScreen extends StatelessWidget {
                     SizedBox(height: 24),
                     PHSectionTitle('Daily Byte'),
                     SizedBox(height: 17.5),
-                    PHFeaturedByte(result.data),
+                    PHFeaturedByte(result),
                   ],
                 ),
               ]),

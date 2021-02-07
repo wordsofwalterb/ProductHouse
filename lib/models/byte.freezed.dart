@@ -18,12 +18,13 @@ class _$PHByteTearOff {
 
 // ignore: unused_element
   _PHByte call(
-      {String id,
+      {@required String id,
       @required String title,
       @required List<String> tags,
       @required String overview,
       @required String readTime,
-      @required List<Map<String, String>> body}) {
+      @required List<Map<String, String>> body,
+      @required bool featured}) {
     return _PHByte(
       id: id,
       title: title,
@@ -31,6 +32,7 @@ class _$PHByteTearOff {
       overview: overview,
       readTime: readTime,
       body: body,
+      featured: featured,
     );
   }
 
@@ -52,6 +54,7 @@ mixin _$PHByte {
   String get overview;
   String get readTime;
   List<Map<String, String>> get body;
+  bool get featured;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -68,7 +71,8 @@ abstract class $PHByteCopyWith<$Res> {
       List<String> tags,
       String overview,
       String readTime,
-      List<Map<String, String>> body});
+      List<Map<String, String>> body,
+      bool featured});
 }
 
 /// @nodoc
@@ -87,6 +91,7 @@ class _$PHByteCopyWithImpl<$Res> implements $PHByteCopyWith<$Res> {
     Object overview = freezed,
     Object readTime = freezed,
     Object body = freezed,
+    Object featured = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as String,
@@ -95,6 +100,7 @@ class _$PHByteCopyWithImpl<$Res> implements $PHByteCopyWith<$Res> {
       overview: overview == freezed ? _value.overview : overview as String,
       readTime: readTime == freezed ? _value.readTime : readTime as String,
       body: body == freezed ? _value.body : body as List<Map<String, String>>,
+      featured: featured == freezed ? _value.featured : featured as bool,
     ));
   }
 }
@@ -110,7 +116,8 @@ abstract class _$PHByteCopyWith<$Res> implements $PHByteCopyWith<$Res> {
       List<String> tags,
       String overview,
       String readTime,
-      List<Map<String, String>> body});
+      List<Map<String, String>> body,
+      bool featured});
 }
 
 /// @nodoc
@@ -130,6 +137,7 @@ class __$PHByteCopyWithImpl<$Res> extends _$PHByteCopyWithImpl<$Res>
     Object overview = freezed,
     Object readTime = freezed,
     Object body = freezed,
+    Object featured = freezed,
   }) {
     return _then(_PHByte(
       id: id == freezed ? _value.id : id as String,
@@ -138,6 +146,7 @@ class __$PHByteCopyWithImpl<$Res> extends _$PHByteCopyWithImpl<$Res>
       overview: overview == freezed ? _value.overview : overview as String,
       readTime: readTime == freezed ? _value.readTime : readTime as String,
       body: body == freezed ? _value.body : body as List<Map<String, String>>,
+      featured: featured == freezed ? _value.featured : featured as bool,
     ));
   }
 }
@@ -147,17 +156,20 @@ class __$PHByteCopyWithImpl<$Res> extends _$PHByteCopyWithImpl<$Res>
 /// @nodoc
 class _$_PHByte with DiagnosticableTreeMixin implements _PHByte {
   const _$_PHByte(
-      {this.id,
+      {@required this.id,
       @required this.title,
       @required this.tags,
       @required this.overview,
       @required this.readTime,
-      @required this.body})
-      : assert(title != null),
+      @required this.body,
+      @required this.featured})
+      : assert(id != null),
+        assert(title != null),
         assert(tags != null),
         assert(overview != null),
         assert(readTime != null),
-        assert(body != null);
+        assert(body != null),
+        assert(featured != null);
 
   factory _$_PHByte.fromJson(Map<String, dynamic> json) =>
       _$_$_PHByteFromJson(json);
@@ -174,10 +186,12 @@ class _$_PHByte with DiagnosticableTreeMixin implements _PHByte {
   final String readTime;
   @override
   final List<Map<String, String>> body;
+  @override
+  final bool featured;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PHByte(id: $id, title: $title, tags: $tags, overview: $overview, readTime: $readTime, body: $body)';
+    return 'PHByte(id: $id, title: $title, tags: $tags, overview: $overview, readTime: $readTime, body: $body, featured: $featured)';
   }
 
   @override
@@ -190,7 +204,8 @@ class _$_PHByte with DiagnosticableTreeMixin implements _PHByte {
       ..add(DiagnosticsProperty('tags', tags))
       ..add(DiagnosticsProperty('overview', overview))
       ..add(DiagnosticsProperty('readTime', readTime))
-      ..add(DiagnosticsProperty('body', body));
+      ..add(DiagnosticsProperty('body', body))
+      ..add(DiagnosticsProperty('featured', featured));
   }
 
   @override
@@ -210,7 +225,10 @@ class _$_PHByte with DiagnosticableTreeMixin implements _PHByte {
                 const DeepCollectionEquality()
                     .equals(other.readTime, readTime)) &&
             (identical(other.body, body) ||
-                const DeepCollectionEquality().equals(other.body, body)));
+                const DeepCollectionEquality().equals(other.body, body)) &&
+            (identical(other.featured, featured) ||
+                const DeepCollectionEquality()
+                    .equals(other.featured, featured)));
   }
 
   @override
@@ -221,7 +239,8 @@ class _$_PHByte with DiagnosticableTreeMixin implements _PHByte {
       const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(overview) ^
       const DeepCollectionEquality().hash(readTime) ^
-      const DeepCollectionEquality().hash(body);
+      const DeepCollectionEquality().hash(body) ^
+      const DeepCollectionEquality().hash(featured);
 
   @JsonKey(ignore: true)
   @override
@@ -236,12 +255,13 @@ class _$_PHByte with DiagnosticableTreeMixin implements _PHByte {
 
 abstract class _PHByte implements PHByte {
   const factory _PHByte(
-      {String id,
+      {@required String id,
       @required String title,
       @required List<String> tags,
       @required String overview,
       @required String readTime,
-      @required List<Map<String, String>> body}) = _$_PHByte;
+      @required List<Map<String, String>> body,
+      @required bool featured}) = _$_PHByte;
 
   factory _PHByte.fromJson(Map<String, dynamic> json) = _$_PHByte.fromJson;
 
@@ -257,6 +277,8 @@ abstract class _PHByte implements PHByte {
   String get readTime;
   @override
   List<Map<String, String>> get body;
+  @override
+  bool get featured;
   @override
   @JsonKey(ignore: true)
   _$PHByteCopyWith<_PHByte> get copyWith;
