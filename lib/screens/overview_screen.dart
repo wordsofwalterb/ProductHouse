@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:ProductHouse/blocs/bookmark_bloc/bookmark_bloc.dart';
 import 'package:ProductHouse/models/byte.dart';
+import 'package:ProductHouse/services/byte_repository.dart';
+import 'package:ProductHouse/util/result.dart';
 import 'package:ProductHouse/widgets/byte_tile.dart';
 import 'package:ProductHouse/widgets/featured_byte.dart';
 import 'package:ProductHouse/widgets/profile_button.dart';
@@ -20,7 +22,7 @@ class PHOverviewScreen extends StatelessWidget {
       child: CustomScrollView(
         slivers: [
           _appSearchBar(),
-          // _dailyByte(),
+          _dailyByte(),
           SliverPadding(
             padding: EdgeInsets.symmetric(vertical: 22),
             sliver: SliverToBoxAdapter(
@@ -62,21 +64,31 @@ class PHOverviewScreen extends StatelessWidget {
     );
   }
 
-  // Widget _dailyByte() {
-  //   return SliverList(
-  //     delegate: SliverChildListDelegate.fixed([
-  //       Column(
-  //         crossAxisAlignment: CrossAxisAlignment.start,
-  //         children: [
-  //           SizedBox(height: 24),
-  //           PHSectionTitle('Daily Byte'),
-  //           SizedBox(height: 17.5),
-  //           PHFeaturedByte(byteList[0]),
-  //         ],
-  //       ),
-  //     ]),
-  //   );
-  // }
+  Widget _dailyByte() {
+    return FutureBuilder(
+        future: ByteRepository().retrieveFeaturedByte(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            PHResult<PHByte> result = snapshot.data as PHResult<PHByte>;
+            return SliverList(
+              delegate: SliverChildListDelegate.fixed([
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 24),
+                    PHSectionTitle('Daily Byte'),
+                    SizedBox(height: 17.5),
+                    PHFeaturedByte(result.data),
+                  ],
+                ),
+              ]),
+            );
+          } else {
+            return SliverToBoxAdapter(child: Container(),);
+          }
+        }
+        );
+  }
 
   // Widget _recent() {
   //   return SliverList(

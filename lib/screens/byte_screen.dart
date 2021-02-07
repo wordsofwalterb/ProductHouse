@@ -2,6 +2,7 @@ import 'package:ProductHouse/blocs/bookmark_bloc/bookmark_bloc.dart';
 import 'package:ProductHouse/models/byte.dart';
 import 'package:ProductHouse/widgets/button.dart';
 import 'package:ProductHouse/widgets/emphasis.dart';
+import 'package:ProductHouse/widgets/header1.dart';
 import 'package:ProductHouse/widgets/image.dart';
 import 'package:ProductHouse/widgets/paragraph.dart';
 import 'package:flutter/material.dart';
@@ -118,6 +119,8 @@ class PHByteScreen extends StatelessWidget {
           PHEmphasis(element["emphasis"])
         } else if (element.containsKey("image")) ...{
           PHImage(element["image"], caption: element["imageCaption"])
+        } else if (element.containsKey("header1")) ...{
+          PHHeader1 (element["header1"])
         },
         // Always adds a sizedBox for height spacing
         SizedBox(
@@ -126,6 +129,7 @@ class PHByteScreen extends StatelessWidget {
       ]);
     }
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ...bodyWidgets,
         SizedBox(
