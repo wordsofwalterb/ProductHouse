@@ -24,15 +24,17 @@ class ByteRepository {
     }
   }
 
-  Future<PHByte> retrieveFeaturedByte() async {
+  Future<PHResult<PHByte>> retrieveFeaturedByte() async {
+    try {
       final querySnapshot =
           await PHGlobal.byteRef.where('featured', isEqualTo: true).get();
       final document = querySnapshot.docs.first;
-      return parseJson<PHByte>(document.data());
-    // } catch (error) {
-    //   return PHResult.failure(
-    //       errorCode: error.toString(),
-    //       errorMessage: 'There was a problem retrieving all bytes');
+      return PHResult.success(parseJson<PHByte>(document.data()));
+    } catch (error) {
+      return PHResult.failure(
+          errorCode: error.toString(),
+          errorMessage: 'There was a problem retrieving all bytes');
+    }
   }
 
   Future<PHResult<List<PHByte>>> getAllBytes() async {
@@ -40,6 +42,7 @@ class ByteRepository {
       final querySnapshot = await PHGlobal.byteRef.get();
       return PHResult.success(parseFirestoreQuery(querySnapshot));
     } catch (error) {
+      print('eerror');
       return PHResult.failure(
           errorCode: error.toString(),
           errorMessage: 'There was a problem retrieving all bytes');

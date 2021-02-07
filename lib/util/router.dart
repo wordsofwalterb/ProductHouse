@@ -35,7 +35,7 @@ class PHRouter {
   static Route<dynamic> _byteScreenRoute(ByteScreenArgs args) {
     return MaterialPageRoute(
       builder: (context) => BlocProvider.value(
-        value: args.bloc,
+        value: args.bookmarkBloc,
         child: PHByteScreen(args.byte),
       ),
     );
@@ -55,11 +55,11 @@ class PHRouter {
 //Arguement Classes
 
 class ByteScreenArgs {
-  final BookmarkBloc bloc;
+  final BookmarkBloc bookmarkBloc;
   final PHByte byte;
 
   const ByteScreenArgs({
-    @required this.bloc,
+    @required this.bookmarkBloc,
     @required this.byte,
   });
 }

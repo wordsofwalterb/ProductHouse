@@ -1,6 +1,8 @@
+import 'package:ProductHouse/blocs/bookmark_bloc/bookmark_bloc.dart';
 import 'package:ProductHouse/models/byte.dart';
 import 'package:ProductHouse/util/router.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PHFeaturedByte extends StatelessWidget {
   final PHByte byte;
@@ -13,7 +15,10 @@ class PHFeaturedByte extends StatelessWidget {
       onTap: () => Navigator.pushNamed(
         context,
         PHRoutes.byteScreen,
-        arguments: byte,
+        arguments: ByteScreenArgs(
+          bookmarkBloc: BlocProvider.of<BookmarkBloc>(context),
+          byte: byte,
+        ),
       ),
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 12),

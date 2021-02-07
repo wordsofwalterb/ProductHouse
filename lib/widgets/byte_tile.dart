@@ -17,7 +17,7 @@ class PHByteTile extends StatelessWidget {
         context,
         PHRoutes.byteScreen,
         arguments: ByteScreenArgs(
-          bloc: bookmarkBloc,
+          bookmarkBloc: bookmarkBloc,
           byte: byte,
         ),
       ),

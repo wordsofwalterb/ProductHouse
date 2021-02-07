@@ -16,14 +16,20 @@ class PHResult<T> {
   /// Required and automatically set by constructors.
   bool hasError;
 
+  /// Required and automatically set by constructors.
+  bool hasData;
+
   /// Private Contructor
   PHResult._();
 
   /// Used when there is no error, and the data is available
-  PHResult.success(this.data) : hasError = false;
+  PHResult.success(this.data)
+      : hasError = false,
+        hasData = true;
 
   /// Used when there is an error. Error code is the system generated message,
   /// while error message is a user friendly message.
   PHResult.failure({@required this.errorCode, @required this.errorMessage})
-      : hasError = true;
+      : hasError = true,
+        hasData = false;
 }

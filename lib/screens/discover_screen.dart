@@ -1,5 +1,6 @@
 import 'package:ProductHouse/models/byte.dart';
 import 'package:ProductHouse/services/byte_repository.dart';
+import 'package:ProductHouse/util/result.dart';
 import 'package:ProductHouse/widgets/byte_square.dart';
 import 'package:ProductHouse/widgets/category_chip.dart';
 import 'package:ProductHouse/widgets/search_bar.dart';
@@ -112,9 +113,12 @@ class _PHDiscoverScreenState extends State<PHDiscoverScreen> {
   Widget _byteGrid() {
     return FutureBuilder(
       future: ByteRepository().getAllBytes(),
-      builder: (context, snapshot) {
+      builder: (context, AsyncSnapshot snapshot) {
+        PHResult<List<PHByte>> result;
         if (snapshot.hasData) {
-          final List<PHByte> bytes = snapshot.data.data as List<PHByte>;
+          result = snapshot.data as PHResult<List<PHByte>>;
+        }
+        if (result?.hasData ?? false) {
           return SliverGrid(
             gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
               maxCrossAxisExtent: 200.0,
@@ -124,8 +128,8 @@ class _PHDiscoverScreenState extends State<PHDiscoverScreen> {
             ),
             delegate:
                 SliverChildBuilderDelegate((BuildContext context, int index) {
-              return PHByteSquare(bytes[index]);
-            }, childCount: bytes.length),
+              return PHByteSquare(result.data[index]);
+            }, childCount: result.data.length),
           );
         } else {
           return SliverPadding(padding: EdgeInsets.zero);

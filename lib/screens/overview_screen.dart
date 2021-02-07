@@ -66,28 +66,33 @@ class PHOverviewScreen extends StatelessWidget {
 
   Widget _dailyByte() {
     return FutureBuilder(
-        future: ByteRepository().retrieveFeaturedByte(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            PHByte result = snapshot.data as PHByte;
-            return SliverList(
-              delegate: SliverChildListDelegate.fixed([
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: 24),
-                    PHSectionTitle('Daily Byte'),
-                    SizedBox(height: 17.5),
-                    PHFeaturedByte(result),
-                  ],
-                ),
-              ]),
-            );
-          } else {
-            return SliverToBoxAdapter(child: Container(),);
-          }
+      future: ByteRepository().retrieveFeaturedByte(),
+      builder: (context, snapshot) {
+        PHResult<PHByte> result;
+        if (snapshot.hasData) {
+          result = snapshot.data as PHResult<PHByte>;
         }
-        );
+        if (result?.hasData ?? false) {
+          return SliverList(
+            delegate: SliverChildListDelegate.fixed([
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 24),
+                  PHSectionTitle('Daily Byte'),
+                  SizedBox(height: 17.5),
+                  PHFeaturedByte(result.data),
+                ],
+              ),
+            ]),
+          );
+        } else {
+          return SliverToBoxAdapter(
+            child: Container(),
+          );
+        }
+      },
+    );
   }
 
   // Widget _recent() {

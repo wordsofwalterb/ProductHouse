@@ -24,7 +24,7 @@ class _$PHByteTearOff {
       @required String overview,
       @required String readTime,
       @required List<Map<String, String>> body,
-      @required bool featured}) {
+      bool featured}) {
     return _PHByte(
       id: id,
       title: title,
@@ -162,14 +162,13 @@ class _$_PHByte with DiagnosticableTreeMixin implements _PHByte {
       @required this.overview,
       @required this.readTime,
       @required this.body,
-      @required this.featured})
+      this.featured})
       : assert(id != null),
         assert(title != null),
         assert(tags != null),
         assert(overview != null),
         assert(readTime != null),
-        assert(body != null),
-        assert(featured != null);
+        assert(body != null);
 
   factory _$_PHByte.fromJson(Map<String, dynamic> json) =>
       _$_$_PHByteFromJson(json);
@@ -261,7 +260,7 @@ abstract class _PHByte implements PHByte {
       @required String overview,
       @required String readTime,
       @required List<Map<String, String>> body,
-      @required bool featured}) = _$_PHByte;
+      bool featured}) = _$_PHByte;
 
   factory _PHByte.fromJson(Map<String, dynamic> json) = _$_PHByte.fromJson;
 

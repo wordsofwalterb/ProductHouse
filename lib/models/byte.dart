@@ -13,7 +13,7 @@ abstract class PHByte with _$PHByte {
     @required String overview,
     @required String readTime,
     @required List<Map<String, String>> body,
-    @required bool featured,
+    bool featured,
   }) = _PHByte;
 
   factory PHByte.fromJson(Map<String, dynamic> json) => _$PHByteFromJson(json);
