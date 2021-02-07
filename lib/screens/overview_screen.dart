@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:ProductHouse/blocs/bookmark_bloc/bookmark_bloc.dart';
 import 'package:ProductHouse/models/byte.dart';
-import 'package:ProductHouse/util/byte_json.dart';
 import 'package:ProductHouse/widgets/byte_tile.dart';
 import 'package:ProductHouse/widgets/featured_byte.dart';
 import 'package:ProductHouse/widgets/profile_button.dart';
@@ -21,7 +20,7 @@ class PHOverviewScreen extends StatelessWidget {
       child: CustomScrollView(
         slivers: [
           _appSearchBar(),
-          _dailyByte(),
+          // _dailyByte(),
           SliverPadding(
             padding: EdgeInsets.symmetric(vertical: 22),
             sliver: SliverToBoxAdapter(
@@ -63,25 +62,21 @@ class PHOverviewScreen extends StatelessWidget {
     );
   }
 
-  Widget _dailyByte() {
-    List<PHByte> byteList = byteJson.map((e) => PHByte.fromJson(e)).toList();
-
-    var featuredIndex = Random.secure().nextInt(byteList.length);
-
-    return SliverList(
-      delegate: SliverChildListDelegate.fixed([
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 24),
-            PHSectionTitle('Daily Byte'),
-            SizedBox(height: 17.5),
-            PHFeaturedByte(byteList[0]),
-          ],
-        ),
-      ]),
-    );
-  }
+  // Widget _dailyByte() {
+  //   return SliverList(
+  //     delegate: SliverChildListDelegate.fixed([
+  //       Column(
+  //         crossAxisAlignment: CrossAxisAlignment.start,
+  //         children: [
+  //           SizedBox(height: 24),
+  //           PHSectionTitle('Daily Byte'),
+  //           SizedBox(height: 17.5),
+  //           PHFeaturedByte(byteList[0]),
+  //         ],
+  //       ),
+  //     ]),
+  //   );
+  // }
 
   // Widget _recent() {
   //   return SliverList(

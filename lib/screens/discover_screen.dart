@@ -5,7 +5,6 @@ import 'package:ProductHouse/widgets/category_chip.dart';
 import 'package:ProductHouse/widgets/search_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ProductHouse/util/byte_json.dart';
 
 const categoryNames = [
   'All',

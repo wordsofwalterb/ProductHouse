@@ -1,7 +1,6 @@
 import 'package:ProductHouse/models/byte.dart';
 import 'package:ProductHouse/services/byte_repository.dart';
 import 'package:ProductHouse/services/user_repository.dart';
-import 'package:ProductHouse/util/byte_json.dart';
 import 'package:ProductHouse/util/result.dart';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -26,7 +25,7 @@ class BookmarkCubit extends Cubit<BookmarkState> {
       PHResult<bool> result;
       List<PHByte> updatedBookmarks;
 
-      if (currentState.bookmarks.contains(byteJson)) {
+      if (currentState.bookmarks.contains(byte)) {
         result = await _userRepository.updateUserWithMap(currentUserID, {
           "bookmarks": FieldValue.arrayRemove([byte.id]),
         });
