@@ -1,4 +1,5 @@
 import 'package:ProductHouse/blocs/bookmark_bloc/bookmark_bloc.dart';
+import 'package:ProductHouse/cubits/recent_bytes_cubit/recent_bytes_cubit.dart';
 import 'package:ProductHouse/models/byte.dart';
 import 'package:ProductHouse/screens/byte_screen.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +34,7 @@ class PHRouter {
   }
 
   static Route<dynamic> _byteScreenRoute(ByteScreenArgs args) {
+    args.recentsCubit.updateRecents(args.byte);
     return MaterialPageRoute(
       builder: (context) => BlocProvider.value(
         value: args.bookmarkBloc,
@@ -57,9 +59,11 @@ class PHRouter {
 class ByteScreenArgs {
   final BookmarkBloc bookmarkBloc;
   final PHByte byte;
+  final RecentBytesCubit recentsCubit;
 
   const ByteScreenArgs({
     @required this.bookmarkBloc,
     @required this.byte,
+    @required this.recentsCubit,
   });
 }

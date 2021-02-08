@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:ProductHouse/blocs/bookmark_bloc/bookmark_bloc.dart';
+import 'package:ProductHouse/cubits/recent_bytes_cubit/recent_bytes_cubit.dart';
 import 'package:ProductHouse/models/byte.dart';
 import 'package:ProductHouse/services/byte_repository.dart';
 import 'package:ProductHouse/util/result.dart';
@@ -29,7 +30,7 @@ class PHOverviewScreen extends StatelessWidget {
               child: PHSectionTitle('Recent'),
             ),
           ),
-          // _recent(),
+          _recents(),
           SliverPadding(
             padding: EdgeInsets.symmetric(vertical: 22),
             sliver: SliverToBoxAdapter(
@@ -95,18 +96,37 @@ class PHOverviewScreen extends StatelessWidget {
     );
   }
 
-  // Widget _recent() {
-  //   return SliverList(
-  //     delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
-  //       return Padding(
-  //         padding: const EdgeInsets.symmetric(vertical: 8.0),
-  //         child: PHByteTile(
-
-  //         ),
-  //       );
-  //     }, childCount: 2),
-  //   );
-  // }
+  Widget _recents() {
+    return BlocBuilder<RecentBytesCubit, RecentBytesState>(
+      builder: (context, state) {
+        return state.when(
+          initial: () => sliverShimmer(),
+          loadInProgress: () => sliverShimmer(),
+          loadFailure: (_, __) => sliverShimmer(),
+          loadSuccess: (byteList) {
+            return SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (BuildContext context, int index) {
+                  return state.when(
+                    initial: () => const ByteTileShimmer(),
+                    loadInProgress: () => const ByteTileShimmer(),
+                    loadSuccess: (recentBytes) => Padding(
+                      padding: EdgeInsets.only(bottom: 14),
+                      child: PHByteTile(
+                        byte: recentBytes[index],
+                      ),
+                    ),
+                    loadFailure: (_, __) => Container(),
+                  );
+                },
+                childCount: byteList.length,
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
 
   Widget _bookmarks() {
     return BlocBuilder<BookmarkBloc, BookmarkState>(

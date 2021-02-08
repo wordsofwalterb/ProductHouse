@@ -54,7 +54,6 @@ class BookmarkCubit extends Cubit<BookmarkState> {
     PHResult<List<PHByte>> result;
 
     result = await _byteRepository.getBytesByIDs(ids);
-    await Future.delayed(Duration(seconds: 1));
 
     if (!result.hasError) {
       emit(BookmarkState.loadSuccess(bookmarks: result.data));

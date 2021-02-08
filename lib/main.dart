@@ -12,6 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'blocs/bloc_observer.dart';
 import 'blocs/bookmark_bloc/bookmark_bloc.dart';
 import 'blocs/user_bloc/user_bloc.dart';
+import 'cubits/recent_bytes_cubit/recent_bytes_cubit.dart';
 import 'services/byte_repository.dart';
 import 'util/global.dart';
 import 'util/router.dart';
@@ -57,12 +58,20 @@ class PHApp extends StatelessWidget {
           return state.when(
             unauthenticated: () => SplashScreen(),
             authenticating: () => SplashScreen(),
-            authenticatedAnonymously: (user) => BlocProvider(
-              create: (context) =>
-                  BookmarkBloc(ByteRepository(), UserRepository())
-                    ..add(BookmarkEvent.loadBookmarks(user.bookmarks)),
-              child: HomeScreen(),
-            ),
+            authenticatedAnonymously: (user) {
+              return MultiBlocProvider(providers: [
+                BlocProvider(
+                  create: (context) =>
+                      BookmarkBloc(ByteRepository(), UserRepository())
+                        ..add(BookmarkEvent.loadBookmarks(user.bookmarks)),
+                ),
+                BlocProvider(
+                  create: (context) =>
+                      RecentBytesCubit(ByteRepository(), UserRepository())
+                        ..loadRecentBytes(user.recent),
+                ),
+              ], child: HomeScreen());
+            },
             authenticationFailed: () => SplashScreen(),
           );
         },
