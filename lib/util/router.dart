@@ -2,6 +2,7 @@ import 'package:ProductHouse/blocs/bookmark_bloc/bookmark_bloc.dart';
 import 'package:ProductHouse/cubits/recent_bytes_cubit/recent_bytes_cubit.dart';
 import 'package:ProductHouse/models/byte.dart';
 import 'package:ProductHouse/screens/byte_screen.dart';
+import 'package:ProductHouse/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,6 +12,7 @@ import '../home_screen.dart';
 class PHRoutes {
   static const String home = '/';
   static const String byteScreen = 'byteScreen';
+  static const String searchScreen = 'searchScreen';
 }
 
 /// Correlates routes names to builders
@@ -21,6 +23,12 @@ class PHRouter {
     switch (settings.name) {
       case PHRoutes.home:
         return MaterialPageRoute(builder: (_) => HomeScreen());
+      case PHRoutes.searchScreen:
+        if (args is SearchScreenArgs) {
+          return _searchScreenRoute(args);
+        }
+        throw Exception('Invalid arguments for ${settings.name}');
+        break;
       case PHRoutes.byteScreen:
         if (args is ByteScreenArgs) {
           return _byteScreenRoute(args);
@@ -43,6 +51,18 @@ class PHRouter {
     );
   }
 
+  static Route<dynamic> _searchScreenRoute(SearchScreenArgs args) {
+    return MaterialPageRoute(
+      builder: (context) => MultiBlocProvider(
+        providers: [
+          BlocProvider.value(value: args.bookmarkBloc),
+          BlocProvider.value(value: args.recentsCubit),
+        ],
+        child: SearchScreen(),
+      ),
+    );
+  }
+
 // Moved route generation to this section for brevity in previous section
 
   static Route<dynamic> _errorRoute(dynamic settings) {
@@ -55,7 +75,6 @@ class PHRouter {
 }
 
 //Arguement Classes
-
 class ByteScreenArgs {
   final BookmarkBloc bookmarkBloc;
   final PHByte byte;
@@ -64,6 +83,16 @@ class ByteScreenArgs {
   const ByteScreenArgs({
     @required this.bookmarkBloc,
     @required this.byte,
+    @required this.recentsCubit,
+  });
+}
+
+class SearchScreenArgs {
+  final BookmarkBloc bookmarkBloc;
+  final RecentBytesCubit recentsCubit;
+
+  const SearchScreenArgs({
+    @required this.bookmarkBloc,
     @required this.recentsCubit,
   });
 }

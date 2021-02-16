@@ -42,11 +42,11 @@ class PHByteTile extends StatelessWidget {
               ),
             ),
             SizedBox(width: 12),
-            Flexible(
-              flex: 1,
+            Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Spacer(flex: 2),
                   Text(
                     byte.title,
                     style: TextStyle(
@@ -54,11 +54,11 @@ class PHByteTile extends StatelessWidget {
                         fontSize: 18,
                         color: const Color(0xff404040),
                         fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.center,
+                    textAlign: TextAlign.start,
                   ),
-                  Spacer(flex: 2),
+                  Spacer(flex: 1),
                   Text(
-                    byte.overview,
+                    'Strategy',
                     style: TextStyle(
                       fontFamily: 'SFProText-Regular',
                       fontSize: 18,
@@ -68,7 +68,7 @@ class PHByteTile extends StatelessWidget {
                     textAlign: TextAlign.left,
                     maxLines: 2,
                   ),
-                  Spacer(flex: 1),
+                  Spacer(flex: 2),
                 ],
               ),
             ),

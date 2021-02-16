@@ -6,8 +6,9 @@ import 'package:ProductHouse/widgets/category_chip.dart';
 import 'package:ProductHouse/widgets/search_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flappy_search_bar/flappy_search_bar.dart';
 
-const categoryNames = [
+const categories = [
   'All',
   'Strategy',
   'Design',
@@ -22,61 +23,70 @@ class PHDiscoverScreen extends StatefulWidget {
   _PHDiscoverScreenState createState() => _PHDiscoverScreenState();
 }
 
-class _PHDiscoverScreenState extends State<PHDiscoverScreen> {
+class _PHDiscoverScreenState extends State<PHDiscoverScreen>
+    with SingleTickerProviderStateMixin {
+  int _currentTab = 0;
+  TabController _tabController;
+  List<PHByte> bytes;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: categories.length, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _tabController.dispose();
+  }
+
+  void _onTabItemTapped(int indexTapped) {
+    setState(() {
+      _currentTab = indexTapped;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CupertinoScrollbar(
-        child: CustomScrollView(
-          slivers: [
-            SliverPadding(
+      body: CustomScrollView(
+        slivers: [
+          SliverPadding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            sliver: SliverToBoxAdapter(
+              child: SizedBox(height: MediaQuery.of(context).viewPadding.top),
+            ),
+          ),
+          SliverPadding(
               padding: EdgeInsets.symmetric(horizontal: 16),
-              sliver: SliverToBoxAdapter(
-                child: SizedBox(height: MediaQuery.of(context).viewPadding.top),
-              ),
+              sliver: _topSection(context)),
+          SliverToBoxAdapter(
+            child: TabBar(
+              labelPadding: EdgeInsets.only(left: 16),
+              indicatorColor: Colors.transparent,
+              isScrollable: true,
+              controller: _tabController,
+              onTap: _onTabItemTapped,
+              tabs: [
+                ...categories
+                    .map((e) => PHCategoryChip(
+                          e,
+                          isActive: e == categories[_currentTab],
+                        ))
+                    .toList()
+              ],
             ),
-            SliverPadding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                sliver: _topSection(context)),
-            SliverToBoxAdapter(
-              child: Container(
-                height: 40,
-                child: ListView.separated(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: categoryNames.length,
-                  separatorBuilder: (BuildContext context, int index) {
-                    return SizedBox(width: 10);
-                  },
-                  itemBuilder: (BuildContext context, int index) {
-                    if (index == 0)
-                      return Padding(
-                        padding: const EdgeInsets.only(left: 16.0),
-                        child: PHCategoryChip(
-                          '  All  ',
-                          isActive: true,
-                        ),
-                      );
-                    else if (index == categoryNames.length - 1) {
-                      return SizedBox(
-                        width: 10,
-                      );
-                    } else
-                      return PHCategoryChip(categoryNames[index]);
-                  },
-                ),
-              ),
+          ),
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: 20,
             ),
-            SliverToBoxAdapter(
-              child: SizedBox(
-                height: 20,
-              ),
-            ),
-            SliverPadding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                sliver: _byteGrid()),
-          ],
-        ),
+          ),
+          SliverPadding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              sliver: _byteGrid()),
+        ],
       ),
     );
   }
@@ -112,7 +122,7 @@ class _PHDiscoverScreenState extends State<PHDiscoverScreen> {
 
   Widget _byteGrid() {
     return FutureBuilder(
-      future: ByteRepository().getAllBytes(),
+      future: ByteRepository().getBytesFromCategory(categories[_currentTab]),
       builder: (context, AsyncSnapshot snapshot) {
         PHResult<List<PHByte>> result;
         if (snapshot.hasData) {

@@ -151,7 +151,7 @@ class PHOverviewScreen extends StatelessWidget {
                     loadFailure: (_, __) => Container(),
                   );
                 },
-                childCount: byteList.length,
+                childCount: (byteList.length <= 4) ? byteList.length : 4,
               ),
             );
           },
