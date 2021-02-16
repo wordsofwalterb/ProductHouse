@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
 
-part of 'recent_bytes_cubit.dart';
+part of 'read_bytes_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -10,8 +10,8 @@ part of 'recent_bytes_cubit.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-class _$RecentBytesStateTearOff {
-  const _$RecentBytesStateTearOff();
+class _$ReadBytesStateTearOff {
+  const _$ReadBytesStateTearOff();
 
 // ignore: unused_element
   _Initial initial() {
@@ -24,17 +24,17 @@ class _$RecentBytesStateTearOff {
   }
 
 // ignore: unused_element
-  _LoadSuccess loadSuccess({List<PHByte> recents = const []}) {
+  _LoadSuccess loadSuccess({List<String> readByteIds = const []}) {
     return _LoadSuccess(
-      recents: recents,
+      readByteIds: readByteIds,
     );
   }
 
 // ignore: unused_element
   _LoadFailure loadFailure(
-      {List<PHByte> recents = const [], @required String errorMessage}) {
+      {List<String> readByteIds = const [], @required String errorMessage}) {
     return _LoadFailure(
-      recents: recents,
+      readByteIds: readByteIds,
       errorMessage: errorMessage,
     );
   }
@@ -42,23 +42,24 @@ class _$RecentBytesStateTearOff {
 
 /// @nodoc
 // ignore: unused_element
-const $RecentBytesState = _$RecentBytesStateTearOff();
+const $ReadBytesState = _$ReadBytesStateTearOff();
 
 /// @nodoc
-mixin _$RecentBytesState {
+mixin _$ReadBytesState {
   @optionalTypeArgs
   TResult when<TResult extends Object>({
     @required TResult initial(),
     @required TResult loadInProgress(),
-    @required TResult loadSuccess(List<PHByte> recents),
-    @required TResult loadFailure(List<PHByte> recents, String errorMessage),
+    @required TResult loadSuccess(List<String> readByteIds),
+    @required
+        TResult loadFailure(List<String> readByteIds, String errorMessage),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
     TResult initial(),
     TResult loadInProgress(),
-    TResult loadSuccess(List<PHByte> recents),
-    TResult loadFailure(List<PHByte> recents, String errorMessage),
+    TResult loadSuccess(List<String> readByteIds),
+    TResult loadFailure(List<String> readByteIds, String errorMessage),
     @required TResult orElse(),
   });
   @optionalTypeArgs
@@ -79,20 +80,20 @@ mixin _$RecentBytesState {
 }
 
 /// @nodoc
-abstract class $RecentBytesStateCopyWith<$Res> {
-  factory $RecentBytesStateCopyWith(
-          RecentBytesState value, $Res Function(RecentBytesState) then) =
-      _$RecentBytesStateCopyWithImpl<$Res>;
+abstract class $ReadBytesStateCopyWith<$Res> {
+  factory $ReadBytesStateCopyWith(
+          ReadBytesState value, $Res Function(ReadBytesState) then) =
+      _$ReadBytesStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$RecentBytesStateCopyWithImpl<$Res>
-    implements $RecentBytesStateCopyWith<$Res> {
-  _$RecentBytesStateCopyWithImpl(this._value, this._then);
+class _$ReadBytesStateCopyWithImpl<$Res>
+    implements $ReadBytesStateCopyWith<$Res> {
+  _$ReadBytesStateCopyWithImpl(this._value, this._then);
 
-  final RecentBytesState _value;
+  final ReadBytesState _value;
   // ignore: unused_field
-  final $Res Function(RecentBytesState) _then;
+  final $Res Function(ReadBytesState) _then;
 }
 
 /// @nodoc
@@ -102,7 +103,7 @@ abstract class _$InitialCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$InitialCopyWithImpl<$Res> extends _$RecentBytesStateCopyWithImpl<$Res>
+class __$InitialCopyWithImpl<$Res> extends _$ReadBytesStateCopyWithImpl<$Res>
     implements _$InitialCopyWith<$Res> {
   __$InitialCopyWithImpl(_Initial _value, $Res Function(_Initial) _then)
       : super(_value, (v) => _then(v as _Initial));
@@ -112,18 +113,12 @@ class __$InitialCopyWithImpl<$Res> extends _$RecentBytesStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$_Initial with DiagnosticableTreeMixin implements _Initial {
+class _$_Initial implements _Initial {
   const _$_Initial();
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'RecentBytesState.initial()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties..add(DiagnosticsProperty('type', 'RecentBytesState.initial'));
+  String toString() {
+    return 'ReadBytesState.initial()';
   }
 
   @override
@@ -139,8 +134,9 @@ class _$_Initial with DiagnosticableTreeMixin implements _Initial {
   TResult when<TResult extends Object>({
     @required TResult initial(),
     @required TResult loadInProgress(),
-    @required TResult loadSuccess(List<PHByte> recents),
-    @required TResult loadFailure(List<PHByte> recents, String errorMessage),
+    @required TResult loadSuccess(List<String> readByteIds),
+    @required
+        TResult loadFailure(List<String> readByteIds, String errorMessage),
   }) {
     assert(initial != null);
     assert(loadInProgress != null);
@@ -154,8 +150,8 @@ class _$_Initial with DiagnosticableTreeMixin implements _Initial {
   TResult maybeWhen<TResult extends Object>({
     TResult initial(),
     TResult loadInProgress(),
-    TResult loadSuccess(List<PHByte> recents),
-    TResult loadFailure(List<PHByte> recents, String errorMessage),
+    TResult loadSuccess(List<String> readByteIds),
+    TResult loadFailure(List<String> readByteIds, String errorMessage),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -197,7 +193,7 @@ class _$_Initial with DiagnosticableTreeMixin implements _Initial {
   }
 }
 
-abstract class _Initial implements RecentBytesState {
+abstract class _Initial implements ReadBytesState {
   const factory _Initial() = _$_Initial;
 }
 
@@ -210,7 +206,7 @@ abstract class _$LoadInProgressCopyWith<$Res> {
 
 /// @nodoc
 class __$LoadInProgressCopyWithImpl<$Res>
-    extends _$RecentBytesStateCopyWithImpl<$Res>
+    extends _$ReadBytesStateCopyWithImpl<$Res>
     implements _$LoadInProgressCopyWith<$Res> {
   __$LoadInProgressCopyWithImpl(
       _LoadInProgress _value, $Res Function(_LoadInProgress) _then)
@@ -221,21 +217,12 @@ class __$LoadInProgressCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$_LoadInProgress
-    with DiagnosticableTreeMixin
-    implements _LoadInProgress {
+class _$_LoadInProgress implements _LoadInProgress {
   const _$_LoadInProgress();
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'RecentBytesState.loadInProgress()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'RecentBytesState.loadInProgress'));
+  String toString() {
+    return 'ReadBytesState.loadInProgress()';
   }
 
   @override
@@ -251,8 +238,9 @@ class _$_LoadInProgress
   TResult when<TResult extends Object>({
     @required TResult initial(),
     @required TResult loadInProgress(),
-    @required TResult loadSuccess(List<PHByte> recents),
-    @required TResult loadFailure(List<PHByte> recents, String errorMessage),
+    @required TResult loadSuccess(List<String> readByteIds),
+    @required
+        TResult loadFailure(List<String> readByteIds, String errorMessage),
   }) {
     assert(initial != null);
     assert(loadInProgress != null);
@@ -266,8 +254,8 @@ class _$_LoadInProgress
   TResult maybeWhen<TResult extends Object>({
     TResult initial(),
     TResult loadInProgress(),
-    TResult loadSuccess(List<PHByte> recents),
-    TResult loadFailure(List<PHByte> recents, String errorMessage),
+    TResult loadSuccess(List<String> readByteIds),
+    TResult loadFailure(List<String> readByteIds, String errorMessage),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -309,7 +297,7 @@ class _$_LoadInProgress
   }
 }
 
-abstract class _LoadInProgress implements RecentBytesState {
+abstract class _LoadInProgress implements ReadBytesState {
   const factory _LoadInProgress() = _$_LoadInProgress;
 }
 
@@ -318,12 +306,12 @@ abstract class _$LoadSuccessCopyWith<$Res> {
   factory _$LoadSuccessCopyWith(
           _LoadSuccess value, $Res Function(_LoadSuccess) then) =
       __$LoadSuccessCopyWithImpl<$Res>;
-  $Res call({List<PHByte> recents});
+  $Res call({List<String> readByteIds});
 }
 
 /// @nodoc
 class __$LoadSuccessCopyWithImpl<$Res>
-    extends _$RecentBytesStateCopyWithImpl<$Res>
+    extends _$ReadBytesStateCopyWithImpl<$Res>
     implements _$LoadSuccessCopyWith<$Res> {
   __$LoadSuccessCopyWithImpl(
       _LoadSuccess _value, $Res Function(_LoadSuccess) _then)
@@ -334,46 +322,42 @@ class __$LoadSuccessCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object recents = freezed,
+    Object readByteIds = freezed,
   }) {
     return _then(_LoadSuccess(
-      recents: recents == freezed ? _value.recents : recents as List<PHByte>,
+      readByteIds: readByteIds == freezed
+          ? _value.readByteIds
+          : readByteIds as List<String>,
     ));
   }
 }
 
 /// @nodoc
-class _$_LoadSuccess with DiagnosticableTreeMixin implements _LoadSuccess {
-  const _$_LoadSuccess({this.recents = const []}) : assert(recents != null);
+class _$_LoadSuccess implements _LoadSuccess {
+  const _$_LoadSuccess({this.readByteIds = const []})
+      : assert(readByteIds != null);
 
   @JsonKey(defaultValue: const [])
   @override
-  final List<PHByte> recents;
+  final List<String> readByteIds;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'RecentBytesState.loadSuccess(recents: $recents)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'RecentBytesState.loadSuccess'))
-      ..add(DiagnosticsProperty('recents', recents));
+  String toString() {
+    return 'ReadBytesState.loadSuccess(readByteIds: $readByteIds)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _LoadSuccess &&
-            (identical(other.recents, recents) ||
-                const DeepCollectionEquality().equals(other.recents, recents)));
+            (identical(other.readByteIds, readByteIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.readByteIds, readByteIds)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(recents);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(readByteIds);
 
   @JsonKey(ignore: true)
   @override
@@ -385,14 +369,15 @@ class _$_LoadSuccess with DiagnosticableTreeMixin implements _LoadSuccess {
   TResult when<TResult extends Object>({
     @required TResult initial(),
     @required TResult loadInProgress(),
-    @required TResult loadSuccess(List<PHByte> recents),
-    @required TResult loadFailure(List<PHByte> recents, String errorMessage),
+    @required TResult loadSuccess(List<String> readByteIds),
+    @required
+        TResult loadFailure(List<String> readByteIds, String errorMessage),
   }) {
     assert(initial != null);
     assert(loadInProgress != null);
     assert(loadSuccess != null);
     assert(loadFailure != null);
-    return loadSuccess(recents);
+    return loadSuccess(readByteIds);
   }
 
   @override
@@ -400,13 +385,13 @@ class _$_LoadSuccess with DiagnosticableTreeMixin implements _LoadSuccess {
   TResult maybeWhen<TResult extends Object>({
     TResult initial(),
     TResult loadInProgress(),
-    TResult loadSuccess(List<PHByte> recents),
-    TResult loadFailure(List<PHByte> recents, String errorMessage),
+    TResult loadSuccess(List<String> readByteIds),
+    TResult loadFailure(List<String> readByteIds, String errorMessage),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (loadSuccess != null) {
-      return loadSuccess(recents);
+      return loadSuccess(readByteIds);
     }
     return orElse();
   }
@@ -443,10 +428,10 @@ class _$_LoadSuccess with DiagnosticableTreeMixin implements _LoadSuccess {
   }
 }
 
-abstract class _LoadSuccess implements RecentBytesState {
-  const factory _LoadSuccess({List<PHByte> recents}) = _$_LoadSuccess;
+abstract class _LoadSuccess implements ReadBytesState {
+  const factory _LoadSuccess({List<String> readByteIds}) = _$_LoadSuccess;
 
-  List<PHByte> get recents;
+  List<String> get readByteIds;
   @JsonKey(ignore: true)
   _$LoadSuccessCopyWith<_LoadSuccess> get copyWith;
 }
@@ -456,12 +441,12 @@ abstract class _$LoadFailureCopyWith<$Res> {
   factory _$LoadFailureCopyWith(
           _LoadFailure value, $Res Function(_LoadFailure) then) =
       __$LoadFailureCopyWithImpl<$Res>;
-  $Res call({List<PHByte> recents, String errorMessage});
+  $Res call({List<String> readByteIds, String errorMessage});
 }
 
 /// @nodoc
 class __$LoadFailureCopyWithImpl<$Res>
-    extends _$RecentBytesStateCopyWithImpl<$Res>
+    extends _$ReadBytesStateCopyWithImpl<$Res>
     implements _$LoadFailureCopyWith<$Res> {
   __$LoadFailureCopyWithImpl(
       _LoadFailure _value, $Res Function(_LoadFailure) _then)
@@ -472,11 +457,13 @@ class __$LoadFailureCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object recents = freezed,
+    Object readByteIds = freezed,
     Object errorMessage = freezed,
   }) {
     return _then(_LoadFailure(
-      recents: recents == freezed ? _value.recents : recents as List<PHByte>,
+      readByteIds: readByteIds == freezed
+          ? _value.readByteIds
+          : readByteIds as List<String>,
       errorMessage: errorMessage == freezed
           ? _value.errorMessage
           : errorMessage as String,
@@ -485,38 +472,30 @@ class __$LoadFailureCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$_LoadFailure with DiagnosticableTreeMixin implements _LoadFailure {
-  const _$_LoadFailure({this.recents = const [], @required this.errorMessage})
-      : assert(recents != null),
+class _$_LoadFailure implements _LoadFailure {
+  const _$_LoadFailure(
+      {this.readByteIds = const [], @required this.errorMessage})
+      : assert(readByteIds != null),
         assert(errorMessage != null);
 
   @JsonKey(defaultValue: const [])
   @override
-  final List<PHByte> recents;
+  final List<String> readByteIds;
   @override
   final String errorMessage;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'RecentBytesState.loadFailure(recents: $recents, errorMessage: $errorMessage)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'RecentBytesState.loadFailure'))
-      ..add(DiagnosticsProperty('recents', recents))
-      ..add(DiagnosticsProperty('errorMessage', errorMessage));
+  String toString() {
+    return 'ReadBytesState.loadFailure(readByteIds: $readByteIds, errorMessage: $errorMessage)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _LoadFailure &&
-            (identical(other.recents, recents) ||
+            (identical(other.readByteIds, readByteIds) ||
                 const DeepCollectionEquality()
-                    .equals(other.recents, recents)) &&
+                    .equals(other.readByteIds, readByteIds)) &&
             (identical(other.errorMessage, errorMessage) ||
                 const DeepCollectionEquality()
                     .equals(other.errorMessage, errorMessage)));
@@ -525,7 +504,7 @@ class _$_LoadFailure with DiagnosticableTreeMixin implements _LoadFailure {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(recents) ^
+      const DeepCollectionEquality().hash(readByteIds) ^
       const DeepCollectionEquality().hash(errorMessage);
 
   @JsonKey(ignore: true)
@@ -538,14 +517,15 @@ class _$_LoadFailure with DiagnosticableTreeMixin implements _LoadFailure {
   TResult when<TResult extends Object>({
     @required TResult initial(),
     @required TResult loadInProgress(),
-    @required TResult loadSuccess(List<PHByte> recents),
-    @required TResult loadFailure(List<PHByte> recents, String errorMessage),
+    @required TResult loadSuccess(List<String> readByteIds),
+    @required
+        TResult loadFailure(List<String> readByteIds, String errorMessage),
   }) {
     assert(initial != null);
     assert(loadInProgress != null);
     assert(loadSuccess != null);
     assert(loadFailure != null);
-    return loadFailure(recents, errorMessage);
+    return loadFailure(readByteIds, errorMessage);
   }
 
   @override
@@ -553,13 +533,13 @@ class _$_LoadFailure with DiagnosticableTreeMixin implements _LoadFailure {
   TResult maybeWhen<TResult extends Object>({
     TResult initial(),
     TResult loadInProgress(),
-    TResult loadSuccess(List<PHByte> recents),
-    TResult loadFailure(List<PHByte> recents, String errorMessage),
+    TResult loadSuccess(List<String> readByteIds),
+    TResult loadFailure(List<String> readByteIds, String errorMessage),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (loadFailure != null) {
-      return loadFailure(recents, errorMessage);
+      return loadFailure(readByteIds, errorMessage);
     }
     return orElse();
   }
@@ -596,11 +576,12 @@ class _$_LoadFailure with DiagnosticableTreeMixin implements _LoadFailure {
   }
 }
 
-abstract class _LoadFailure implements RecentBytesState {
+abstract class _LoadFailure implements ReadBytesState {
   const factory _LoadFailure(
-      {List<PHByte> recents, @required String errorMessage}) = _$_LoadFailure;
+      {List<String> readByteIds,
+      @required String errorMessage}) = _$_LoadFailure;
 
-  List<PHByte> get recents;
+  List<String> get readByteIds;
   String get errorMessage;
   @JsonKey(ignore: true)
   _$LoadFailureCopyWith<_LoadFailure> get copyWith;

@@ -6,6 +6,13 @@ import 'package:ProductHouse/util/functions.dart';
 import 'package:flutter/foundation.dart';
 
 class ByteRepository {
+  // Maybe this should not be in memory, but instead in local storage?? Maybe just Ids?
+  List<PHByte> cachedByteIds = [];
+
+  ByteRepository() {
+    // Retrieve relevant cached bytes from local storage
+  }
+
   Future<PHResult<List<PHByte>>> getBytesByIDs(List<String> byteIDs) async {
     try {
       List<Map<String, dynamic>> jsonObjects = [];
@@ -39,7 +46,8 @@ class ByteRepository {
 
   Future<PHResult<List<PHByte>>> getAllBytes() async {
     try {
-      final querySnapshot = await PHGlobal.byteRef.get();
+      final querySnapshot =
+          await PHGlobal.byteRef.where('id', whereNotIn: cachedByteIds).get();
       return PHResult.success(parseFirestoreQuery(querySnapshot));
     } catch (error) {
       print('eerror');
@@ -48,4 +56,6 @@ class ByteRepository {
           errorMessage: 'There was a problem retrieving all bytes');
     }
   }
+
+  Future<PHResult<List<PHByte>>> getSuggestedBytes(List<String> readByteIds) {}
 }
