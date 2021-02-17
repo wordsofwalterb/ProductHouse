@@ -2,6 +2,7 @@ import 'package:ProductHouse/blocs/bookmark_bloc/bookmark_bloc.dart';
 import 'package:ProductHouse/cubits/recent_bytes_cubit/recent_bytes_cubit.dart';
 import 'package:ProductHouse/models/byte.dart';
 import 'package:ProductHouse/screens/byte_screen.dart';
+import 'package:ProductHouse/screens/profile_screen.dart';
 import 'package:ProductHouse/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,16 +14,18 @@ class PHRoutes {
   static const String home = '/';
   static const String byteScreen = 'byteScreen';
   static const String searchScreen = 'searchScreen';
+  static const String profileScreen = 'profileScreen';
 }
 
 /// Correlates routes names to builders
 class PHRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
-
     switch (settings.name) {
       case PHRoutes.home:
         return MaterialPageRoute(builder: (_) => HomeScreen());
+      case PHRoutes.profileScreen:
+        return MaterialPageRoute(builder: (_) => ProfileScreen());
       case PHRoutes.searchScreen:
         if (args is SearchScreenArgs) {
           return _searchScreenRoute(args);
