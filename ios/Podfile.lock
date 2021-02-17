@@ -302,6 +302,9 @@ PODS:
     - GoogleUtilities/Environment (~> 7.0)
     - "GoogleUtilities/NSData+zlib (~> 7.0)"
   - Flutter (1.0.0)
+  - flutter_uxcam (1.3.1):
+    - Flutter
+    - UXCam (~> 3.3.1)
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
@@ -373,6 +376,7 @@ PODS:
     - FMDB (>= 2.7.5)
   - url_launcher (0.0.1):
     - Flutter
+  - UXCam (3.3.2)
 
 DEPENDENCIES:
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
@@ -381,6 +385,7 @@ DEPENDENCIES:
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_remote_config (from `.symlinks/plugins/firebase_remote_config/ios`)
   - Flutter (from `Flutter`)
+  - flutter_uxcam (from `.symlinks/plugins/flutter_uxcam/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
@@ -409,6 +414,7 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - PromisesObjC
+    - UXCam
 
 EXTERNAL SOURCES:
   cloud_firestore:
@@ -423,6 +429,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_remote_config/ios"
   Flutter:
     :path: Flutter
+  flutter_uxcam:
+    :path: ".symlinks/plugins/flutter_uxcam/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
   shared_preferences:
@@ -450,6 +458,7 @@ SPEC CHECKSUMS:
   FirebaseInstallations: 30646fc9a61c6f4ee3cd7a8b7231721842b40c95
   FirebaseRemoteConfig: 826fad8bec5ce1912ef97a124d6ec0ce4dcf6ec1
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  flutter_uxcam: 72d3e32f9a6f013da5854b4ded79e2ecd64fbaf5
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   GoogleAppMeasurement: 8d3c0aeede16ab7764144b5a4ca8e1d4323841b7
   GoogleDataTransport: 116c84c4bdeb76be2a7a46de51244368f9794eab
@@ -464,6 +473,7 @@ SPEC CHECKSUMS:
   shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
   sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904
   url_launcher: 6fef411d543ceb26efce54b05a0a40bfd74cbbef
+  UXCam: 578dfa771589b2ffa62ab05d7d4649a9be8e30ef
 
 PODFILE CHECKSUM: fe0e1ee7f3d1f7d00b11b474b62dd62134535aea
 

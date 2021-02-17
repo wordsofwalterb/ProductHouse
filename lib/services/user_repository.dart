@@ -94,7 +94,7 @@ class UserRepository {
       final user = parseJson<PHUser>(
           userDoc.data()..update('lastOpenDate', (value) => Timestamp.now()));
 
-      if (user.isTester) {
+      if (user?.isTester ?? false) {
         await PHGlobal.analytics.setAnalyticsCollectionEnabled(false);
       }
 
