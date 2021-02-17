@@ -101,5 +101,18 @@ class ByteRepository {
     cachedByteIds.addAll(items.map((e) => e.id));
   }
 
-  Future<PHResult<List<PHByte>>> getSuggestedBytes(List<String> readByteIds) {}
+  Future<PHResult<List<PHByte>>> getSuggestedBytes() async {
+    try {
+      final querySnapshot =
+          await PHGlobal.byteRef.where('suggested', isEqualTo: true).get();
+
+      final bytes = parseFirestoreQuery<PHByte>(querySnapshot);
+
+      return PHResult.success(bytes);
+    } catch (error) {
+      return PHResult.failure(
+          errorCode: error.toString(),
+          errorMessage: 'There was a problem retrieving suggested bytes.');
+    }
+  }
 }

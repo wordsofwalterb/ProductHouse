@@ -75,7 +75,7 @@ class PHByteTile extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 8.0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   BlocBuilder<BookmarkBloc, BookmarkState>(
                     builder: (context, state) {
@@ -99,6 +99,7 @@ class PHByteTile extends StatelessWidget {
                   Spacer(flex: 1),
                   Text(
                     "${byte.readTime}",
+                    textAlign: TextAlign.end,
                     style: TextStyle(fontSize: 18),
                   ),
                 ],

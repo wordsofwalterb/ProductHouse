@@ -44,7 +44,7 @@ class PHOverviewScreen extends StatelessWidget {
               child: PHSectionTitle('Suggested'),
             ),
           ),
-          // _suggested(),
+          _suggested(),
         ],
       ),
     ));
@@ -171,17 +171,27 @@ class PHOverviewScreen extends StatelessWidget {
     );
   }
 
-//   Widget _suggested() {
-//     return SliverList(
-//       delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
-//         return Padding(
-//           padding: const EdgeInsets.symmetric(vertical: 8.0),
-//           child: PHByteTile(
-
-//           ),
-//         );
-//       }, childCount: 4),
-//     );
-//   }
-// }
+  Widget _suggested() {
+    return FutureBuilder(
+        future: ByteRepository().getSuggestedBytes(),
+        builder: (_, snapshot) {
+          PHResult<List<PHByte>> result;
+          if (snapshot.hasData) {
+            result = snapshot.data as PHResult<List<PHByte>>;
+          }
+          if (result?.hasData ?? false) {
+            return SliverList(
+              delegate:
+                  SliverChildBuilderDelegate((BuildContext context, int index) {
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 16.0),
+                  child: PHByteTile(byte: result.data[index]),
+                );
+              }, childCount: result.data.length),
+            );
+          } else {
+            return SliverPadding(padding: EdgeInsets.zero);
+          }
+        });
+  }
 }
