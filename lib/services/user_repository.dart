@@ -87,6 +87,10 @@ class UserRepository {
       final DocumentSnapshot userDoc =
           await PHGlobal.userRef.doc(currentUser.uid).get();
 
+      PHGlobal.userRef
+          .doc(currentUser.uid)
+          .update({'lastOpenDate': Timestamp.now()});
+
       return PHResult.success(parseJson(
         userDoc.data()
           ..update(

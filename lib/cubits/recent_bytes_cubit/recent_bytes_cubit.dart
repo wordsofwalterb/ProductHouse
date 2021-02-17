@@ -41,7 +41,7 @@ class RecentBytesCubit extends Cubit<RecentBytesState> {
       if (!listEquals(currentState.recents, updatedRecents)) {
         // Add new recent byte to database and locally
         final result = await _userRepository.updateUserWithMap(currentUserID, {
-          "recents": updatedRecents.map((e) => e.id).toList(),
+          "recent": updatedRecents.map((e) => e.id).toList(),
         });
 
         if (result.hasData) {

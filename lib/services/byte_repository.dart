@@ -16,7 +16,8 @@ class ByteRepository {
   Future<PHResult<List<PHByte>>> searchBytesByTitle(String title) async {
     try {
       final query = await PHGlobal.byteRef
-          .where('title', isGreaterThanOrEqualTo: title.trim())
+          .where('titleLower',
+              isGreaterThanOrEqualTo: title.toLowerCase().trim())
           .get();
 
       final bytes = parseFirestoreQuery<PHByte>(query);
