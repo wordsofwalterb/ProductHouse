@@ -24,23 +24,11 @@ class PHOverviewScreen extends StatelessWidget {
         slivers: [
           _appSearchBar(),
           _dailyByte(),
-          SliverPadding(
-            padding: EdgeInsets.symmetric(vertical: 22),
-            sliver: SliverToBoxAdapter(
-              child: PHSectionTitle('Recent'),
-            ),
-          ),
           _recents(),
-          SliverPadding(
-            padding: EdgeInsets.symmetric(vertical: 22),
-            sliver: SliverToBoxAdapter(
-              child: PHSectionTitle('Bookmarks'),
-            ),
-          ),
           _bookmarks(),
-          SliverPadding(
-            padding: EdgeInsets.symmetric(vertical: 22),
-            sliver: SliverToBoxAdapter(
+          SliverToBoxAdapter(
+            child: const Padding(
+              padding: EdgeInsets.symmetric(vertical: 22.0),
               child: PHSectionTitle('Suggested'),
             ),
           ),
@@ -110,16 +98,26 @@ class PHOverviewScreen extends StatelessWidget {
                   return state.when(
                     initial: () => const ByteTileShimmer(),
                     loadInProgress: () => const ByteTileShimmer(),
-                    loadSuccess: (recentBytes) => Padding(
-                      padding: EdgeInsets.only(bottom: 14),
-                      child: PHByteTile(
-                        byte: recentBytes[index],
-                      ),
-                    ),
+                    loadSuccess: (recentBytes) {
+                      if (recentBytes.isEmpty) {
+                        return Container();
+                      } else if (index == 0 && recentBytes.isNotEmpty) {
+                        return const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 22.0),
+                          child: PHSectionTitle('Recent'),
+                        );
+                      }
+                      return Padding(
+                        padding: EdgeInsets.only(bottom: 14),
+                        child: PHByteTile(
+                          byte: recentBytes[index - 1],
+                        ),
+                      );
+                    },
                     loadFailure: (_, __) => Container(),
                   );
                 },
-                childCount: byteList.length,
+                childCount: byteList.length + 1,
               ),
             );
           },
@@ -142,16 +140,26 @@ class PHOverviewScreen extends StatelessWidget {
                   return state.when(
                     initial: () => const ByteTileShimmer(),
                     loadInProgress: () => const ByteTileShimmer(),
-                    loadSuccess: (bookmarkedBytes) => Padding(
-                      padding: EdgeInsets.only(bottom: 14),
-                      child: PHByteTile(
-                        byte: bookmarkedBytes[index],
-                      ),
-                    ),
+                    loadSuccess: (bookmarkedBytes) {
+                      if (bookmarkedBytes.isEmpty) {
+                        return Container();
+                      } else if (index == 0 && bookmarkedBytes.isNotEmpty) {
+                        return const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 22.0),
+                          child: PHSectionTitle('Bookmarks'),
+                        );
+                      }
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 14),
+                        child: PHByteTile(
+                          byte: bookmarkedBytes[index - 1],
+                        ),
+                      );
+                    },
                     loadFailure: (_, __) => Container(),
                   );
                 },
-                childCount: (byteList.length <= 4) ? byteList.length : 4,
+                childCount: (byteList.length <= 4) ? byteList.length + 1 : 5,
               ),
             );
           },
@@ -190,7 +198,7 @@ class PHOverviewScreen extends StatelessWidget {
               }, childCount: result.data.length),
             );
           } else {
-            return SliverPadding(padding: EdgeInsets.zero);
+            return const SliverPadding(padding: EdgeInsets.zero);
           }
         });
   }
