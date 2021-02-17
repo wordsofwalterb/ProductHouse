@@ -1,3 +1,4 @@
+import 'package:ProductHouse/cubits/read_bytes_cubit/read_bytes_cubit.dart';
 import 'package:ProductHouse/home_screen.dart';
 import 'package:ProductHouse/services/user_repository.dart';
 import 'package:ProductHouse/splash_screen.dart';
@@ -60,6 +61,10 @@ class PHApp extends StatelessWidget {
             authenticating: () => SplashScreen(),
             authenticatedAnonymously: (user) {
               return MultiBlocProvider(providers: [
+                BlocProvider(
+                  create: (context) => ReadBytesCubit(
+                      ByteRepository(), UserRepository(), user.read),
+                ),
                 BlocProvider(
                   create: (context) =>
                       BookmarkBloc(ByteRepository(), UserRepository())

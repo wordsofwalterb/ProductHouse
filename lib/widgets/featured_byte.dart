@@ -1,4 +1,5 @@
 import 'package:ProductHouse/blocs/bookmark_bloc/bookmark_bloc.dart';
+import 'package:ProductHouse/cubits/read_bytes_cubit/read_bytes_cubit.dart';
 import 'package:ProductHouse/cubits/recent_bytes_cubit/recent_bytes_cubit.dart';
 import 'package:ProductHouse/models/byte.dart';
 import 'package:ProductHouse/util/router.dart';
@@ -17,6 +18,7 @@ class PHFeaturedByte extends StatelessWidget {
         context,
         PHRoutes.byteScreen,
         arguments: ByteScreenArgs(
+          readBytesCubit: BlocProvider.of<ReadBytesCubit>(context),
           bookmarkBloc: BlocProvider.of<BookmarkBloc>(context),
           recentsCubit: BlocProvider.of<RecentBytesCubit>(context),
           byte: byte,

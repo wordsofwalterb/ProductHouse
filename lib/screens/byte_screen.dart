@@ -1,4 +1,5 @@
 import 'package:ProductHouse/blocs/bookmark_bloc/bookmark_bloc.dart';
+import 'package:ProductHouse/cubits/read_bytes_cubit/read_bytes_cubit.dart';
 import 'package:ProductHouse/models/byte.dart';
 import 'package:ProductHouse/widgets/button.dart';
 import 'package:ProductHouse/widgets/emphasis.dart';
@@ -81,10 +82,16 @@ class PHByteScreen extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              PHButton(
-                'Mark Read',
-                icon: Icons.check,
-              ),
+              BlocBuilder<ReadBytesCubit, ReadBytesState>(
+                  builder: (context, state) {
+                final cubit = BlocProvider.of<ReadBytesCubit>(context);
+                return PHButton(
+                  'Mark Read',
+                  icon: Icons.check,
+                  isActive: state.readByteIds.contains(byte.id),
+                  onTap: () => cubit.toggleReadByte(byte.id),
+                );
+              }),
               SizedBox(
                 width: 12,
               ),
@@ -120,7 +127,7 @@ class PHByteScreen extends StatelessWidget {
         } else if (element.containsKey("image")) ...{
           PHImage(element["image"], caption: element["imageCaption"])
         } else if (element.containsKey("header1")) ...{
-          PHHeader1 (element["header1"])
+          PHHeader1(element["header1"])
         },
         // Always adds a sizedBox for height spacing
         SizedBox(

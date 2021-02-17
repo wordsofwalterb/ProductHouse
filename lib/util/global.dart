@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 class PHGlobal {
   static const primaryColor = Color.fromRGBO(12, 107, 196, 1);
+  static const lightGrey = Color.fromRGBO(240, 241, 245, 1);
 
   static final FirebaseAnalytics analytics = FirebaseAnalytics();
 

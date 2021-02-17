@@ -1,4 +1,5 @@
 import 'package:ProductHouse/blocs/bookmark_bloc/bookmark_bloc.dart';
+import 'package:ProductHouse/cubits/read_bytes_cubit/read_bytes_cubit.dart';
 import 'package:ProductHouse/cubits/recent_bytes_cubit/recent_bytes_cubit.dart';
 import 'package:ProductHouse/util/router.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ class PHSearchBar extends StatelessWidget {
     return GestureDetector(
       onTap: () => Navigator.of(context).pushNamed(PHRoutes.searchScreen,
           arguments: SearchScreenArgs(
+            readBytesCubit: BlocProvider.of<ReadBytesCubit>(context),
             bookmarkBloc: bookmarkBloc,
             recentsCubit: recentsCubit,
           )),

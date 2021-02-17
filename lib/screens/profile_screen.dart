@@ -1,3 +1,4 @@
+import 'package:ProductHouse/util/global.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sfsymbols/flutter_sfsymbols.dart';
 
@@ -5,7 +6,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(240, 241, 245, 1),
+      backgroundColor: PHGlobal.lightGrey,
       appBar: AppBar(
         title: Text(
           'Account',

@@ -1,4 +1,5 @@
 import 'package:ProductHouse/blocs/bookmark_bloc/bookmark_bloc.dart';
+import 'package:ProductHouse/cubits/read_bytes_cubit/read_bytes_cubit.dart';
 import 'package:ProductHouse/cubits/recent_bytes_cubit/recent_bytes_cubit.dart';
 import 'package:ProductHouse/models/byte.dart';
 import 'package:ProductHouse/screens/byte_screen.dart';
@@ -47,8 +48,11 @@ class PHRouter {
   static Route<dynamic> _byteScreenRoute(ByteScreenArgs args) {
     args.recentsCubit.updateRecents(args.byte);
     return MaterialPageRoute(
-      builder: (context) => BlocProvider.value(
-        value: args.bookmarkBloc,
+      builder: (context) => MultiBlocProvider(
+        providers: [
+          BlocProvider.value(value: args.bookmarkBloc),
+          BlocProvider.value(value: args.readBytesCubit),
+        ],
         child: PHByteScreen(args.byte),
       ),
     );
@@ -60,6 +64,7 @@ class PHRouter {
         providers: [
           BlocProvider.value(value: args.bookmarkBloc),
           BlocProvider.value(value: args.recentsCubit),
+          BlocProvider.value(value: args.readBytesCubit),
         ],
         child: SearchScreen(),
       ),
@@ -82,20 +87,24 @@ class ByteScreenArgs {
   final BookmarkBloc bookmarkBloc;
   final PHByte byte;
   final RecentBytesCubit recentsCubit;
+  final ReadBytesCubit readBytesCubit;
 
   const ByteScreenArgs({
     @required this.bookmarkBloc,
     @required this.byte,
     @required this.recentsCubit,
+    @required this.readBytesCubit,
   });
 }
 
 class SearchScreenArgs {
   final BookmarkBloc bookmarkBloc;
   final RecentBytesCubit recentsCubit;
+  final ReadBytesCubit readBytesCubit;
 
   const SearchScreenArgs({
     @required this.bookmarkBloc,
     @required this.recentsCubit,
+    @required this.readBytesCubit,
   });
 }
