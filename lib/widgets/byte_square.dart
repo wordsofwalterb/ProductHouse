@@ -34,8 +34,7 @@ class PHByteSquare extends StatelessWidget {
         return Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(4.0),
-              color:
-                  isRead ? Theme.of(context).primaryColor : PHGlobal.lightGrey),
+              color: Theme.of(context).primaryColor),
           padding: EdgeInsets.all(11),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,18 +43,34 @@ class PHByteSquare extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
-                    child: AutoSizeText(
-                      byte.title,
-                      wrapWords: false,
-                      softWrap: true,
-                      style: TextStyle(
-                        fontFamily: 'SFProText-Bold',
-                        fontSize: 22,
-                        color:
-                            isRead ? const Color(0xffffffff) : Colors.black87,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      maxLines: 3,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        AutoSizeText(
+                          byte.title,
+                          wrapWords: false,
+                          softWrap: true,
+                          style: TextStyle(
+                            fontFamily: 'SFProText-Bold',
+                            fontSize: 22,
+                            color: const Color(0xffffffff),
+                            fontWeight: FontWeight.bold,
+                          ),
+                          maxLines: 3,
+                        ),
+                        if (isRead) ...{
+                          SizedBox(
+                            height: 6,
+                          ),
+                          Text(
+                            'Read',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText2
+                                .copyWith(color: Colors.white, fontSize: 18),
+                          ),
+                        }
+                      ],
                     ),
                   ),
                   Padding(
@@ -73,8 +88,7 @@ class PHByteSquare extends StatelessWidget {
                                     (bookmarks.contains(byte))
                                         ? Icons.bookmark
                                         : Icons.bookmark_border_outlined,
-                                    color:
-                                        isRead ? Colors.white : Colors.black54,
+                                    color: Colors.white,
                                   ),
                                 ),
                             orElse: () => Container());
@@ -93,7 +107,7 @@ class PHByteSquare extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: 'SFProText-Regular',
                       fontSize: 18,
-                      color: isRead ? const Color(0xffffffff) : Colors.black87,
+                      color: const Color(0xffffffff),
                     ),
                     textAlign: TextAlign.left,
                   ),
@@ -103,7 +117,7 @@ class PHByteSquare extends StatelessWidget {
                   Icon(
                     Icons.circle,
                     size: 9,
-                    color: isRead ? Colors.white : Colors.black87,
+                    color: Colors.white,
                   ),
                   Spacer(
                     flex: 1,
@@ -112,10 +126,9 @@ class PHByteSquare extends StatelessWidget {
                   Text(
                     byte.readTime,
                     style: TextStyle(
-                      fontFamily: 'SFProText-Regular',
-                      fontSize: 18,
-                      color: isRead ? const Color(0xffffffff) : Colors.black87,
-                    ),
+                        fontFamily: 'SFProText-Regular',
+                        fontSize: 18,
+                        color: const Color(0xffffffff)),
                     textAlign: TextAlign.left,
                   ),
                   Spacer(

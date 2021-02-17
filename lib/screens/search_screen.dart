@@ -1,5 +1,6 @@
 import 'package:ProductHouse/models/byte.dart';
 import 'package:ProductHouse/services/byte_repository.dart';
+import 'package:ProductHouse/util/global.dart';
 import 'package:ProductHouse/widgets/byte_tile.dart';
 import 'package:flappy_search_bar/flappy_search_bar.dart';
 
@@ -18,6 +19,12 @@ class _SearchScreenState extends State<SearchScreen> {
 
   Future<List<PHByte>> _fetchBytes(String keyword) async {
     final bytes = await ByteRepository().searchBytesByTitle(keyword);
+    PHGlobal.analytics.logEvent(
+      name: 'Searched For Byte',
+      parameters: {
+        'keyword': keyword,
+      },
+    );
     return bytes.hasData ? bytes.data : [];
   }
 

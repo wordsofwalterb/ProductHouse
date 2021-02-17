@@ -26,6 +26,7 @@ class _$PHUserTearOff {
           List<String> recent,
       @required
           List<String> read,
+      bool isTester,
       @required
       @JsonKey(fromJson: PHFunctions.dateTimeFromTimestamp, toJson: PHFunctions.dateTimeAsIs)
           DateTime creationDate,
@@ -37,6 +38,7 @@ class _$PHUserTearOff {
       bookmarks: bookmarks,
       recent: recent,
       read: read,
+      isTester: isTester,
       creationDate: creationDate,
       lastOpenDate: lastOpenDate,
     );
@@ -65,6 +67,7 @@ mixin _$PHUser {
 
   /// List of references(IDs) to all the bytes marked read by the user
   List<String> get read;
+  bool get isTester;
 
   /// When the account was created. Created from firestore [Timestamp].
   @JsonKey(
@@ -92,6 +95,7 @@ abstract class $PHUserCopyWith<$Res> {
       List<String> bookmarks,
       List<String> recent,
       List<String> read,
+      bool isTester,
       @JsonKey(fromJson: PHFunctions.dateTimeFromTimestamp, toJson: PHFunctions.dateTimeAsIs)
           DateTime creationDate,
       @JsonKey(fromJson: PHFunctions.dateTimeFromTimestamp, toJson: PHFunctions.dateTimeAsIs)
@@ -112,6 +116,7 @@ class _$PHUserCopyWithImpl<$Res> implements $PHUserCopyWith<$Res> {
     Object bookmarks = freezed,
     Object recent = freezed,
     Object read = freezed,
+    Object isTester = freezed,
     Object creationDate = freezed,
     Object lastOpenDate = freezed,
   }) {
@@ -121,6 +126,7 @@ class _$PHUserCopyWithImpl<$Res> implements $PHUserCopyWith<$Res> {
           bookmarks == freezed ? _value.bookmarks : bookmarks as List<String>,
       recent: recent == freezed ? _value.recent : recent as List<String>,
       read: read == freezed ? _value.read : read as List<String>,
+      isTester: isTester == freezed ? _value.isTester : isTester as bool,
       creationDate: creationDate == freezed
           ? _value.creationDate
           : creationDate as DateTime,
@@ -141,6 +147,7 @@ abstract class _$PHUserCopyWith<$Res> implements $PHUserCopyWith<$Res> {
       List<String> bookmarks,
       List<String> recent,
       List<String> read,
+      bool isTester,
       @JsonKey(fromJson: PHFunctions.dateTimeFromTimestamp, toJson: PHFunctions.dateTimeAsIs)
           DateTime creationDate,
       @JsonKey(fromJson: PHFunctions.dateTimeFromTimestamp, toJson: PHFunctions.dateTimeAsIs)
@@ -162,6 +169,7 @@ class __$PHUserCopyWithImpl<$Res> extends _$PHUserCopyWithImpl<$Res>
     Object bookmarks = freezed,
     Object recent = freezed,
     Object read = freezed,
+    Object isTester = freezed,
     Object creationDate = freezed,
     Object lastOpenDate = freezed,
   }) {
@@ -171,6 +179,7 @@ class __$PHUserCopyWithImpl<$Res> extends _$PHUserCopyWithImpl<$Res>
           bookmarks == freezed ? _value.bookmarks : bookmarks as List<String>,
       recent: recent == freezed ? _value.recent : recent as List<String>,
       read: read == freezed ? _value.read : read as List<String>,
+      isTester: isTester == freezed ? _value.isTester : isTester as bool,
       creationDate: creationDate == freezed
           ? _value.creationDate
           : creationDate as DateTime,
@@ -194,6 +203,7 @@ class _$_PHUser with DiagnosticableTreeMixin implements _PHUser {
           this.recent,
       @required
           this.read,
+      this.isTester,
       @required
       @JsonKey(fromJson: PHFunctions.dateTimeFromTimestamp, toJson: PHFunctions.dateTimeAsIs)
           this.creationDate,
@@ -227,6 +237,8 @@ class _$_PHUser with DiagnosticableTreeMixin implements _PHUser {
   /// List of references(IDs) to all the bytes marked read by the user
   final List<String> read;
   @override
+  final bool isTester;
+  @override
 
   /// When the account was created. Created from firestore [Timestamp].
   @JsonKey(
@@ -243,7 +255,7 @@ class _$_PHUser with DiagnosticableTreeMixin implements _PHUser {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PHUser(userID: $userID, bookmarks: $bookmarks, recent: $recent, read: $read, creationDate: $creationDate, lastOpenDate: $lastOpenDate)';
+    return 'PHUser(userID: $userID, bookmarks: $bookmarks, recent: $recent, read: $read, isTester: $isTester, creationDate: $creationDate, lastOpenDate: $lastOpenDate)';
   }
 
   @override
@@ -255,6 +267,7 @@ class _$_PHUser with DiagnosticableTreeMixin implements _PHUser {
       ..add(DiagnosticsProperty('bookmarks', bookmarks))
       ..add(DiagnosticsProperty('recent', recent))
       ..add(DiagnosticsProperty('read', read))
+      ..add(DiagnosticsProperty('isTester', isTester))
       ..add(DiagnosticsProperty('creationDate', creationDate))
       ..add(DiagnosticsProperty('lastOpenDate', lastOpenDate));
   }
@@ -272,6 +285,9 @@ class _$_PHUser with DiagnosticableTreeMixin implements _PHUser {
                 const DeepCollectionEquality().equals(other.recent, recent)) &&
             (identical(other.read, read) ||
                 const DeepCollectionEquality().equals(other.read, read)) &&
+            (identical(other.isTester, isTester) ||
+                const DeepCollectionEquality()
+                    .equals(other.isTester, isTester)) &&
             (identical(other.creationDate, creationDate) ||
                 const DeepCollectionEquality()
                     .equals(other.creationDate, creationDate)) &&
@@ -287,6 +303,7 @@ class _$_PHUser with DiagnosticableTreeMixin implements _PHUser {
       const DeepCollectionEquality().hash(bookmarks) ^
       const DeepCollectionEquality().hash(recent) ^
       const DeepCollectionEquality().hash(read) ^
+      const DeepCollectionEquality().hash(isTester) ^
       const DeepCollectionEquality().hash(creationDate) ^
       const DeepCollectionEquality().hash(lastOpenDate);
 
@@ -311,6 +328,7 @@ abstract class _PHUser implements PHUser {
           List<String> recent,
       @required
           List<String> read,
+      bool isTester,
       @required
       @JsonKey(fromJson: PHFunctions.dateTimeFromTimestamp, toJson: PHFunctions.dateTimeAsIs)
           DateTime creationDate,
@@ -336,6 +354,8 @@ abstract class _PHUser implements PHUser {
 
   /// List of references(IDs) to all the bytes marked read by the user
   List<String> get read;
+  @override
+  bool get isTester;
   @override
 
   /// When the account was created. Created from firestore [Timestamp].

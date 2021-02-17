@@ -1,6 +1,7 @@
 import 'package:ProductHouse/models/byte.dart';
 import 'package:ProductHouse/services/byte_repository.dart';
 import 'package:ProductHouse/services/user_repository.dart';
+import 'package:ProductHouse/util/global.dart';
 import 'package:ProductHouse/util/result.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -40,11 +41,23 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
           "bookmarks": FieldValue.arrayRemove([event.byte.id]),
         });
         updatedBookmarks = currentState.bookmarks.toList()..remove(event.byte);
+        PHGlobal.analytics.logEvent(
+          name: 'Bookmark Removed',
+          parameters: {
+            'description': state.toString(),
+          },
+        );
       } else {
         result = await _userRepository.updateUserWithMap(currentUserID, {
           "bookmarks": FieldValue.arrayUnion([event.byte.id]),
         });
         updatedBookmarks = currentState.bookmarks.toList()..add(event.byte);
+        PHGlobal.analytics.logEvent(
+          name: 'Bookmark Added',
+          parameters: {
+            'description': state.toString(),
+          },
+        );
       }
 
       if (!result.hasError) {

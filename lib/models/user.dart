@@ -22,6 +22,7 @@ abstract class PHUser with _$PHUser {
 
     /// List of references(IDs) to all the bytes marked read by the user
     @required List<String> read,
+    bool isTester,
 
     /// When the account was created. Created from firestore [Timestamp].
     @required

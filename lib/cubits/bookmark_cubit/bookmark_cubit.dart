@@ -1,6 +1,7 @@
 import 'package:ProductHouse/models/byte.dart';
 import 'package:ProductHouse/services/byte_repository.dart';
 import 'package:ProductHouse/services/user_repository.dart';
+import 'package:ProductHouse/util/global.dart';
 import 'package:ProductHouse/util/result.dart';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -30,11 +31,22 @@ class BookmarkCubit extends Cubit<BookmarkState> {
           "bookmarks": FieldValue.arrayRemove([byte.id]),
         });
         updatedBookmarks = currentState.bookmarks.toList()..remove(byte);
+        PHGlobal.analytics.logEvent(
+          name: 'Bookmark Removed',
+          parameters: {
+            'description': state.toString(),
+            'id': byte.id,
+          },
+        );
       } else {
         result = await _userRepository.updateUserWithMap(currentUserID, {
           "bookmarks": FieldValue.arrayUnion([byte.id]),
         });
         updatedBookmarks = currentState.bookmarks.toList()..add(byte);
+        PHGlobal.analytics.logEvent(
+          name: 'Bookmark Added',
+          parameters: {'description': state.toString(), 'id': byte.id},
+        );
       }
 
       if (!result.hasError) {

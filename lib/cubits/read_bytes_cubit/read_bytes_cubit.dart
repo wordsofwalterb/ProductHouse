@@ -1,5 +1,6 @@
 import 'package:ProductHouse/services/byte_repository.dart';
 import 'package:ProductHouse/services/user_repository.dart';
+import 'package:ProductHouse/util/global.dart';
 import 'package:ProductHouse/util/result.dart';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -27,11 +28,25 @@ class ReadBytesCubit extends Cubit<ReadBytesState> {
         "read": FieldValue.arrayRemove([byteId]),
       });
       updatedReadByteIds.remove(byteId);
+      PHGlobal.analytics.logEvent(
+        name: 'Read Byte Removed',
+        parameters: {
+          'description': state.toString(),
+          'id': byteId,
+        },
+      );
     } else {
       result = await _userRepository.updateUserWithMap(currentUserID, {
         "read": FieldValue.arrayUnion([byteId]),
       });
       updatedReadByteIds.add(byteId);
+      PHGlobal.analytics.logEvent(
+        name: 'Read Byte Added',
+        parameters: {
+          'description': state.toString(),
+          'id': byteId,
+        },
+      );
     }
 
     emit(ReadBytesState.initial(updatedReadByteIds));

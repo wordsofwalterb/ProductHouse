@@ -91,13 +91,14 @@ class UserRepository {
           .doc(currentUser.uid)
           .update({'lastOpenDate': Timestamp.now()});
 
-      return PHResult.success(parseJson(
-        userDoc.data()
-          ..update(
-            'lastOpenDate',
-            (value) => Timestamp.now(),
-          ),
-      ));
+      final user = parseJson<PHUser>(
+          userDoc.data()..update('lastOpenDate', (value) => Timestamp.now()));
+
+      if (user.isTester) {
+        await PHGlobal.analytics.setAnalyticsCollectionEnabled(false);
+      }
+
+      return PHResult.success(user);
     } catch (error) {
       return PHResult.failure(
           errorCode: error.toString(),

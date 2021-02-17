@@ -1,6 +1,7 @@
 import 'package:ProductHouse/models/byte.dart';
 import 'package:ProductHouse/services/byte_repository.dart';
 import 'package:ProductHouse/services/user_repository.dart';
+import 'package:ProductHouse/util/global.dart';
 import 'package:ProductHouse/util/result.dart';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -36,6 +37,14 @@ class RecentBytesCubit extends Cubit<RecentBytesState> {
       if (updatedRecents.length > 2) {
         updatedRecents.removeAt(1);
       }
+
+      PHGlobal.analytics.logEvent(
+        name: 'Byte Read',
+        parameters: {
+          'description': state.toString(),
+          'id': byte.id,
+        },
+      );
 
       // Don't update database or state if order is the same
       if (!listEquals(currentState.recents, updatedRecents)) {

@@ -1,5 +1,6 @@
 import 'package:ProductHouse/models/byte.dart';
 import 'package:ProductHouse/services/byte_repository.dart';
+import 'package:ProductHouse/util/global.dart';
 import 'package:ProductHouse/util/result.dart';
 import 'package:ProductHouse/widgets/byte_square.dart';
 import 'package:ProductHouse/widgets/category_chip.dart';
@@ -45,6 +46,12 @@ class _PHDiscoverScreenState extends State<PHDiscoverScreen>
     setState(() {
       _currentTab = indexTapped;
     });
+    PHGlobal.analytics.logEvent(
+      name: 'Filter Changed',
+      parameters: {
+        'to filter': categories[indexTapped],
+      },
+    );
   }
 
   @override
