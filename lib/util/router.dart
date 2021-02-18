@@ -1,10 +1,10 @@
-import 'package:ProductHouse/blocs/bookmark_bloc/bookmark_bloc.dart';
-import 'package:ProductHouse/cubits/read_bytes_cubit/read_bytes_cubit.dart';
-import 'package:ProductHouse/cubits/recent_bytes_cubit/recent_bytes_cubit.dart';
-import 'package:ProductHouse/models/byte.dart';
-import 'package:ProductHouse/screens/byte_screen.dart';
-import 'package:ProductHouse/screens/profile_screen.dart';
-import 'package:ProductHouse/screens/search_screen.dart';
+import 'package:ProductByte/blocs/bookmark_bloc/bookmark_bloc.dart';
+import 'package:ProductByte/cubits/read_bytes_cubit/read_bytes_cubit.dart';
+import 'package:ProductByte/cubits/recent_bytes_cubit/recent_bytes_cubit.dart';
+import 'package:ProductByte/models/byte.dart';
+import 'package:ProductByte/screens/byte_screen.dart';
+import 'package:ProductByte/screens/profile_screen.dart';
+import 'package:ProductByte/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

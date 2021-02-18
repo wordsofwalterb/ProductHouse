@@ -1,16 +1,16 @@
 import 'dart:math';
 
-import 'package:ProductHouse/blocs/bookmark_bloc/bookmark_bloc.dart';
-import 'package:ProductHouse/cubits/recent_bytes_cubit/recent_bytes_cubit.dart';
-import 'package:ProductHouse/models/byte.dart';
-import 'package:ProductHouse/services/byte_repository.dart';
-import 'package:ProductHouse/util/result.dart';
-import 'package:ProductHouse/widgets/byte_tile.dart';
-import 'package:ProductHouse/widgets/featured_byte.dart';
-import 'package:ProductHouse/widgets/profile_button.dart';
-import 'package:ProductHouse/widgets/search_bar.dart';
-import 'package:ProductHouse/widgets/section_title.dart';
-import 'package:ProductHouse/widgets/shimmers/byte_tile_shimmer.dart';
+import 'package:ProductByte/blocs/bookmark_bloc/bookmark_bloc.dart';
+import 'package:ProductByte/cubits/recent_bytes_cubit/recent_bytes_cubit.dart';
+import 'package:ProductByte/models/byte.dart';
+import 'package:ProductByte/services/byte_repository.dart';
+import 'package:ProductByte/util/result.dart';
+import 'package:ProductByte/widgets/byte_tile.dart';
+import 'package:ProductByte/widgets/featured_byte.dart';
+import 'package:ProductByte/widgets/profile_button.dart';
+import 'package:ProductByte/widgets/search_bar.dart';
+import 'package:ProductByte/widgets/section_title.dart';
+import 'package:ProductByte/widgets/shimmers/byte_tile_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

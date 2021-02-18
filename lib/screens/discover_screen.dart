@@ -1,10 +1,10 @@
-import 'package:ProductHouse/models/byte.dart';
-import 'package:ProductHouse/services/byte_repository.dart';
-import 'package:ProductHouse/util/global.dart';
-import 'package:ProductHouse/util/result.dart';
-import 'package:ProductHouse/widgets/byte_square.dart';
-import 'package:ProductHouse/widgets/category_chip.dart';
-import 'package:ProductHouse/widgets/search_bar.dart';
+import 'package:ProductByte/models/byte.dart';
+import 'package:ProductByte/services/byte_repository.dart';
+import 'package:ProductByte/util/global.dart';
+import 'package:ProductByte/util/result.dart';
+import 'package:ProductByte/widgets/byte_square.dart';
+import 'package:ProductByte/widgets/category_chip.dart';
+import 'package:ProductByte/widgets/search_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flappy_search_bar/flappy_search_bar.dart';

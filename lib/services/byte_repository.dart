@@ -1,8 +1,8 @@
-import 'package:ProductHouse/models/byte.dart';
-import 'package:ProductHouse/util/result.dart';
+import 'package:ProductByte/models/byte.dart';
+import 'package:ProductByte/util/result.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ProductHouse/util/global.dart';
-import 'package:ProductHouse/util/functions.dart';
+import 'package:ProductByte/util/global.dart';
+import 'package:ProductByte/util/functions.dart';
 import 'package:flutter/foundation.dart';
 
 class ByteRepository {

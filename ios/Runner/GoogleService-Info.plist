@@ -13,11 +13,11 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>org.brandonwalter.producthouse</string>
+	<string>org.brandonwalter.ProductByte</string>
 	<key>PROJECT_ID</key>
-	<string>producthouse-23d80</string>
+	<string>ProductByte-23d80</string>
 	<key>STORAGE_BUCKET</key>
-	<string>producthouse-23d80.appspot.com</string>
+	<string>ProductByte-23d80.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>

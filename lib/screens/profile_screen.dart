@@ -1,4 +1,4 @@
-import 'package:ProductHouse/util/global.dart';
+import 'package:ProductByte/util/global.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sfsymbols/flutter_sfsymbols.dart';
 import 'package:url_launcher/url_launcher.dart';

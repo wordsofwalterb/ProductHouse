@@ -1,7 +1,7 @@
-import 'package:ProductHouse/models/byte.dart';
-import 'package:ProductHouse/services/byte_repository.dart';
-import 'package:ProductHouse/util/global.dart';
-import 'package:ProductHouse/widgets/byte_tile.dart';
+import 'package:ProductByte/models/byte.dart';
+import 'package:ProductByte/services/byte_repository.dart';
+import 'package:ProductByte/util/global.dart';
+import 'package:ProductByte/widgets/byte_tile.dart';
 import 'package:flappy_search_bar/flappy_search_bar.dart';
 
 import 'package:flappy_search_bar/search_bar_style.dart';

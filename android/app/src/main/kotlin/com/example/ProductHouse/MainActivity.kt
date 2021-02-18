@@ -1,4 +1,4 @@
-package com.example.ProductHouse
+package com.example.ProductByte
 
 import io.flutter.embedding.android.FlutterActivity
 

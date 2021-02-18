@@ -1,4 +1,4 @@
-import 'package:ProductHouse/util/global.dart';
+import 'package:ProductByte/util/global.dart';
 import 'package:flutter/material.dart';
 
 ThemeData lightTheme() {

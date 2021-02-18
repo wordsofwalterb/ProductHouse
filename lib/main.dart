@@ -1,8 +1,8 @@
-import 'package:ProductHouse/cubits/read_bytes_cubit/read_bytes_cubit.dart';
-import 'package:ProductHouse/home_screen.dart';
-import 'package:ProductHouse/services/user_repository.dart';
-import 'package:ProductHouse/splash_screen.dart';
-import 'package:ProductHouse/util/theme.dart';
+import 'package:ProductByte/cubits/read_bytes_cubit/read_bytes_cubit.dart';
+import 'package:ProductByte/home_screen.dart';
+import 'package:ProductByte/services/user_repository.dart';
+import 'package:ProductByte/splash_screen.dart';
+import 'package:ProductByte/util/theme.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -50,7 +50,7 @@ class PHApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'ProductHouse',
+      title: 'ProductByte',
       debugShowCheckedModeBanner: false,
       navigatorObservers: [
         FirebaseAnalyticsObserver(analytics: PHGlobal.analytics),

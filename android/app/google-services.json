@@ -1,15 +1,15 @@
 {
   "project_info": {
     "project_number": "96573987366",
-    "project_id": "producthouse-23d80",
-    "storage_bucket": "producthouse-23d80.appspot.com"
+    "project_id": "ProductByte-23d80",
+    "storage_bucket": "ProductByte-23d80.appspot.com"
   },
   "client": [
     {
       "client_info": {
         "mobilesdk_app_id": "1:96573987366:android:1f664e5775bc06c152e4e7",
         "android_client_info": {
-          "package_name": "org.brandonwalter.producthouse"
+          "package_name": "org.brandonwalter.ProductByte"
         }
       },
       "oauth_client": [
@@ -34,7 +34,7 @@
               "client_id": "96573987366-ndjfbcj4smn2ktjv15bklm7ar7lqb6qv.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "org.brandonwalter.producthouse"
+                "bundle_id": "org.brandonwalter.ProductByte"
               }
             }
           ]

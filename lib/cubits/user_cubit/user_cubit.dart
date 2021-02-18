@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:ProductHouse/cubits/auth_cubit/auth_cubit.dart';
+import 'package:ProductByte/cubits/auth_cubit/auth_cubit.dart';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

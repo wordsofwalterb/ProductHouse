@@ -6,7 +6,7 @@
     "configurations": [
 
         {
-            "name": "ProductHouse",
+            "name": "ProductByte",
             "request": "launch",
             "type": "dart"
         }

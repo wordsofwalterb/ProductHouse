@@ -1,8 +1,8 @@
-import 'package:ProductHouse/models/byte.dart';
-import 'package:ProductHouse/services/byte_repository.dart';
-import 'package:ProductHouse/services/user_repository.dart';
-import 'package:ProductHouse/util/global.dart';
-import 'package:ProductHouse/util/result.dart';
+import 'package:ProductByte/models/byte.dart';
+import 'package:ProductByte/services/byte_repository.dart';
+import 'package:ProductByte/services/user_repository.dart';
+import 'package:ProductByte/util/global.dart';
+import 'package:ProductByte/util/result.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

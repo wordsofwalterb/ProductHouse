@@ -1,6 +1,6 @@
-import 'package:ProductHouse/models/user.dart';
-import 'package:ProductHouse/services/user_repository.dart';
-import 'package:ProductHouse/util/result.dart';
+import 'package:ProductByte/models/user.dart';
+import 'package:ProductByte/services/user_repository.dart';
+import 'package:ProductByte/util/result.dart';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
