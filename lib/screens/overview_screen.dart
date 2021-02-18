@@ -171,10 +171,11 @@ class PHOverviewScreen extends StatelessWidget {
   Widget sliverShimmer() {
     return SliverList(
       delegate: SliverChildListDelegate.fixed([
-        Container(
-            width: double.infinity,
-            height: 100,
-            child: const ByteTileShimmer()),
+        Container(),
+        // Container(
+        //     width: double.infinity,
+        //     height: 100,
+        //     child: const ByteTileShimmer()),
       ]),
     );
   }

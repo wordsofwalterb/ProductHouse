@@ -23,8 +23,6 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   Bloc.observer = PHBlocObserver();
-  FlutterUxcam.optIntoSchematicRecordings();
-  FlutterUxcam.startWithKey("8ly265sltxzg33i");
 
   final prefs = await SharedPreferences.getInstance();
 
@@ -49,6 +47,8 @@ Future<void> main() async {
 class PHApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    FlutterUxcam.optIntoSchematicRecordings();
+    FlutterUxcam.startWithKey("8ly265sltxzg33i");
     return MaterialApp(
       title: 'ProductByte',
       debugShowCheckedModeBanner: false,

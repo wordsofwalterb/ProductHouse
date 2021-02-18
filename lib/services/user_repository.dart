@@ -95,7 +95,7 @@ class UserRepository {
           userDoc.data()..update('lastOpenDate', (value) => Timestamp.now()));
 
       if (user?.isTester ?? false) {
-        await PHGlobal.analytics.setAnalyticsCollectionEnabled(false);
+        PHGlobal.analytics.setAnalyticsCollectionEnabled(false);
       }
 
       return PHResult.success(user);
