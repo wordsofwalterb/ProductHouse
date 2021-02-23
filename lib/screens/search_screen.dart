@@ -17,6 +17,11 @@ class _SearchScreenState extends State<SearchScreen> {
   final SearchBarController<PHByte> _searchBarController =
       SearchBarController();
 
+  @override
+  void initState() {
+    super.initState();
+  }
+
   Future<List<PHByte>> _fetchBytes(String keyword) async {
     final bytes = await ByteRepository().searchBytesByTitle(keyword);
     PHGlobal.analytics.logEvent(
@@ -38,10 +43,11 @@ class _SearchScreenState extends State<SearchScreen> {
             searchBarPadding: const EdgeInsets.symmetric(horizontal: 10),
             headerPadding: const EdgeInsets.symmetric(horizontal: 10),
             onSearch: _fetchBytes,
+            minimumChars: 2,
             searchBarController: _searchBarController,
             iconActiveColor: Theme.of(context).primaryColor,
             hintText: 'Search',
-            cancellationWidget: const Text('Cancel'),
+            onCancelled: () => Navigator.of(context).pop(),
             searchBarStyle: const SearchBarStyle(
               padding: EdgeInsets.symmetric(horizontal: 10),
             ),
@@ -57,12 +63,6 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
               ),
             ),
-            // emptyWidget: Center(child: Text("empty")),
-            // indexedScaledTileBuilder: (int index) =>
-            //     ScaledTile.count(1, index.isEven ? 2 : 1),
-            // onCancelled: () {
-            //   print("Cancelled triggered");
-            // },
             onItemFound: (PHByte byte, int index) {
               return Padding(
                 padding: const EdgeInsets.all(8.0),
