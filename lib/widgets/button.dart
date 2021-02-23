@@ -20,10 +20,10 @@ class PHButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap ?? () => {},
       child: Container(
-        padding: const EdgeInsets.all(15),
+        padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4.0),
-          color: (isActive)
+          color: isActive
               ? (activeColor ?? Theme.of(context).primaryColor)
               : (Theme.of(context).buttonColor),
         ),

@@ -70,47 +70,43 @@ class PHByteScreen extends StatelessWidget {
       //Bottom Nav Bar
       bottomNavigationBar: Container(
         height: MediaQuery.of(context).padding.bottom +
-            (MediaQuery.of(context).size.height * .06),
-        decoration: BoxDecoration(
+            (MediaQuery.of(context).size.height * .09),
+        decoration: const BoxDecoration(
           border: Border(
-            top: BorderSide(width: .5, color: Colors.grey),
+            top: BorderSide(width: .5, color: Colors.black12),
           ),
         ),
-        child: Padding(
-          padding:
-              EdgeInsets.only(bottom: MediaQuery.of(context).size.height * .02),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              BlocBuilder<ReadBytesCubit, ReadBytesState>(
-                  builder: (context, state) {
-                final cubit = BlocProvider.of<ReadBytesCubit>(context);
-                return PHButton(
-                  'Mark Read',
-                  icon: Icons.check,
-                  isActive: state.readByteIds.contains(byte.id),
-                  onTap: () => cubit.toggleReadByte(byte.id),
-                );
-              }),
-              SizedBox(
-                width: 12,
-              ),
-              BlocBuilder<BookmarkBloc, BookmarkState>(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            BlocBuilder<ReadBytesCubit, ReadBytesState>(
                 builder: (context, state) {
-                  final bloc = BlocProvider.of<BookmarkBloc>(context);
-                  return state.maybeMap(
-                    loadSuccess: (successState) => PHButton(
-                      'Bookmark',
-                      icon: Icons.bookmark,
-                      isActive: successState.bookmarks.contains(byte),
-                      onTap: () => bloc.add(BookmarkEvent.updateBookmark(byte)),
-                    ),
-                    orElse: () => Container(),
-                  );
-                },
-              ),
-            ],
-          ),
+              final cubit = BlocProvider.of<ReadBytesCubit>(context);
+              return PHButton(
+                'Mark Read',
+                icon: Icons.check,
+                isActive: state.readByteIds.contains(byte.id),
+                onTap: () => cubit.toggleReadByte(byte.id),
+              );
+            }),
+            SizedBox(
+              width: 12,
+            ),
+            BlocBuilder<BookmarkBloc, BookmarkState>(
+              builder: (context, state) {
+                final bloc = BlocProvider.of<BookmarkBloc>(context);
+                return state.maybeMap(
+                  loadSuccess: (successState) => PHButton(
+                    'Bookmark',
+                    icon: Icons.bookmark,
+                    isActive: successState.bookmarks.contains(byte),
+                    onTap: () => bloc.add(BookmarkEvent.updateBookmark(byte)),
+                  ),
+                  orElse: () => Container(),
+                );
+              },
+            ),
+          ],
         ),
       ),
     );
