@@ -137,8 +137,8 @@ class _PHDiscoverScreenState extends State<PHDiscoverScreen>
         }
         if (result?.hasData ?? false) {
           return SliverGrid(
-            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 200.0,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
               mainAxisSpacing: 10.0,
               crossAxisSpacing: 10.0,
               childAspectRatio: 1.0,

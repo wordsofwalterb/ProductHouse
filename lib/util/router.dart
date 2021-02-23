@@ -3,6 +3,7 @@ import 'package:ProductByte/cubits/read_bytes_cubit/read_bytes_cubit.dart';
 import 'package:ProductByte/cubits/recent_bytes_cubit/recent_bytes_cubit.dart';
 import 'package:ProductByte/models/byte.dart';
 import 'package:ProductByte/screens/byte_screen.dart';
+import 'package:ProductByte/screens/more_screen.dart';
 import 'package:ProductByte/screens/profile_screen.dart';
 import 'package:ProductByte/screens/search_screen.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class PHRoutes {
   static const String byteScreen = 'byteScreen';
   static const String searchScreen = 'searchScreen';
   static const String profileScreen = 'profileScreen';
+  static const String moreScreen = 'moreScreen';
 }
 
 /// Correlates routes names to builders
@@ -30,6 +32,12 @@ class PHRouter {
       case PHRoutes.searchScreen:
         if (args is SearchScreenArgs) {
           return _searchScreenRoute(args);
+        }
+        throw Exception('Invalid arguments for ${settings.name}');
+        break;
+      case PHRoutes.moreScreen:
+        if (args is MoreScreenArgs) {
+          return _moreScreenRoute(args);
         }
         throw Exception('Invalid arguments for ${settings.name}');
         break;
@@ -71,6 +79,19 @@ class PHRouter {
     );
   }
 
+  static Route<dynamic> _moreScreenRoute(MoreScreenArgs args) {
+    return MaterialPageRoute(
+      builder: (context) => MultiBlocProvider(
+        providers: [
+          BlocProvider.value(value: args.bookmarkBloc),
+          BlocProvider.value(value: args.recentsCubit),
+          BlocProvider.value(value: args.readBytesCubit),
+        ],
+        child: MoreScreen(),
+      ),
+    );
+  }
+
 // Moved route generation to this section for brevity in previous section
 
   static Route<dynamic> _errorRoute(dynamic settings) {
@@ -103,6 +124,18 @@ class SearchScreenArgs {
   final ReadBytesCubit readBytesCubit;
 
   const SearchScreenArgs({
+    @required this.bookmarkBloc,
+    @required this.recentsCubit,
+    @required this.readBytesCubit,
+  });
+}
+
+class MoreScreenArgs {
+  final BookmarkBloc bookmarkBloc;
+  final RecentBytesCubit recentsCubit;
+  final ReadBytesCubit readBytesCubit;
+
+  const MoreScreenArgs({
     @required this.bookmarkBloc,
     @required this.recentsCubit,
     @required this.readBytesCubit,

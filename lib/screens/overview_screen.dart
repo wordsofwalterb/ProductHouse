@@ -1,10 +1,12 @@
 import 'dart:math';
 
 import 'package:ProductByte/blocs/bookmark_bloc/bookmark_bloc.dart';
+import 'package:ProductByte/cubits/read_bytes_cubit/read_bytes_cubit.dart';
 import 'package:ProductByte/cubits/recent_bytes_cubit/recent_bytes_cubit.dart';
 import 'package:ProductByte/models/byte.dart';
 import 'package:ProductByte/services/byte_repository.dart';
 import 'package:ProductByte/util/result.dart';
+import 'package:ProductByte/util/router.dart';
 import 'package:ProductByte/widgets/byte_tile.dart';
 import 'package:ProductByte/widgets/featured_byte.dart';
 import 'package:ProductByte/widgets/profile_button.dart';
@@ -13,6 +15,7 @@ import 'package:ProductByte/widgets/section_title.dart';
 import 'package:ProductByte/widgets/shimmers/byte_tile_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_sfsymbols/flutter_sfsymbols.dart';
 
 class PHOverviewScreen extends StatelessWidget {
   @override
@@ -144,9 +147,36 @@ class PHOverviewScreen extends StatelessWidget {
                       if (bookmarkedBytes.isEmpty) {
                         return Container();
                       } else if (index == 0 && bookmarkedBytes.isNotEmpty) {
-                        return const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 22.0),
-                          child: PHSectionTitle('Bookmarks'),
+                        return Row(
+                          children: [
+                            Expanded(
+                              child: const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 22.0),
+                                child: PHSectionTitle('Bookmarks'),
+                              ),
+                            ),
+                            IconButton(
+                              icon: Icon(
+                                SFSymbols.chevron_right,
+                                color: Colors.black87,
+                                size: 25,
+                              ),
+                              padding: EdgeInsets.zero,
+                              visualDensity: VisualDensity.compact,
+                              onPressed: () => Navigator.of(context).pushNamed(
+                                PHRoutes.moreScreen,
+                                arguments: MoreScreenArgs(
+                                  bookmarkBloc:
+                                      BlocProvider.of<BookmarkBloc>(context),
+                                  recentsCubit:
+                                      BlocProvider.of<RecentBytesCubit>(
+                                          context),
+                                  readBytesCubit:
+                                      BlocProvider.of<ReadBytesCubit>(context),
+                                ),
+                              ),
+                            ),
+                          ],
                         );
                       }
                       return Padding(
