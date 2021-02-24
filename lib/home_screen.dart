@@ -68,13 +68,13 @@ class _HomeScreenState extends State<HomeScreen> {
         items: [
           BottomNavigationBarItem(
             icon: Icon(
-              SFSymbols.rectangle_grid_1x2_fill,
+              SFSymbols.house_fill,
               size: 28.0,
             ),
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              SFSymbols.search,
+              SFSymbols.rectangle_grid_1x2_fill,
               size: 28.0,
             ),
           ),

@@ -1,10 +1,8 @@
 import 'package:ProductByte/models/byte.dart';
 import 'package:ProductByte/services/byte_repository.dart';
 import 'package:ProductByte/util/global.dart';
+import 'package:ProductByte/util/search_bar.dart';
 import 'package:ProductByte/widgets/byte_tile.dart';
-import 'package:flappy_search_bar/flappy_search_bar.dart';
-
-import 'package:flappy_search_bar/search_bar_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -43,7 +41,7 @@ class _SearchScreenState extends State<SearchScreen> {
             searchBarPadding: const EdgeInsets.symmetric(horizontal: 10),
             headerPadding: const EdgeInsets.symmetric(horizontal: 10),
             onSearch: _fetchBytes,
-            minimumChars: 2,
+            minimumChars: 0,
             searchBarController: _searchBarController,
             iconActiveColor: Theme.of(context).primaryColor,
             hintText: 'Search',

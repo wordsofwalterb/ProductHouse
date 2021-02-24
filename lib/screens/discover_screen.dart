@@ -11,6 +11,7 @@ import 'package:flappy_search_bar/flappy_search_bar.dart';
 
 const categories = [
   'All',
+  'Trending',
   'Strategy',
   'Design',
   'Analytics',

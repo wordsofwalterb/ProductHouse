@@ -27,6 +27,7 @@ class _$PHUserTearOff {
       @required
           List<String> read,
       bool isTester,
+      String featuredByteId,
       @required
       @JsonKey(fromJson: PHFunctions.dateTimeFromTimestamp, toJson: PHFunctions.dateTimeAsIs)
           DateTime creationDate,
@@ -39,6 +40,7 @@ class _$PHUserTearOff {
       recent: recent,
       read: read,
       isTester: isTester,
+      featuredByteId: featuredByteId,
       creationDate: creationDate,
       lastOpenDate: lastOpenDate,
     );
@@ -67,7 +69,12 @@ mixin _$PHUser {
 
   /// List of references(IDs) to all the bytes marked read by the user
   List<String> get read;
+
+  /// If true then disable analytics for the user
   bool get isTester;
+
+  /// If the user has a specific featured byte
+  String get featuredByteId;
 
   /// When the account was created. Created from firestore [Timestamp].
   @JsonKey(
@@ -96,6 +103,7 @@ abstract class $PHUserCopyWith<$Res> {
       List<String> recent,
       List<String> read,
       bool isTester,
+      String featuredByteId,
       @JsonKey(fromJson: PHFunctions.dateTimeFromTimestamp, toJson: PHFunctions.dateTimeAsIs)
           DateTime creationDate,
       @JsonKey(fromJson: PHFunctions.dateTimeFromTimestamp, toJson: PHFunctions.dateTimeAsIs)
@@ -117,6 +125,7 @@ class _$PHUserCopyWithImpl<$Res> implements $PHUserCopyWith<$Res> {
     Object recent = freezed,
     Object read = freezed,
     Object isTester = freezed,
+    Object featuredByteId = freezed,
     Object creationDate = freezed,
     Object lastOpenDate = freezed,
   }) {
@@ -127,6 +136,9 @@ class _$PHUserCopyWithImpl<$Res> implements $PHUserCopyWith<$Res> {
       recent: recent == freezed ? _value.recent : recent as List<String>,
       read: read == freezed ? _value.read : read as List<String>,
       isTester: isTester == freezed ? _value.isTester : isTester as bool,
+      featuredByteId: featuredByteId == freezed
+          ? _value.featuredByteId
+          : featuredByteId as String,
       creationDate: creationDate == freezed
           ? _value.creationDate
           : creationDate as DateTime,
@@ -148,6 +160,7 @@ abstract class _$PHUserCopyWith<$Res> implements $PHUserCopyWith<$Res> {
       List<String> recent,
       List<String> read,
       bool isTester,
+      String featuredByteId,
       @JsonKey(fromJson: PHFunctions.dateTimeFromTimestamp, toJson: PHFunctions.dateTimeAsIs)
           DateTime creationDate,
       @JsonKey(fromJson: PHFunctions.dateTimeFromTimestamp, toJson: PHFunctions.dateTimeAsIs)
@@ -170,6 +183,7 @@ class __$PHUserCopyWithImpl<$Res> extends _$PHUserCopyWithImpl<$Res>
     Object recent = freezed,
     Object read = freezed,
     Object isTester = freezed,
+    Object featuredByteId = freezed,
     Object creationDate = freezed,
     Object lastOpenDate = freezed,
   }) {
@@ -180,6 +194,9 @@ class __$PHUserCopyWithImpl<$Res> extends _$PHUserCopyWithImpl<$Res>
       recent: recent == freezed ? _value.recent : recent as List<String>,
       read: read == freezed ? _value.read : read as List<String>,
       isTester: isTester == freezed ? _value.isTester : isTester as bool,
+      featuredByteId: featuredByteId == freezed
+          ? _value.featuredByteId
+          : featuredByteId as String,
       creationDate: creationDate == freezed
           ? _value.creationDate
           : creationDate as DateTime,
@@ -204,6 +221,7 @@ class _$_PHUser with DiagnosticableTreeMixin implements _PHUser {
       @required
           this.read,
       this.isTester,
+      this.featuredByteId,
       @required
       @JsonKey(fromJson: PHFunctions.dateTimeFromTimestamp, toJson: PHFunctions.dateTimeAsIs)
           this.creationDate,
@@ -237,7 +255,13 @@ class _$_PHUser with DiagnosticableTreeMixin implements _PHUser {
   /// List of references(IDs) to all the bytes marked read by the user
   final List<String> read;
   @override
+
+  /// If true then disable analytics for the user
   final bool isTester;
+  @override
+
+  /// If the user has a specific featured byte
+  final String featuredByteId;
   @override
 
   /// When the account was created. Created from firestore [Timestamp].
@@ -255,7 +279,7 @@ class _$_PHUser with DiagnosticableTreeMixin implements _PHUser {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PHUser(userID: $userID, bookmarks: $bookmarks, recent: $recent, read: $read, isTester: $isTester, creationDate: $creationDate, lastOpenDate: $lastOpenDate)';
+    return 'PHUser(userID: $userID, bookmarks: $bookmarks, recent: $recent, read: $read, isTester: $isTester, featuredByteId: $featuredByteId, creationDate: $creationDate, lastOpenDate: $lastOpenDate)';
   }
 
   @override
@@ -268,6 +292,7 @@ class _$_PHUser with DiagnosticableTreeMixin implements _PHUser {
       ..add(DiagnosticsProperty('recent', recent))
       ..add(DiagnosticsProperty('read', read))
       ..add(DiagnosticsProperty('isTester', isTester))
+      ..add(DiagnosticsProperty('featuredByteId', featuredByteId))
       ..add(DiagnosticsProperty('creationDate', creationDate))
       ..add(DiagnosticsProperty('lastOpenDate', lastOpenDate));
   }
@@ -288,6 +313,9 @@ class _$_PHUser with DiagnosticableTreeMixin implements _PHUser {
             (identical(other.isTester, isTester) ||
                 const DeepCollectionEquality()
                     .equals(other.isTester, isTester)) &&
+            (identical(other.featuredByteId, featuredByteId) ||
+                const DeepCollectionEquality()
+                    .equals(other.featuredByteId, featuredByteId)) &&
             (identical(other.creationDate, creationDate) ||
                 const DeepCollectionEquality()
                     .equals(other.creationDate, creationDate)) &&
@@ -304,6 +332,7 @@ class _$_PHUser with DiagnosticableTreeMixin implements _PHUser {
       const DeepCollectionEquality().hash(recent) ^
       const DeepCollectionEquality().hash(read) ^
       const DeepCollectionEquality().hash(isTester) ^
+      const DeepCollectionEquality().hash(featuredByteId) ^
       const DeepCollectionEquality().hash(creationDate) ^
       const DeepCollectionEquality().hash(lastOpenDate);
 
@@ -329,6 +358,7 @@ abstract class _PHUser implements PHUser {
       @required
           List<String> read,
       bool isTester,
+      String featuredByteId,
       @required
       @JsonKey(fromJson: PHFunctions.dateTimeFromTimestamp, toJson: PHFunctions.dateTimeAsIs)
           DateTime creationDate,
@@ -355,7 +385,13 @@ abstract class _PHUser implements PHUser {
   /// List of references(IDs) to all the bytes marked read by the user
   List<String> get read;
   @override
+
+  /// If true then disable analytics for the user
   bool get isTester;
+  @override
+
+  /// If the user has a specific featured byte
+  String get featuredByteId;
   @override
 
   /// When the account was created. Created from firestore [Timestamp].

@@ -48,12 +48,19 @@ class ByteRepository {
     }
   }
 
-  Future<PHResult<PHByte>> retrieveFeaturedByte() async {
+  Future<PHResult<PHByte>> retrieveFeaturedByte({String featuredByteId}) async {
     try {
-      final querySnapshot =
-          await PHGlobal.byteRef.where('featured', isEqualTo: true).get();
-      final document = querySnapshot.docs.first;
-      return PHResult.success(parseJson<PHByte>(document.data()));
+      Map<String, dynamic> map;
+      if (featuredByteId == null) {
+        final querySnapshot =
+            await PHGlobal.byteRef.where('featured', isEqualTo: true).get();
+        final doc = querySnapshot.docs.first;
+        map = doc.data();
+      } else {
+        final doc = await PHGlobal.byteRef.doc(featuredByteId).get();
+        map = doc.data();
+      }
+      return PHResult.success(parseJson<PHByte>(map));
     } catch (error) {
       return PHResult.failure(
           errorCode: error.toString(),

@@ -22,7 +22,12 @@ abstract class PHUser with _$PHUser {
 
     /// List of references(IDs) to all the bytes marked read by the user
     @required List<String> read,
+
+    /// If true then disable analytics for the user
     bool isTester,
+
+    /// If the user has a specific featured byte
+    String featuredByteId,
 
     /// When the account was created. Created from firestore [Timestamp].
     @required

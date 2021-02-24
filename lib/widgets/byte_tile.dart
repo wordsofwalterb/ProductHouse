@@ -113,20 +113,28 @@ class PHByteTile extends StatelessWidget {
                     BlocBuilder<BookmarkBloc, BookmarkState>(
                       builder: (context, state) {
                         return state.maybeWhen(
-                            loadSuccess: (bookmarks) => IconButton(
-                                  iconSize: 35,
-                                  visualDensity: VisualDensity.compact,
-                                  padding: EdgeInsets.zero,
-                                  onPressed: () => bookmarkBloc
-                                      .add(BookmarkEvent.updateBookmark(byte)),
-                                  icon: Icon(
-                                    (bookmarks.contains(byte))
-                                        ? Icons.bookmark
-                                        : Icons.bookmark_border_outlined,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                            orElse: () => Container());
+                          loadSuccess: (bookmarks) => IconButton(
+                            iconSize: 35,
+                            visualDensity: VisualDensity.compact,
+                            padding: EdgeInsets.zero,
+                            onPressed: () => bookmarkBloc
+                                .add(BookmarkEvent.updateBookmark(byte)),
+                            icon: Icon(
+                              (bookmarks.contains(byte))
+                                  ? Icons.bookmark
+                                  : Icons.bookmark_border_outlined,
+                              color: Colors.grey,
+                            ),
+                          ),
+                          orElse: () => IconButton(
+                            iconSize: 35,
+                            visualDensity: VisualDensity.compact,
+                            padding: EdgeInsets.zero,
+                            onPressed: () => {},
+                            icon: const Icon(Icons.bookmark_border_outlined),
+                            color: Colors.grey,
+                          ),
+                        );
                       },
                     ),
                     Spacer(flex: 1),

@@ -13,6 +13,7 @@ _$_PHUser _$_$_PHUserFromJson(Map<String, dynamic> json) {
     recent: (json['recent'] as List)?.map((e) => e as String)?.toList(),
     read: (json['read'] as List)?.map((e) => e as String)?.toList(),
     isTester: json['isTester'] as bool,
+    featuredByteId: json['featuredByteId'] as String,
     creationDate:
         PHFunctions.dateTimeFromTimestamp(json['creationDate'] as Timestamp),
     lastOpenDate:
@@ -26,6 +27,7 @@ Map<String, dynamic> _$_$_PHUserToJson(_$_PHUser instance) => <String, dynamic>{
       'recent': instance.recent,
       'read': instance.read,
       'isTester': instance.isTester,
+      'featuredByteId': instance.featuredByteId,
       'creationDate': PHFunctions.dateTimeAsIs(instance.creationDate),
       'lastOpenDate': PHFunctions.dateTimeAsIs(instance.lastOpenDate),
     };
