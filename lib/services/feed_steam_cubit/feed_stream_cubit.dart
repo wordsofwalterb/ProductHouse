@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:ProductByte/services/firebase_service/firebase_service.dart';
 import 'package:ProductByte/util/global.dart';
@@ -25,8 +26,6 @@ class FeedStreamCubit<T extends Model> extends Cubit<FeedStreamState<T>> {
       query =
           PHGlobal.collectionMapper[T].orderBy(orderByField, descending: desc);
     }
-
-    // feedStream = feedController.stream;
   }
 
   final FirebaseService<T> repository;
@@ -56,9 +55,7 @@ class FeedStreamCubit<T extends Model> extends Cubit<FeedStreamState<T>> {
 
     final streamResult = repository.getStreamFromQuery(query);
 
-    streamResult
-        .listen(streamListFunc)
-        .onError((error) => emit(const FeedStreamState.failure({})));
+    streamListFunc(streamResult);
   }
 
   Future<void> filterFeed(Query newWhereQuery) async {
@@ -68,9 +65,7 @@ class FeedStreamCubit<T extends Model> extends Cubit<FeedStreamState<T>> {
 
     final streamResult = repository.getStreamFromQuery(query);
 
-    streamResult
-        .listen(streamListFunc)
-        .onError((error) => emit(const FeedStreamState.failure({})));
+    streamListFunc(streamResult);
   }
 
   Future<void> setupFeed() async {
@@ -79,9 +74,7 @@ class FeedStreamCubit<T extends Model> extends Cubit<FeedStreamState<T>> {
 
     final streamResult = repository.getStreamFromQuery(query);
 
-    streamResult
-        .listen(streamListFunc)
-        .onError((error) => emit(const FeedStreamState.failure({})));
+    streamListFunc(streamResult);
   }
 
   Future<void> fetchPage() async {
@@ -98,35 +91,38 @@ class FeedStreamCubit<T extends Model> extends Cubit<FeedStreamState<T>> {
 
         final streamResult = repository.getStreamFromQuery(query);
 
-        streamResult
-            .listen(streamListFunc)
-            .onError((error) => emit(const FeedStreamState.failure({})));
+        streamListFunc(streamResult);
       },
       orElse: () => {},
     );
   }
 
-  void streamListFunc(List<T> itemList) {
-    if (itemList.isEmpty) {
-      emit(const FeedStreamState.empty({}));
-    } else {
-      final end = Map<String, T>.from(state.itemIds);
+  void streamListFunc(Stream<List<T>> streamResult) {
+    streamResult.listen((itemList) {
+      if (itemList.isEmpty) {
+        emit(const FeedStreamState.empty({}));
+      } else {
+        final end = Map<String, T>.from(state.itemIds);
 
-      Map<String, T> front = {};
+        Map<String, T> front = {};
 
-      for (final item in itemList) {
-        if (!state.itemIds.containsKey(item.id)) {
-          front.addAll({item.id: item});
-        } else {
-          end.addAll({item.id: item});
+        for (final item in itemList) {
+          if (!state.itemIds.containsKey(item.id)) {
+            front.addAll({item.id: item});
+          } else {
+            end.addAll({item.id: item});
+          }
         }
+
+        front.addAll(end);
+
+        (itemList.length == limit)
+            ? emit(FeedStreamState.reachedMax(front))
+            : emit(FeedStreamState.loaded(front));
       }
-
-      front.addAll(end);
-
-      (itemList.length == limit)
-          ? emit(FeedStreamState.reachedMax(front))
-          : emit(FeedStreamState.loaded(front));
-    }
+    }).onError((error) {
+      log(error.toString());
+      emit(const FeedStreamState.failure({}));
+    });
   }
 }
