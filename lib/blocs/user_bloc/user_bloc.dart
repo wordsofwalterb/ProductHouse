@@ -25,7 +25,21 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     yield* event.map(
       loginAnonymously: (_LoginAnonymously event) =>
           _mapLoginAnonymouslyToState(),
+      updateUser: (_UpdateUser event) => _mapUpdateUserToState(event),
     );
+  }
+
+  Stream<UserState> _mapUpdateUserToState(_UpdateUser event) async* {
+    PHUser updatedUser;
+    state.maybeWhen(
+      authenticatedAnonymously: (user) {
+        updatedUser = (user as PHUser).copyWith(hasDarkMode: event.hasDarkMode);
+      },
+      orElse: () => print('error'),
+    );
+    if (updatedUser != null) {
+      yield UserState.authenticatedAnonymously(user: updatedUser);
+    }
   }
 
   /// Checks if the the current user is already signed in, and if so it retrieves

@@ -49,41 +49,43 @@ class PHApp extends StatelessWidget {
   Widget build(BuildContext context) {
     FlutterUxcam.optIntoSchematicRecordings();
     FlutterUxcam.startWithKey("8ly265sltxzg33i");
-    return MaterialApp(
-      title: 'ProductByte',
-      debugShowCheckedModeBanner: false,
-      navigatorObservers: [
-        FirebaseAnalyticsObserver(analytics: PHGlobal.analytics),
-      ],
-      theme: phTheme(isDark: true),
-      onGenerateRoute: PHRouter.generateRoute,
-      home: BlocBuilder<UserBloc, UserState>(
-        builder: (context, state) {
-          return state.when(
-            unauthenticated: () => SplashScreen(),
-            authenticating: () => SplashScreen(),
-            authenticatedAnonymously: (user) {
-              return MultiBlocProvider(providers: [
-                BlocProvider(
-                  create: (context) => ReadBytesCubit(
-                      ByteRepository(), UserRepository(), user.read),
-                ),
-                BlocProvider(
-                  create: (context) =>
-                      BookmarkBloc(ByteRepository(), UserRepository())
-                        ..add(BookmarkEvent.loadBookmarks(user.bookmarks)),
-                ),
-                BlocProvider(
-                  create: (context) =>
-                      RecentBytesCubit(ByteRepository(), UserRepository())
-                        ..loadRecentBytes(user.recent),
-                ),
-              ], child: HomeScreen());
-            },
-            authenticationFailed: () => SplashScreen(),
-          );
-        },
-      ),
-    );
+    return BlocBuilder<UserBloc, UserState>(builder: (context, state) {
+      return MaterialApp(
+        title: 'ProductByte',
+        debugShowCheckedModeBanner: false,
+        navigatorObservers: [
+          FirebaseAnalyticsObserver(analytics: PHGlobal.analytics),
+        ],
+        theme: phTheme(
+            isDark: state.maybeWhen(
+          authenticatedAnonymously: (user) => user.hasDarkMode,
+          orElse: () => true,
+        )),
+        onGenerateRoute: PHRouter.generateRoute,
+        home: state.when(
+          unauthenticated: () => SplashScreen(),
+          authenticating: () => SplashScreen(),
+          authenticatedAnonymously: (user) {
+            return MultiBlocProvider(providers: [
+              BlocProvider(
+                create: (context) => ReadBytesCubit(
+                    ByteRepository(), UserRepository(), user.read),
+              ),
+              BlocProvider(
+                create: (context) =>
+                    BookmarkBloc(ByteRepository(), UserRepository())
+                      ..add(BookmarkEvent.loadBookmarks(user.bookmarks)),
+              ),
+              BlocProvider(
+                create: (context) =>
+                    RecentBytesCubit(ByteRepository(), UserRepository())
+                      ..loadRecentBytes(user.recent),
+              ),
+            ], child: HomeScreen());
+          },
+          authenticationFailed: () => SplashScreen(),
+        ),
+      );
+    });
   }
 }

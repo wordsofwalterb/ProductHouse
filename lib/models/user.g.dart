@@ -12,6 +12,7 @@ _$_PHUser _$_$_PHUserFromJson(Map<String, dynamic> json) {
     bookmarks: (json['bookmarks'] as List)?.map((e) => e as String)?.toList(),
     recent: (json['recent'] as List)?.map((e) => e as String)?.toList(),
     read: (json['read'] as List)?.map((e) => e as String)?.toList(),
+    hasDarkMode: json['hasDarkMode'] as bool ?? true,
     isTester: json['isTester'] as bool,
     featuredByteId: json['featuredByteId'] as String,
     creationDate:
@@ -26,6 +27,7 @@ Map<String, dynamic> _$_$_PHUserToJson(_$_PHUser instance) => <String, dynamic>{
       'bookmarks': instance.bookmarks,
       'recent': instance.recent,
       'read': instance.read,
+      'hasDarkMode': instance.hasDarkMode,
       'isTester': instance.isTester,
       'featuredByteId': instance.featuredByteId,
       'creationDate': PHFunctions.dateTimeAsIs(instance.creationDate),

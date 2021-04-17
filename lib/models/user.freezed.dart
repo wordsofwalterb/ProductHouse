@@ -26,6 +26,7 @@ class _$PHUserTearOff {
           List<String> recent,
       @required
           List<String> read,
+      bool hasDarkMode = true,
       bool isTester,
       String featuredByteId,
       @required
@@ -39,6 +40,7 @@ class _$PHUserTearOff {
       bookmarks: bookmarks,
       recent: recent,
       read: read,
+      hasDarkMode: hasDarkMode,
       isTester: isTester,
       featuredByteId: featuredByteId,
       creationDate: creationDate,
@@ -69,6 +71,7 @@ mixin _$PHUser {
 
   /// List of references(IDs) to all the bytes marked read by the user
   List<String> get read;
+  bool get hasDarkMode;
 
   /// If true then disable analytics for the user
   bool get isTester;
@@ -102,6 +105,7 @@ abstract class $PHUserCopyWith<$Res> {
       List<String> bookmarks,
       List<String> recent,
       List<String> read,
+      bool hasDarkMode,
       bool isTester,
       String featuredByteId,
       @JsonKey(fromJson: PHFunctions.dateTimeFromTimestamp, toJson: PHFunctions.dateTimeAsIs)
@@ -124,6 +128,7 @@ class _$PHUserCopyWithImpl<$Res> implements $PHUserCopyWith<$Res> {
     Object bookmarks = freezed,
     Object recent = freezed,
     Object read = freezed,
+    Object hasDarkMode = freezed,
     Object isTester = freezed,
     Object featuredByteId = freezed,
     Object creationDate = freezed,
@@ -135,6 +140,8 @@ class _$PHUserCopyWithImpl<$Res> implements $PHUserCopyWith<$Res> {
           bookmarks == freezed ? _value.bookmarks : bookmarks as List<String>,
       recent: recent == freezed ? _value.recent : recent as List<String>,
       read: read == freezed ? _value.read : read as List<String>,
+      hasDarkMode:
+          hasDarkMode == freezed ? _value.hasDarkMode : hasDarkMode as bool,
       isTester: isTester == freezed ? _value.isTester : isTester as bool,
       featuredByteId: featuredByteId == freezed
           ? _value.featuredByteId
@@ -159,6 +166,7 @@ abstract class _$PHUserCopyWith<$Res> implements $PHUserCopyWith<$Res> {
       List<String> bookmarks,
       List<String> recent,
       List<String> read,
+      bool hasDarkMode,
       bool isTester,
       String featuredByteId,
       @JsonKey(fromJson: PHFunctions.dateTimeFromTimestamp, toJson: PHFunctions.dateTimeAsIs)
@@ -182,6 +190,7 @@ class __$PHUserCopyWithImpl<$Res> extends _$PHUserCopyWithImpl<$Res>
     Object bookmarks = freezed,
     Object recent = freezed,
     Object read = freezed,
+    Object hasDarkMode = freezed,
     Object isTester = freezed,
     Object featuredByteId = freezed,
     Object creationDate = freezed,
@@ -193,6 +202,8 @@ class __$PHUserCopyWithImpl<$Res> extends _$PHUserCopyWithImpl<$Res>
           bookmarks == freezed ? _value.bookmarks : bookmarks as List<String>,
       recent: recent == freezed ? _value.recent : recent as List<String>,
       read: read == freezed ? _value.read : read as List<String>,
+      hasDarkMode:
+          hasDarkMode == freezed ? _value.hasDarkMode : hasDarkMode as bool,
       isTester: isTester == freezed ? _value.isTester : isTester as bool,
       featuredByteId: featuredByteId == freezed
           ? _value.featuredByteId
@@ -221,6 +232,7 @@ class _$_PHUser with DiagnosticableTreeMixin implements _PHUser {
           this.recent,
       @required
           this.read,
+      this.hasDarkMode = true,
       this.isTester,
       this.featuredByteId,
       @required
@@ -233,6 +245,7 @@ class _$_PHUser with DiagnosticableTreeMixin implements _PHUser {
         assert(bookmarks != null),
         assert(recent != null),
         assert(read != null),
+        assert(hasDarkMode != null),
         assert(creationDate != null),
         assert(lastOpenDate != null);
 
@@ -255,6 +268,9 @@ class _$_PHUser with DiagnosticableTreeMixin implements _PHUser {
 
   /// List of references(IDs) to all the bytes marked read by the user
   final List<String> read;
+  @JsonKey(defaultValue: true)
+  @override
+  final bool hasDarkMode;
   @override
 
   /// If true then disable analytics for the user
@@ -280,7 +296,7 @@ class _$_PHUser with DiagnosticableTreeMixin implements _PHUser {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PHUser(id: $id, bookmarks: $bookmarks, recent: $recent, read: $read, isTester: $isTester, featuredByteId: $featuredByteId, creationDate: $creationDate, lastOpenDate: $lastOpenDate)';
+    return 'PHUser(id: $id, bookmarks: $bookmarks, recent: $recent, read: $read, hasDarkMode: $hasDarkMode, isTester: $isTester, featuredByteId: $featuredByteId, creationDate: $creationDate, lastOpenDate: $lastOpenDate)';
   }
 
   @override
@@ -292,6 +308,7 @@ class _$_PHUser with DiagnosticableTreeMixin implements _PHUser {
       ..add(DiagnosticsProperty('bookmarks', bookmarks))
       ..add(DiagnosticsProperty('recent', recent))
       ..add(DiagnosticsProperty('read', read))
+      ..add(DiagnosticsProperty('hasDarkMode', hasDarkMode))
       ..add(DiagnosticsProperty('isTester', isTester))
       ..add(DiagnosticsProperty('featuredByteId', featuredByteId))
       ..add(DiagnosticsProperty('creationDate', creationDate))
@@ -311,6 +328,9 @@ class _$_PHUser with DiagnosticableTreeMixin implements _PHUser {
                 const DeepCollectionEquality().equals(other.recent, recent)) &&
             (identical(other.read, read) ||
                 const DeepCollectionEquality().equals(other.read, read)) &&
+            (identical(other.hasDarkMode, hasDarkMode) ||
+                const DeepCollectionEquality()
+                    .equals(other.hasDarkMode, hasDarkMode)) &&
             (identical(other.isTester, isTester) ||
                 const DeepCollectionEquality()
                     .equals(other.isTester, isTester)) &&
@@ -332,6 +352,7 @@ class _$_PHUser with DiagnosticableTreeMixin implements _PHUser {
       const DeepCollectionEquality().hash(bookmarks) ^
       const DeepCollectionEquality().hash(recent) ^
       const DeepCollectionEquality().hash(read) ^
+      const DeepCollectionEquality().hash(hasDarkMode) ^
       const DeepCollectionEquality().hash(isTester) ^
       const DeepCollectionEquality().hash(featuredByteId) ^
       const DeepCollectionEquality().hash(creationDate) ^
@@ -358,6 +379,7 @@ abstract class _PHUser implements PHUser, Model {
           List<String> recent,
       @required
           List<String> read,
+      bool hasDarkMode,
       bool isTester,
       String featuredByteId,
       @required
@@ -385,6 +407,8 @@ abstract class _PHUser implements PHUser, Model {
 
   /// List of references(IDs) to all the bytes marked read by the user
   List<String> get read;
+  @override
+  bool get hasDarkMode;
   @override
 
   /// If true then disable analytics for the user

@@ -549,6 +549,13 @@ class _$UserEventTearOff {
   _LoginAnonymously loginAnonymously() {
     return const _LoginAnonymously();
   }
+
+// ignore: unused_element
+  _UpdateUser updateUser({bool hasDarkMode}) {
+    return _UpdateUser(
+      hasDarkMode: hasDarkMode,
+    );
+  }
 }
 
 /// @nodoc
@@ -560,19 +567,23 @@ mixin _$UserEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object>({
     @required TResult loginAnonymously(),
+    @required TResult updateUser(bool hasDarkMode),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
     TResult loginAnonymously(),
+    TResult updateUser(bool hasDarkMode),
     @required TResult orElse(),
   });
   @optionalTypeArgs
   TResult map<TResult extends Object>({
     @required TResult loginAnonymously(_LoginAnonymously value),
+    @required TResult updateUser(_UpdateUser value),
   });
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
     TResult loginAnonymously(_LoginAnonymously value),
+    TResult updateUser(_UpdateUser value),
     @required TResult orElse(),
   });
 }
@@ -632,8 +643,10 @@ class _$_LoginAnonymously implements _LoginAnonymously {
   @optionalTypeArgs
   TResult when<TResult extends Object>({
     @required TResult loginAnonymously(),
+    @required TResult updateUser(bool hasDarkMode),
   }) {
     assert(loginAnonymously != null);
+    assert(updateUser != null);
     return loginAnonymously();
   }
 
@@ -641,6 +654,7 @@ class _$_LoginAnonymously implements _LoginAnonymously {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
     TResult loginAnonymously(),
+    TResult updateUser(bool hasDarkMode),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -654,8 +668,10 @@ class _$_LoginAnonymously implements _LoginAnonymously {
   @optionalTypeArgs
   TResult map<TResult extends Object>({
     @required TResult loginAnonymously(_LoginAnonymously value),
+    @required TResult updateUser(_UpdateUser value),
   }) {
     assert(loginAnonymously != null);
+    assert(updateUser != null);
     return loginAnonymously(this);
   }
 
@@ -663,6 +679,7 @@ class _$_LoginAnonymously implements _LoginAnonymously {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
     TResult loginAnonymously(_LoginAnonymously value),
+    TResult updateUser(_UpdateUser value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -675,4 +692,122 @@ class _$_LoginAnonymously implements _LoginAnonymously {
 
 abstract class _LoginAnonymously implements UserEvent {
   const factory _LoginAnonymously() = _$_LoginAnonymously;
+}
+
+/// @nodoc
+abstract class _$UpdateUserCopyWith<$Res> {
+  factory _$UpdateUserCopyWith(
+          _UpdateUser value, $Res Function(_UpdateUser) then) =
+      __$UpdateUserCopyWithImpl<$Res>;
+  $Res call({bool hasDarkMode});
+}
+
+/// @nodoc
+class __$UpdateUserCopyWithImpl<$Res> extends _$UserEventCopyWithImpl<$Res>
+    implements _$UpdateUserCopyWith<$Res> {
+  __$UpdateUserCopyWithImpl(
+      _UpdateUser _value, $Res Function(_UpdateUser) _then)
+      : super(_value, (v) => _then(v as _UpdateUser));
+
+  @override
+  _UpdateUser get _value => super._value as _UpdateUser;
+
+  @override
+  $Res call({
+    Object hasDarkMode = freezed,
+  }) {
+    return _then(_UpdateUser(
+      hasDarkMode:
+          hasDarkMode == freezed ? _value.hasDarkMode : hasDarkMode as bool,
+    ));
+  }
+}
+
+/// @nodoc
+class _$_UpdateUser implements _UpdateUser {
+  const _$_UpdateUser({this.hasDarkMode});
+
+  @override
+  final bool hasDarkMode;
+
+  @override
+  String toString() {
+    return 'UserEvent.updateUser(hasDarkMode: $hasDarkMode)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _UpdateUser &&
+            (identical(other.hasDarkMode, hasDarkMode) ||
+                const DeepCollectionEquality()
+                    .equals(other.hasDarkMode, hasDarkMode)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(hasDarkMode);
+
+  @JsonKey(ignore: true)
+  @override
+  _$UpdateUserCopyWith<_UpdateUser> get copyWith =>
+      __$UpdateUserCopyWithImpl<_UpdateUser>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object>({
+    @required TResult loginAnonymously(),
+    @required TResult updateUser(bool hasDarkMode),
+  }) {
+    assert(loginAnonymously != null);
+    assert(updateUser != null);
+    return updateUser(hasDarkMode);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object>({
+    TResult loginAnonymously(),
+    TResult updateUser(bool hasDarkMode),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (updateUser != null) {
+      return updateUser(hasDarkMode);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object>({
+    @required TResult loginAnonymously(_LoginAnonymously value),
+    @required TResult updateUser(_UpdateUser value),
+  }) {
+    assert(loginAnonymously != null);
+    assert(updateUser != null);
+    return updateUser(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object>({
+    TResult loginAnonymously(_LoginAnonymously value),
+    TResult updateUser(_UpdateUser value),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (updateUser != null) {
+      return updateUser(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateUser implements UserEvent {
+  const factory _UpdateUser({bool hasDarkMode}) = _$_UpdateUser;
+
+  bool get hasDarkMode;
+  @JsonKey(ignore: true)
+  _$UpdateUserCopyWith<_UpdateUser> get copyWith;
 }

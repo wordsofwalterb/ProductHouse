@@ -24,6 +24,7 @@ abstract class PHUser with _$PHUser implements Model {
 
     /// List of references(IDs) to all the bytes marked read by the user
     @required List<String> read,
+    @Default(true) bool hasDarkMode,
 
     /// If true then disable analytics for the user
     bool isTester,
