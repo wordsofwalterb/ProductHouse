@@ -5,6 +5,7 @@ import 'package:ProductByte/widgets/button.dart';
 import 'package:ProductByte/widgets/emphasis.dart';
 import 'package:ProductByte/widgets/header1.dart';
 import 'package:ProductByte/widgets/image.dart';
+import 'package:ProductByte/widgets/link_tile.dart';
 import 'package:ProductByte/widgets/paragraph.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -131,6 +132,8 @@ class PHByteScreen extends StatelessWidget {
           PHImage(element["image"], caption: element["imageCaption"])
         } else if (element.containsKey("header1")) ...{
           PHHeader1(element["header1"])
+        } else if (element.containsKey("linkId")) ...{
+          PHLinkTile(element["linkId"])
         },
         // Always adds a sizedBox for height spacing
         SizedBox(

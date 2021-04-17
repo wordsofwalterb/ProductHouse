@@ -6,6 +6,7 @@ ThemeData lightTheme() {
     fontFamily: 'SFProText',
     primaryColor: PHGlobal.primaryColor,
     buttonColor: Color.fromRGBO(73, 73, 73, 1),
+    cardColor: Color.fromRGBO(240, 241, 245, 1),
     textTheme: TextTheme(
       bodyText1: TextStyle(
         fontSize: 18,
@@ -24,6 +25,11 @@ ThemeData lightTheme() {
         fontSize: 22,
         color: const Color(0xff000000),
         fontWeight: FontWeight.w600,
+      ),
+      headline6: TextStyle(
+        fontSize: 20,
+        color: const Color.fromRGBO(64, 64, 64, 1),
+        fontWeight: FontWeight.w700,
       ),
       button: TextStyle(
         fontSize: 18,
