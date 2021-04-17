@@ -1,4 +1,5 @@
 import 'package:ProductByte/models/byte.dart';
+import 'package:ProductByte/models/phcollection.dart';
 import 'package:ProductByte/services/byte_repository.dart';
 import 'package:ProductByte/services/feed_steam_cubit/feed_stream_cubit.dart';
 import 'package:ProductByte/services/firebase_service/firebase_service.dart';
@@ -6,7 +7,9 @@ import 'package:ProductByte/util/global.dart';
 import 'package:ProductByte/util/result.dart';
 import 'package:ProductByte/widgets/byte_square.dart';
 import 'package:ProductByte/widgets/category_chip.dart';
+import 'package:ProductByte/widgets/collection_square.dart';
 import 'package:ProductByte/widgets/search_bar.dart';
+import 'package:ProductByte/widgets/section_title.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,11 +35,17 @@ class PHDiscoverScreen extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<FeedStreamCubit<PHByte>>(
-            create: (_) => FeedStreamCubit<PHByte>(
-                  repository: FirebaseService<PHByte>(),
+          create: (_) => FeedStreamCubit<PHByte>(
+            repository: FirebaseService<PHByte>(),
+            orderByField: 'title',
+            limit: 20,
+            desc: true,
+          )..setupFeed(),
+        ),
+        BlocProvider<FeedStreamCubit<PHCollection>>(
+            create: (_) => FeedStreamCubit<PHCollection>(
+                  repository: FirebaseService<PHCollection>(),
                   orderByField: 'title',
-                  limit: 20,
-                  desc: true,
                 )..setupFeed()),
       ],
       child: PHDiscoverScreenView(feedController: feedController),
@@ -94,8 +103,12 @@ class _PHDiscoverScreenState extends State<PHDiscoverScreenView>
       _currentTab = indexTapped;
       if (_currentTab == 0) {
         context.read<FeedStreamCubit<PHByte>>().refreshFeed();
+        context.read<FeedStreamCubit<PHCollection>>().refreshFeed();
       } else {
         context.read<FeedStreamCubit<PHByte>>().filterFeed(PHGlobal.byteRef
+            .where('tags', arrayContains: categories[_currentTab]));
+        context.read<FeedStreamCubit<PHCollection>>().filterFeed(PHGlobal
+            .collectionRef
             .where('tags', arrayContains: categories[_currentTab]));
       }
     });
@@ -110,6 +123,7 @@ class _PHDiscoverScreenState extends State<PHDiscoverScreenView>
 
   @override
   Widget build(BuildContext context) {
+    final collectionFeed = context.watch<FeedStreamCubit<PHCollection>>();
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       body: CustomScrollView(
@@ -141,17 +155,68 @@ class _PHDiscoverScreenState extends State<PHDiscoverScreenView>
               ],
             ),
           ),
-          SliverToBoxAdapter(
-            child: SizedBox(
-              height: 20,
-            ),
+          // SliverToBoxAdapter(
+          //   child: SizedBox(
+          //     height: 20,
+          //   ),
+          // ),
+          collectionFeed.state.maybeWhen(
+            loaded: (items) {
+              return SliverToBoxAdapter(
+                  child: Padding(
+                padding: const EdgeInsets.fromLTRB(16.0, 20, 16, 24),
+                child: PHSectionTitle('Collections'),
+              ));
+            },
+            reachedMax: (items) {
+              return SliverToBoxAdapter(
+                  child: Padding(
+                padding: const EdgeInsets.fromLTRB(16.0, 20, 16, 24),
+                child: PHSectionTitle('Collections'),
+              ));
+            },
+            orElse: () => SliverPadding(padding: EdgeInsets.all(0)),
           ),
+          collectionFeed.state.maybeWhen(
+            loaded: (items) {
+              return SliverPadding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                sliver: _collectionGrid(items.values.toList()),
+              );
+            },
+            reachedMax: (items) {
+              return SliverPadding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                sliver: _collectionGrid(items.values.toList()),
+              );
+            },
+            orElse: () => SliverPadding(padding: EdgeInsets.all(0)),
+          ),
+          SliverToBoxAdapter(
+              child: Padding(
+            padding: const EdgeInsets.fromLTRB(16.0, 20, 16, 24),
+            child: PHSectionTitle('Explore Bytes'),
+          )),
           SliverPadding(
               padding: EdgeInsets.symmetric(horizontal: 16),
               sliver: _byteGrid()),
           SliverPadding(padding: EdgeInsets.all(22))
         ],
       ),
+    );
+  }
+
+  Widget _collectionGrid(List<PHCollection> list) {
+    return SliverGrid(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        mainAxisSpacing: 10.0,
+        crossAxisSpacing: 10.0,
+        childAspectRatio: 1.0,
+      ),
+      delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
+        return CollectionSquare(list[index]);
+      }, childCount: list.length),
     );
   }
 

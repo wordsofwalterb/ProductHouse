@@ -2,7 +2,9 @@ import 'package:ProductByte/blocs/bookmark_bloc/bookmark_bloc.dart';
 import 'package:ProductByte/cubits/read_bytes_cubit/read_bytes_cubit.dart';
 import 'package:ProductByte/cubits/recent_bytes_cubit/recent_bytes_cubit.dart';
 import 'package:ProductByte/models/byte.dart';
+import 'package:ProductByte/models/phcollection.dart';
 import 'package:ProductByte/screens/byte_screen.dart';
+import 'package:ProductByte/screens/collection_screen.dart';
 import 'package:ProductByte/screens/more_screen.dart';
 import 'package:ProductByte/screens/profile_screen.dart';
 import 'package:ProductByte/screens/search_screen.dart';
@@ -18,6 +20,7 @@ class PHRoutes {
   static const String searchScreen = 'searchScreen';
   static const String profileScreen = 'profileScreen';
   static const String moreScreen = 'moreScreen';
+  static const String collectionScreen = 'collectionScreen';
 }
 
 /// Correlates routes names to builders
@@ -25,6 +28,12 @@ class PHRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
     switch (settings.name) {
+      case PHRoutes.collectionScreen:
+        if (args is CollectionScreenArgs) {
+          return _collectionScreenRoute(args);
+        }
+        throw Exception('Invalid arguments for ${settings.name}');
+        break;
       case PHRoutes.home:
         return MaterialPageRoute(builder: (_) => HomeScreen());
       case PHRoutes.profileScreen:
@@ -79,6 +88,19 @@ class PHRouter {
     );
   }
 
+  static Route<dynamic> _collectionScreenRoute(CollectionScreenArgs args) {
+    return MaterialPageRoute(
+      builder: (context) => MultiBlocProvider(
+        providers: [
+          BlocProvider.value(value: args.bookmarkBloc),
+          BlocProvider.value(value: args.recentsCubit),
+          BlocProvider.value(value: args.readBytesCubit),
+        ],
+        child: CollectionScreen(args.collection),
+      ),
+    );
+  }
+
   static Route<dynamic> _moreScreenRoute(MoreScreenArgs args) {
     return MaterialPageRoute(
       builder: (context) => MultiBlocProvider(
@@ -113,6 +135,20 @@ class ByteScreenArgs {
   const ByteScreenArgs({
     @required this.bookmarkBloc,
     @required this.byte,
+    @required this.recentsCubit,
+    @required this.readBytesCubit,
+  });
+}
+
+class CollectionScreenArgs {
+  final BookmarkBloc bookmarkBloc;
+  final PHCollection collection;
+  final RecentBytesCubit recentsCubit;
+  final ReadBytesCubit readBytesCubit;
+
+  const CollectionScreenArgs({
+    @required this.bookmarkBloc,
+    @required this.collection,
     @required this.recentsCubit,
     @required this.readBytesCubit,
   });

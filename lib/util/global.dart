@@ -1,4 +1,6 @@
 import 'package:ProductByte/models/byte.dart';
+import 'package:ProductByte/models/phcollection.dart';
+import 'package:ProductByte/models/phlink.dart';
 import 'package:ProductByte/models/user.dart';
 import 'package:ProductByte/services/model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -19,14 +21,22 @@ class PHGlobal {
       FirebaseFirestore.instance.collection('users');
   static final CollectionReference byteRef =
       FirebaseFirestore.instance.collection('bytes');
+  static final CollectionReference collectionRef =
+      FirebaseFirestore.instance.collection('collections');
+  static final CollectionReference linkRef =
+      FirebaseFirestore.instance.collection('links');
 
   static final collectionMapper = <Type, CollectionReference>{
     PHByte: byteRef,
     PHUser: userRef,
+    PHCollection: collectionRef,
+    PHLink: linkRef,
   };
 
   static final jsonMapper = {
     PHByte: (Map<String, dynamic> data) => PHByte.fromJson(data),
     PHUser: (Map<String, dynamic> data) => PHUser.fromJson(data),
+    PHCollection: (Map<String, dynamic> data) => PHCollection.fromJson(data),
+    PHLink: (Map<String, dynamic> data) => PHLink.fromJson(data),
   };
 }

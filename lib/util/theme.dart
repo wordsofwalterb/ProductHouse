@@ -10,7 +10,7 @@ ThemeData phTheme({bool isDark}) {
     primaryVariant: Colors.amber,
     brightness: Brightness.dark,
     onPrimary: Colors.white,
-    secondary: Colors.amber,
+    secondary: Color.fromRGBO(70, 73, 89, 1),
     background: Color.fromRGBO(32, 34, 37, 1),
     onBackground: Colors.white,
     error: Colors.red,
