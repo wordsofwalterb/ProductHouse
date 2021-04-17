@@ -49,7 +49,7 @@ class PHLinkTile extends StatelessWidget {
                         'WIKIPEDIA',
                         style: Theme.of(context).textTheme.overline.copyWith(
                               fontSize: 14,
-                              color: Colors.black87,
+                              color: Theme.of(context).colorScheme.onSurface,
                             ),
                       )
                     ],

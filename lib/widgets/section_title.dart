@@ -16,7 +16,7 @@ class PHSectionTitle extends StatelessWidget {
             fontFamily: 'SFProText-Bold',
             fontSize: 28,
             fontWeight: FontWeight.bold,
-            color: const Color(0xff393939),
+            color: Theme.of(context).colorScheme.onBackground,
           ),
           textAlign: TextAlign.left,
         ),
@@ -26,7 +26,7 @@ class PHSectionTitle extends StatelessWidget {
           child: Container(
             height: 5,
             width: 75,
-            color: Theme.of(context).primaryColor,
+            color: Theme.of(context).colorScheme.primary,
           ),
         ),
       ],

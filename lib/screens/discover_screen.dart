@@ -111,6 +111,7 @@ class _PHDiscoverScreenState extends State<PHDiscoverScreenView>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: CustomScrollView(
         controller: _feedController,
         slivers: [
@@ -148,6 +149,7 @@ class _PHDiscoverScreenState extends State<PHDiscoverScreenView>
           SliverPadding(
               padding: EdgeInsets.symmetric(horizontal: 16),
               sliver: _byteGrid()),
+          SliverPadding(padding: EdgeInsets.all(22))
         ],
       ),
     );
@@ -164,7 +166,7 @@ class _PHDiscoverScreenState extends State<PHDiscoverScreenView>
               style: TextStyle(
                 fontFamily: 'SFProText-Bold',
                 fontSize: 35,
-                color: const Color(0xff393939),
+                color: Theme.of(context).colorScheme.onBackground,
                 fontWeight: FontWeight.bold,
               ),
               textAlign: TextAlign.left,

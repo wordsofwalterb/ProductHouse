@@ -83,9 +83,8 @@ class PHByteTile extends StatelessWidget {
                     Text(
                       byte.title,
                       style: TextStyle(
-                          fontFamily: 'SFProText-Semibold',
                           fontSize: 18,
-                          color: const Color(0xff404040),
+                          color: Theme.of(context).colorScheme.onSurface,
                           fontWeight: FontWeight.bold),
                       textAlign: TextAlign.start,
                     ),
@@ -93,9 +92,8 @@ class PHByteTile extends StatelessWidget {
                     Text(
                       'Strategy',
                       style: TextStyle(
-                        fontFamily: 'SFProText-Regular',
                         fontSize: 18,
-                        color: const Color(0xff4b4b4b),
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.left,

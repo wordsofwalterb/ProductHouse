@@ -43,7 +43,8 @@ class _SearchScreenState extends State<SearchScreen> {
             onSearch: _fetchBytes,
             minimumChars: 0,
             searchBarController: _searchBarController,
-            iconActiveColor: Theme.of(context).primaryColor,
+            textStyle: Theme.of(context).textTheme.bodyText2,
+            iconActiveColor: Theme.of(context).colorScheme.primary,
             hintText: 'Search',
             onCancelled: () => Navigator.of(context).pop(),
             searchBarStyle: const SearchBarStyle(

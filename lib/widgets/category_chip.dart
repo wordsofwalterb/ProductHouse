@@ -13,15 +13,16 @@ class PHCategoryChip extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(4.0),
         color: (isActive)
-            ? Theme.of(context).primaryColor
-            : const Color(0xff494949),
+            ? Theme.of(context).colorScheme.primary
+            : Theme.of(context).colorScheme.surface,
       ),
       child: Text(
         text,
         style: TextStyle(
-          fontFamily: 'SFProText-Regular',
           fontSize: 18,
-          color: const Color(0xffffffff),
+          color: (isActive)
+              ? Theme.of(context).colorScheme.onPrimary
+              : Theme.of(context).colorScheme.onSurface,
         ),
         textAlign: TextAlign.left,
       ),

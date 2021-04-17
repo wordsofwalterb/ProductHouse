@@ -21,7 +21,7 @@ class PHSearchBar extends StatelessWidget {
         height: 42,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8.0),
-          color: const Color(0xfff0f1f5),
+          color: Theme.of(context).colorScheme.surface,
         ),
         child: Row(
           children: [

@@ -56,7 +56,7 @@ class PHByteScreen extends StatelessWidget {
                 byte.overview,
                 style: TextStyle(
                     fontSize: 18,
-                    color: Theme.of(context).primaryColor,
+                    color: Theme.of(context).colorScheme.onBackground,
                     height: 1.6666666666666667,
                     fontWeight: FontWeight.w700),
               ),

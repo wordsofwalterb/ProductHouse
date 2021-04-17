@@ -55,7 +55,7 @@ class PHApp extends StatelessWidget {
       navigatorObservers: [
         FirebaseAnalyticsObserver(analytics: PHGlobal.analytics),
       ],
-      theme: lightTheme(),
+      theme: phTheme(isDark: true),
       onGenerateRoute: PHRouter.generateRoute,
       home: BlocBuilder<UserBloc, UserState>(
         builder: (context, state) {

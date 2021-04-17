@@ -14,11 +14,13 @@ class MoreScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        iconTheme: Theme.of(context).iconTheme.copyWith(color: Colors.black87),
+        iconTheme: Theme.of(context)
+            .iconTheme
+            .copyWith(color: Theme.of(context).colorScheme.onBackground),
       ),
       body: CustomScrollView(
         slivers: [
-          const SliverToBoxAdapter(
+          SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
               child: Text(
@@ -26,7 +28,7 @@ class MoreScreen extends StatelessWidget {
                 style: TextStyle(
                   fontFamily: 'SFProText-Bold',
                   fontSize: 35,
-                  color: Color(0xff393939),
+                  color: Theme.of(context).colorScheme.onBackground,
                   fontWeight: FontWeight.bold,
                 ),
                 textAlign: TextAlign.left,

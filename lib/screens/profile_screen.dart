@@ -21,16 +21,18 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: PHGlobal.lightGrey,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         title: Text(
           'Account',
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
         ),
-        iconTheme: IconTheme.of(context).copyWith(color: Colors.black),
-        backgroundColor: Colors.white,
+        iconTheme: Theme.of(context).iconTheme,
+        backgroundColor: Colors.transparent,
+        foregroundColor: Colors.transparent,
+        bottomOpacity: 0,
         elevation: 0,
-        brightness: Brightness.light,
+        actionsIconTheme: Theme.of(context).iconTheme,
       ),
       body: ListView(
         children: [
@@ -49,7 +51,7 @@ class ProfileScreen extends StatelessWidget {
                   Theme.of(context).textTheme.bodyText2.copyWith(fontSize: 18),
             ),
             trailing: const Icon(SFSymbols.chevron_right),
-            tileColor: Colors.white,
+            tileColor: Theme.of(context).colorScheme.surface,
           )
         ],
       ),

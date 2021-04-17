@@ -33,8 +33,9 @@ class PHByteSquare extends StatelessWidget {
         final isRead = state.readByteIds.contains(byte.id);
         return Container(
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4.0),
-              color: Theme.of(context).primaryColor),
+            borderRadius: BorderRadius.circular(4.0),
+            color: Theme.of(context).colorScheme.surface,
+          ),
           padding: EdgeInsets.all(11),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,7 +54,7 @@ class PHByteSquare extends StatelessWidget {
                           style: TextStyle(
                             fontFamily: 'SFProText-Bold',
                             fontSize: 22,
-                            color: const Color(0xffffffff),
+                            color: Theme.of(context).colorScheme.onSurface,
                             fontWeight: FontWeight.bold,
                           ),
                           maxLines: 3,
@@ -67,7 +68,10 @@ class PHByteSquare extends StatelessWidget {
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyText2
-                                .copyWith(color: Colors.white, fontSize: 18),
+                                .copyWith(
+                                    color:
+                                        Theme.of(context).colorScheme.onSurface,
+                                    fontSize: 18),
                           ),
                         }
                       ],
@@ -78,20 +82,22 @@ class PHByteSquare extends StatelessWidget {
                     child: BlocBuilder<BookmarkBloc, BookmarkState>(
                       builder: (context, state) {
                         return state.maybeWhen(
-                            loadSuccess: (bookmarks) => IconButton(
-                                  iconSize: 35,
-                                  visualDensity: VisualDensity.compact,
-                                  padding: EdgeInsets.zero,
-                                  onPressed: () => bookmarkBloc
-                                      .add(BookmarkEvent.updateBookmark(byte)),
-                                  icon: Icon(
-                                    (bookmarks.contains(byte))
-                                        ? Icons.bookmark
-                                        : Icons.bookmark_border_outlined,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                            orElse: () => Container());
+                          loadSuccess: (bookmarks) => IconButton(
+                            iconSize: 35,
+                            visualDensity: VisualDensity.compact,
+                            alignment: Alignment.topRight,
+                            padding: EdgeInsets.zero,
+                            onPressed: () => bookmarkBloc
+                                .add(BookmarkEvent.updateBookmark(byte)),
+                            icon: Icon(
+                              (bookmarks.contains(byte))
+                                  ? Icons.bookmark
+                                  : Icons.bookmark_border_outlined,
+                              color: Theme.of(context).colorScheme.onSurface,
+                            ),
+                          ),
+                          orElse: () => Container(),
+                        );
                       },
                     ),
                   ),
@@ -107,18 +113,14 @@ class PHByteSquare extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: 'SFProText-Regular',
                       fontSize: 18,
-                      color: const Color(0xffffffff),
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
                     textAlign: TextAlign.left,
                   ),
                   Spacer(
                     flex: 1,
                   ),
-                  Icon(
-                    Icons.circle,
-                    size: 9,
-                    color: Colors.white,
-                  ),
+
                   Spacer(
                     flex: 1,
                   ),
@@ -126,13 +128,11 @@ class PHByteSquare extends StatelessWidget {
                   Text(
                     byte.readTime,
                     style: TextStyle(
-                        fontFamily: 'SFProText-Regular',
-                        fontSize: 18,
-                        color: const Color(0xffffffff)),
+                      fontFamily: 'SFProText-Regular',
+                      fontSize: 18,
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
                     textAlign: TextAlign.left,
-                  ),
-                  Spacer(
-                    flex: 3,
                   ),
                 ],
               ),

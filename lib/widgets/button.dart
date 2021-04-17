@@ -24,8 +24,8 @@ class PHButton extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4.0),
           color: isActive
-              ? (activeColor ?? Theme.of(context).primaryColor)
-              : (Theme.of(context).buttonColor),
+              ? (activeColor ?? Theme.of(context).colorScheme.primary)
+              : (Theme.of(context).colorScheme.secondary),
         ),
         child: Row(
           children: [

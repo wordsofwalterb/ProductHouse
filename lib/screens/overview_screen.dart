@@ -158,7 +158,8 @@ class PHOverviewScreen extends StatelessWidget {
                             IconButton(
                               icon: Icon(
                                 SFSymbols.chevron_right,
-                                color: Colors.black87,
+                                color:
+                                    Theme.of(context).colorScheme.onBackground,
                                 size: 25,
                               ),
                               padding: EdgeInsets.zero,
