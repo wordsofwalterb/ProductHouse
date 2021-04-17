@@ -19,7 +19,7 @@ class _$PHUserTearOff {
 // ignore: unused_element
   _PHUser call(
       {@required
-          String userID,
+          String id,
       @required
           List<String> bookmarks,
       @required
@@ -35,7 +35,7 @@ class _$PHUserTearOff {
       @JsonKey(fromJson: PHFunctions.dateTimeFromTimestamp, toJson: PHFunctions.dateTimeAsIs)
           DateTime lastOpenDate}) {
     return _PHUser(
-      userID: userID,
+      id: id,
       bookmarks: bookmarks,
       recent: recent,
       read: read,
@@ -59,7 +59,7 @@ const $PHUser = _$PHUserTearOff();
 /// @nodoc
 mixin _$PHUser {
   /// The unique identifier for the user, assigned by Firestore automatically.
-  String get userID;
+  String get id;
 
   /// List of references(IDs) to byte bookmarked by the user
   List<String> get bookmarks;
@@ -98,7 +98,7 @@ abstract class $PHUserCopyWith<$Res> {
   factory $PHUserCopyWith(PHUser value, $Res Function(PHUser) then) =
       _$PHUserCopyWithImpl<$Res>;
   $Res call(
-      {String userID,
+      {String id,
       List<String> bookmarks,
       List<String> recent,
       List<String> read,
@@ -120,7 +120,7 @@ class _$PHUserCopyWithImpl<$Res> implements $PHUserCopyWith<$Res> {
 
   @override
   $Res call({
-    Object userID = freezed,
+    Object id = freezed,
     Object bookmarks = freezed,
     Object recent = freezed,
     Object read = freezed,
@@ -130,7 +130,7 @@ class _$PHUserCopyWithImpl<$Res> implements $PHUserCopyWith<$Res> {
     Object lastOpenDate = freezed,
   }) {
     return _then(_value.copyWith(
-      userID: userID == freezed ? _value.userID : userID as String,
+      id: id == freezed ? _value.id : id as String,
       bookmarks:
           bookmarks == freezed ? _value.bookmarks : bookmarks as List<String>,
       recent: recent == freezed ? _value.recent : recent as List<String>,
@@ -155,7 +155,7 @@ abstract class _$PHUserCopyWith<$Res> implements $PHUserCopyWith<$Res> {
       __$PHUserCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String userID,
+      {String id,
       List<String> bookmarks,
       List<String> recent,
       List<String> read,
@@ -178,7 +178,7 @@ class __$PHUserCopyWithImpl<$Res> extends _$PHUserCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object userID = freezed,
+    Object id = freezed,
     Object bookmarks = freezed,
     Object recent = freezed,
     Object read = freezed,
@@ -188,7 +188,7 @@ class __$PHUserCopyWithImpl<$Res> extends _$PHUserCopyWithImpl<$Res>
     Object lastOpenDate = freezed,
   }) {
     return _then(_PHUser(
-      userID: userID == freezed ? _value.userID : userID as String,
+      id: id == freezed ? _value.id : id as String,
       bookmarks:
           bookmarks == freezed ? _value.bookmarks : bookmarks as List<String>,
       recent: recent == freezed ? _value.recent : recent as List<String>,
@@ -208,12 +208,13 @@ class __$PHUserCopyWithImpl<$Res> extends _$PHUserCopyWithImpl<$Res>
 }
 
 @JsonSerializable()
+@Implements(Model)
 
 /// @nodoc
 class _$_PHUser with DiagnosticableTreeMixin implements _PHUser {
   const _$_PHUser(
       {@required
-          this.userID,
+          this.id,
       @required
           this.bookmarks,
       @required
@@ -228,7 +229,7 @@ class _$_PHUser with DiagnosticableTreeMixin implements _PHUser {
       @required
       @JsonKey(fromJson: PHFunctions.dateTimeFromTimestamp, toJson: PHFunctions.dateTimeAsIs)
           this.lastOpenDate})
-      : assert(userID != null),
+      : assert(id != null),
         assert(bookmarks != null),
         assert(recent != null),
         assert(read != null),
@@ -241,7 +242,7 @@ class _$_PHUser with DiagnosticableTreeMixin implements _PHUser {
   @override
 
   /// The unique identifier for the user, assigned by Firestore automatically.
-  final String userID;
+  final String id;
   @override
 
   /// List of references(IDs) to byte bookmarked by the user
@@ -279,7 +280,7 @@ class _$_PHUser with DiagnosticableTreeMixin implements _PHUser {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PHUser(userID: $userID, bookmarks: $bookmarks, recent: $recent, read: $read, isTester: $isTester, featuredByteId: $featuredByteId, creationDate: $creationDate, lastOpenDate: $lastOpenDate)';
+    return 'PHUser(id: $id, bookmarks: $bookmarks, recent: $recent, read: $read, isTester: $isTester, featuredByteId: $featuredByteId, creationDate: $creationDate, lastOpenDate: $lastOpenDate)';
   }
 
   @override
@@ -287,7 +288,7 @@ class _$_PHUser with DiagnosticableTreeMixin implements _PHUser {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'PHUser'))
-      ..add(DiagnosticsProperty('userID', userID))
+      ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('bookmarks', bookmarks))
       ..add(DiagnosticsProperty('recent', recent))
       ..add(DiagnosticsProperty('read', read))
@@ -301,8 +302,8 @@ class _$_PHUser with DiagnosticableTreeMixin implements _PHUser {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _PHUser &&
-            (identical(other.userID, userID) ||
-                const DeepCollectionEquality().equals(other.userID, userID)) &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.bookmarks, bookmarks) ||
                 const DeepCollectionEquality()
                     .equals(other.bookmarks, bookmarks)) &&
@@ -327,7 +328,7 @@ class _$_PHUser with DiagnosticableTreeMixin implements _PHUser {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(userID) ^
+      const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(bookmarks) ^
       const DeepCollectionEquality().hash(recent) ^
       const DeepCollectionEquality().hash(read) ^
@@ -347,10 +348,10 @@ class _$_PHUser with DiagnosticableTreeMixin implements _PHUser {
   }
 }
 
-abstract class _PHUser implements PHUser {
+abstract class _PHUser implements PHUser, Model {
   const factory _PHUser(
       {@required
-          String userID,
+          String id,
       @required
           List<String> bookmarks,
       @required
@@ -371,7 +372,7 @@ abstract class _PHUser implements PHUser {
   @override
 
   /// The unique identifier for the user, assigned by Firestore automatically.
-  String get userID;
+  String get id;
   @override
 
   /// List of references(IDs) to byte bookmarked by the user

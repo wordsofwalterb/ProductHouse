@@ -57,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
         onPageChanged: _onPageChanged,
         children: <Widget>[
           PHOverviewScreen(),
-          PHDiscoverScreen(),
+          PHDiscoverScreen(_feedController),
         ],
       ),
       bottomNavigationBar: CupertinoTabBar(

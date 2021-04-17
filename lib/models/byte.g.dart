@@ -13,6 +13,8 @@ _$_PHByte _$_$_PHByteFromJson(Map<String, dynamic> json) {
     tags: (json['tags'] as List)?.map((e) => e as String)?.toList(),
     overview: json['overview'] as String,
     readTime: json['readTime'] as String,
+    collections:
+        (json['collections'] as List)?.map((e) => e as String)?.toList() ?? [],
     body: (json['body'] as List)
         ?.map((e) => (e as Map<String, dynamic>)?.map(
               (k, e) => MapEntry(k, e as String),
@@ -28,6 +30,7 @@ Map<String, dynamic> _$_$_PHByteToJson(_$_PHByte instance) => <String, dynamic>{
       'tags': instance.tags,
       'overview': instance.overview,
       'readTime': instance.readTime,
+      'collections': instance.collections,
       'body': instance.body,
       'featured': instance.featured,
     };

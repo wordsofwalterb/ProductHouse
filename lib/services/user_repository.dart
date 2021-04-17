@@ -18,7 +18,7 @@ class UserRepository {
       final firebaseUser = (await _firebaseAuth.signInAnonymously()).user;
 
       final userMap = {
-        'userID': firebaseUser.uid,
+        'id': firebaseUser.uid,
         'bookmarks': [],
         'recent': [],
         'read': [],

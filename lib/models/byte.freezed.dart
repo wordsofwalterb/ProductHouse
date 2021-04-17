@@ -23,6 +23,7 @@ class _$PHByteTearOff {
       @required List<String> tags,
       @required String overview,
       @required String readTime,
+      List<String> collections = const [],
       @required List<Map<String, String>> body,
       bool featured}) {
     return _PHByte(
@@ -31,6 +32,7 @@ class _$PHByteTearOff {
       tags: tags,
       overview: overview,
       readTime: readTime,
+      collections: collections,
       body: body,
       featured: featured,
     );
@@ -53,6 +55,7 @@ mixin _$PHByte {
   List<String> get tags;
   String get overview;
   String get readTime;
+  List<String> get collections;
   List<Map<String, String>> get body;
   bool get featured;
 
@@ -71,6 +74,7 @@ abstract class $PHByteCopyWith<$Res> {
       List<String> tags,
       String overview,
       String readTime,
+      List<String> collections,
       List<Map<String, String>> body,
       bool featured});
 }
@@ -90,6 +94,7 @@ class _$PHByteCopyWithImpl<$Res> implements $PHByteCopyWith<$Res> {
     Object tags = freezed,
     Object overview = freezed,
     Object readTime = freezed,
+    Object collections = freezed,
     Object body = freezed,
     Object featured = freezed,
   }) {
@@ -99,6 +104,9 @@ class _$PHByteCopyWithImpl<$Res> implements $PHByteCopyWith<$Res> {
       tags: tags == freezed ? _value.tags : tags as List<String>,
       overview: overview == freezed ? _value.overview : overview as String,
       readTime: readTime == freezed ? _value.readTime : readTime as String,
+      collections: collections == freezed
+          ? _value.collections
+          : collections as List<String>,
       body: body == freezed ? _value.body : body as List<Map<String, String>>,
       featured: featured == freezed ? _value.featured : featured as bool,
     ));
@@ -116,6 +124,7 @@ abstract class _$PHByteCopyWith<$Res> implements $PHByteCopyWith<$Res> {
       List<String> tags,
       String overview,
       String readTime,
+      List<String> collections,
       List<Map<String, String>> body,
       bool featured});
 }
@@ -136,6 +145,7 @@ class __$PHByteCopyWithImpl<$Res> extends _$PHByteCopyWithImpl<$Res>
     Object tags = freezed,
     Object overview = freezed,
     Object readTime = freezed,
+    Object collections = freezed,
     Object body = freezed,
     Object featured = freezed,
   }) {
@@ -145,6 +155,9 @@ class __$PHByteCopyWithImpl<$Res> extends _$PHByteCopyWithImpl<$Res>
       tags: tags == freezed ? _value.tags : tags as List<String>,
       overview: overview == freezed ? _value.overview : overview as String,
       readTime: readTime == freezed ? _value.readTime : readTime as String,
+      collections: collections == freezed
+          ? _value.collections
+          : collections as List<String>,
       body: body == freezed ? _value.body : body as List<Map<String, String>>,
       featured: featured == freezed ? _value.featured : featured as bool,
     ));
@@ -152,6 +165,7 @@ class __$PHByteCopyWithImpl<$Res> extends _$PHByteCopyWithImpl<$Res>
 }
 
 @JsonSerializable()
+@Implements(Model)
 
 /// @nodoc
 class _$_PHByte with DiagnosticableTreeMixin implements _PHByte {
@@ -161,6 +175,7 @@ class _$_PHByte with DiagnosticableTreeMixin implements _PHByte {
       @required this.tags,
       @required this.overview,
       @required this.readTime,
+      this.collections = const [],
       @required this.body,
       this.featured})
       : assert(id != null),
@@ -168,6 +183,7 @@ class _$_PHByte with DiagnosticableTreeMixin implements _PHByte {
         assert(tags != null),
         assert(overview != null),
         assert(readTime != null),
+        assert(collections != null),
         assert(body != null);
 
   factory _$_PHByte.fromJson(Map<String, dynamic> json) =>
@@ -183,6 +199,9 @@ class _$_PHByte with DiagnosticableTreeMixin implements _PHByte {
   final String overview;
   @override
   final String readTime;
+  @JsonKey(defaultValue: const [])
+  @override
+  final List<String> collections;
   @override
   final List<Map<String, String>> body;
   @override
@@ -190,7 +209,7 @@ class _$_PHByte with DiagnosticableTreeMixin implements _PHByte {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PHByte(id: $id, title: $title, tags: $tags, overview: $overview, readTime: $readTime, body: $body, featured: $featured)';
+    return 'PHByte(id: $id, title: $title, tags: $tags, overview: $overview, readTime: $readTime, collections: $collections, body: $body, featured: $featured)';
   }
 
   @override
@@ -203,6 +222,7 @@ class _$_PHByte with DiagnosticableTreeMixin implements _PHByte {
       ..add(DiagnosticsProperty('tags', tags))
       ..add(DiagnosticsProperty('overview', overview))
       ..add(DiagnosticsProperty('readTime', readTime))
+      ..add(DiagnosticsProperty('collections', collections))
       ..add(DiagnosticsProperty('body', body))
       ..add(DiagnosticsProperty('featured', featured));
   }
@@ -223,6 +243,9 @@ class _$_PHByte with DiagnosticableTreeMixin implements _PHByte {
             (identical(other.readTime, readTime) ||
                 const DeepCollectionEquality()
                     .equals(other.readTime, readTime)) &&
+            (identical(other.collections, collections) ||
+                const DeepCollectionEquality()
+                    .equals(other.collections, collections)) &&
             (identical(other.body, body) ||
                 const DeepCollectionEquality().equals(other.body, body)) &&
             (identical(other.featured, featured) ||
@@ -238,6 +261,7 @@ class _$_PHByte with DiagnosticableTreeMixin implements _PHByte {
       const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(overview) ^
       const DeepCollectionEquality().hash(readTime) ^
+      const DeepCollectionEquality().hash(collections) ^
       const DeepCollectionEquality().hash(body) ^
       const DeepCollectionEquality().hash(featured);
 
@@ -252,13 +276,14 @@ class _$_PHByte with DiagnosticableTreeMixin implements _PHByte {
   }
 }
 
-abstract class _PHByte implements PHByte {
+abstract class _PHByte implements PHByte, Model {
   const factory _PHByte(
       {@required String id,
       @required String title,
       @required List<String> tags,
       @required String overview,
       @required String readTime,
+      List<String> collections,
       @required List<Map<String, String>> body,
       bool featured}) = _$_PHByte;
 
@@ -274,6 +299,8 @@ abstract class _PHByte implements PHByte {
   String get overview;
   @override
   String get readTime;
+  @override
+  List<String> get collections;
   @override
   List<Map<String, String>> get body;
   @override

@@ -8,7 +8,7 @@ part of 'user.dart';
 
 _$_PHUser _$_$_PHUserFromJson(Map<String, dynamic> json) {
   return _$_PHUser(
-    userID: json['userID'] as String,
+    id: json['id'] as String,
     bookmarks: (json['bookmarks'] as List)?.map((e) => e as String)?.toList(),
     recent: (json['recent'] as List)?.map((e) => e as String)?.toList(),
     read: (json['read'] as List)?.map((e) => e as String)?.toList(),
@@ -22,7 +22,7 @@ _$_PHUser _$_$_PHUserFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$_$_PHUserToJson(_$_PHUser instance) => <String, dynamic>{
-      'userID': instance.userID,
+      'id': instance.id,
       'bookmarks': instance.bookmarks,
       'recent': instance.recent,
       'read': instance.read,

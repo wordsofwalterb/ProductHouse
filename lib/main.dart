@@ -26,13 +26,13 @@ Future<void> main() async {
 
   final prefs = await SharedPreferences.getInstance();
 
-  if (prefs.getBool('first_run') ?? false) {
-    print('Clearing cache');
+  // if (prefs.getBool('first_run') ?? false) {
+  //   print('Clearing cache');
 
-    await FirebaseAuth.instance.signOut();
+  //   await FirebaseAuth.instance.signOut();
 
-    await prefs.setBool('first_run', false);
-  }
+  //   await prefs.setBool('first_run', false);
+  // }
 
   runApp(
     MultiBlocProvider(providers: [

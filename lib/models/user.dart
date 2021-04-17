@@ -1,3 +1,4 @@
+import 'package:ProductByte/services/model.dart';
 import 'package:ProductByte/util/functions.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -9,10 +10,11 @@ part 'user.g.dart';
 /// The class representing users within the app. Used by both the current user,
 /// and by other user profiles being viewed on the app.
 @freezed
-abstract class PHUser with _$PHUser {
+abstract class PHUser with _$PHUser implements Model {
+  @Implements(Model)
   const factory PHUser({
     /// The unique identifier for the user, assigned by Firestore automatically.
-    @required String userID,
+    @required String id,
 
     /// List of references(IDs) to byte bookmarked by the user
     @required List<String> bookmarks,
