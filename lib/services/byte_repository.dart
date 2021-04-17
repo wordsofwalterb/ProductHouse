@@ -18,6 +18,7 @@ class ByteRepository {
       final query = await PHGlobal.byteRef
           .where('titleLower',
               isGreaterThanOrEqualTo: title.toLowerCase().trim())
+          .limit(15)
           .get();
 
       final bytes = parseFirestoreQuery<PHByte>(query);

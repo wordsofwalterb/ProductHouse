@@ -32,4 +32,11 @@ class PHBlocObserver extends BlocObserver {
     super.onTransition(bloc, transition);
     print(transition);
   }
+
+  @override
+  void onChange(Cubit<dynamic> bloc, Change<dynamic> change) {
+    super.onChange(bloc, change);
+    print('Next State: ${change.nextState}');
+    print('$change');
+  }
 }

@@ -85,6 +85,7 @@ class _PHDiscoverScreenState extends State<PHDiscoverScreenView>
   @override
   void dispose() {
     super.dispose();
+    _feedController.dispose();
     _tabController.dispose();
   }
 
@@ -95,7 +96,7 @@ class _PHDiscoverScreenState extends State<PHDiscoverScreenView>
         context.read<FeedStreamCubit<PHByte>>().refreshFeed();
       } else {
         context.read<FeedStreamCubit<PHByte>>().filterFeed(PHGlobal.byteRef
-            .where('tag', arrayContains: categories[_currentTab]));
+            .where('tags', arrayContains: categories[_currentTab]));
       }
     });
 
