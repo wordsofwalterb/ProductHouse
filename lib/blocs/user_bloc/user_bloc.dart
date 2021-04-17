@@ -1,4 +1,5 @@
 import 'package:ProductByte/models/user.dart';
+import 'package:ProductByte/services/firebase_service/firebase_service.dart';
 import 'package:ProductByte/services/user_repository.dart';
 import 'package:ProductByte/util/result.dart';
 import 'package:bloc/bloc.dart';
@@ -38,6 +39,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       orElse: () => print('error'),
     );
     if (updatedUser != null) {
+      FirebaseService<PHUser>().updateItem(updatedUser);
       yield UserState.authenticatedAnonymously(user: updatedUser);
     }
   }
