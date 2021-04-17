@@ -12,6 +12,7 @@ _$_PHLink _$_$_PHLinkFromJson(Map<String, dynamic> json) {
     title: json['title'] as String,
     sourceName: json['sourceName'] as String,
     sourceType: json['sourceType'] as String,
+    url: json['url'] as String,
     relatedBytes: json['relatedBytes'] ?? [],
   );
 }
@@ -21,5 +22,6 @@ Map<String, dynamic> _$_$_PHLinkToJson(_$_PHLink instance) => <String, dynamic>{
       'title': instance.title,
       'sourceName': instance.sourceName,
       'sourceType': instance.sourceType,
+      'url': instance.url,
       'relatedBytes': instance.relatedBytes,
     };

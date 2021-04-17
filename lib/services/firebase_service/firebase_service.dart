@@ -77,6 +77,18 @@ class FirebaseService<T extends Model>
     return stream;
   }
 
+  Future<T> getItemFromId(String id) async {
+    final doc = await PHGlobal.collectionMapper[T].doc(id).get();
+    final fun = PHGlobal.jsonMapper[T];
+
+    if (fun != null && doc != null) {
+      final conv = fun(doc.data()) as T;
+      return conv;
+    } else {
+      return null;
+    }
+  }
+
   Stream<PHResult<T>> getStreamfromId(String id) {
     return PHGlobal.collectionMapper[T].doc(id).snapshots().map((doc) {
       final fun = PHGlobal.jsonMapper[T];
@@ -87,7 +99,6 @@ class FirebaseService<T extends Model>
         return PHResult<T>.success(conv);
       } else {
         throw PHResult<T>.failure(errorCode: 'Error', errorMessage: 'error');
-        ;
       }
     });
   }

@@ -12,6 +12,7 @@ abstract class PHLink with _$PHLink implements Model {
     @required String title,
     @required String sourceName,
     @required String sourceType,
+    @required String url,
     @Default([]) relatedBytes,
   }) = _PHLink;
 

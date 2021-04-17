@@ -22,12 +22,14 @@ class _$PHLinkTearOff {
       @required String title,
       @required String sourceName,
       @required String sourceType,
+      @required String url,
       dynamic relatedBytes = const []}) {
     return _PHLink(
       id: id,
       title: title,
       sourceName: sourceName,
       sourceType: sourceType,
+      url: url,
       relatedBytes: relatedBytes,
     );
   }
@@ -48,6 +50,7 @@ mixin _$PHLink {
   String get title;
   String get sourceName;
   String get sourceType;
+  String get url;
   dynamic get relatedBytes;
 
   Map<String, dynamic> toJson();
@@ -64,6 +67,7 @@ abstract class $PHLinkCopyWith<$Res> {
       String title,
       String sourceName,
       String sourceType,
+      String url,
       dynamic relatedBytes});
 }
 
@@ -81,6 +85,7 @@ class _$PHLinkCopyWithImpl<$Res> implements $PHLinkCopyWith<$Res> {
     Object title = freezed,
     Object sourceName = freezed,
     Object sourceType = freezed,
+    Object url = freezed,
     Object relatedBytes = freezed,
   }) {
     return _then(_value.copyWith(
@@ -90,6 +95,7 @@ class _$PHLinkCopyWithImpl<$Res> implements $PHLinkCopyWith<$Res> {
           sourceName == freezed ? _value.sourceName : sourceName as String,
       sourceType:
           sourceType == freezed ? _value.sourceType : sourceType as String,
+      url: url == freezed ? _value.url : url as String,
       relatedBytes: relatedBytes == freezed
           ? _value.relatedBytes
           : relatedBytes as dynamic,
@@ -107,6 +113,7 @@ abstract class _$PHLinkCopyWith<$Res> implements $PHLinkCopyWith<$Res> {
       String title,
       String sourceName,
       String sourceType,
+      String url,
       dynamic relatedBytes});
 }
 
@@ -125,6 +132,7 @@ class __$PHLinkCopyWithImpl<$Res> extends _$PHLinkCopyWithImpl<$Res>
     Object title = freezed,
     Object sourceName = freezed,
     Object sourceType = freezed,
+    Object url = freezed,
     Object relatedBytes = freezed,
   }) {
     return _then(_PHLink(
@@ -134,6 +142,7 @@ class __$PHLinkCopyWithImpl<$Res> extends _$PHLinkCopyWithImpl<$Res>
           sourceName == freezed ? _value.sourceName : sourceName as String,
       sourceType:
           sourceType == freezed ? _value.sourceType : sourceType as String,
+      url: url == freezed ? _value.url : url as String,
       relatedBytes:
           relatedBytes == freezed ? _value.relatedBytes : relatedBytes,
     ));
@@ -150,11 +159,13 @@ class _$_PHLink implements _PHLink {
       @required this.title,
       @required this.sourceName,
       @required this.sourceType,
+      @required this.url,
       this.relatedBytes = const []})
       : assert(id != null),
         assert(title != null),
         assert(sourceName != null),
         assert(sourceType != null),
+        assert(url != null),
         assert(relatedBytes != null);
 
   factory _$_PHLink.fromJson(Map<String, dynamic> json) =>
@@ -168,13 +179,15 @@ class _$_PHLink implements _PHLink {
   final String sourceName;
   @override
   final String sourceType;
+  @override
+  final String url;
   @JsonKey(defaultValue: const [])
   @override
   final dynamic relatedBytes;
 
   @override
   String toString() {
-    return 'PHLink(id: $id, title: $title, sourceName: $sourceName, sourceType: $sourceType, relatedBytes: $relatedBytes)';
+    return 'PHLink(id: $id, title: $title, sourceName: $sourceName, sourceType: $sourceType, url: $url, relatedBytes: $relatedBytes)';
   }
 
   @override
@@ -191,6 +204,8 @@ class _$_PHLink implements _PHLink {
             (identical(other.sourceType, sourceType) ||
                 const DeepCollectionEquality()
                     .equals(other.sourceType, sourceType)) &&
+            (identical(other.url, url) ||
+                const DeepCollectionEquality().equals(other.url, url)) &&
             (identical(other.relatedBytes, relatedBytes) ||
                 const DeepCollectionEquality()
                     .equals(other.relatedBytes, relatedBytes)));
@@ -203,6 +218,7 @@ class _$_PHLink implements _PHLink {
       const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(sourceName) ^
       const DeepCollectionEquality().hash(sourceType) ^
+      const DeepCollectionEquality().hash(url) ^
       const DeepCollectionEquality().hash(relatedBytes);
 
   @JsonKey(ignore: true)
@@ -222,6 +238,7 @@ abstract class _PHLink implements PHLink, Model {
       @required String title,
       @required String sourceName,
       @required String sourceType,
+      @required String url,
       dynamic relatedBytes}) = _$_PHLink;
 
   factory _PHLink.fromJson(Map<String, dynamic> json) = _$_PHLink.fromJson;
@@ -234,6 +251,8 @@ abstract class _PHLink implements PHLink, Model {
   String get sourceName;
   @override
   String get sourceType;
+  @override
+  String get url;
   @override
   dynamic get relatedBytes;
   @override

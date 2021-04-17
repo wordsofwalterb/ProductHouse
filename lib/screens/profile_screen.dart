@@ -11,6 +11,7 @@ class ProfileScreen extends StatelessWidget {
 
     const url =
         'https://www.notion.so/amerison/Privacy-Policy-for-Bite-ace5b2d9891141b49573b926e2f1b6ff';
+
     if (await canLaunch(url)) {
       await launch(url);
     } else {
