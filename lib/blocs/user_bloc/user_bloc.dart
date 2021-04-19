@@ -39,8 +39,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       orElse: () => print('error'),
     );
     if (updatedUser != null) {
-      FirebaseService<PHUser>().updateItem(updatedUser);
       yield UserState.authenticatedAnonymously(user: updatedUser);
+      await FirebaseService<PHUser>().updateItem(updatedUser);
     }
   }
 
