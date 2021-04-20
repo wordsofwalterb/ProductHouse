@@ -16,22 +16,23 @@ class PHByteTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final bookmarkBloc = BlocProvider.of<BookmarkBloc>(context);
     final readBytesCubit = BlocProvider.of<ReadBytesCubit>(context);
-    return GestureDetector(
-      onTap: () => Navigator.pushNamed(
-        context,
-        PHRoutes.byteScreen,
-        arguments: ByteScreenArgs(
-          readBytesCubit: readBytesCubit,
-          bookmarkBloc: bookmarkBloc,
-          recentsCubit: BlocProvider.of<RecentBytesCubit>(context),
-          byte: byte,
+    return BlocBuilder<ReadBytesCubit, ReadBytesState>(
+        builder: (context, state) {
+      final isRead = state.readByteIds.contains(byte.id);
+      return GestureDetector(
+        onTap: () => Navigator.pushNamed(
+          context,
+          PHRoutes.byteScreen,
+          arguments: ByteScreenArgs(
+            readBytesCubit: readBytesCubit,
+            bookmarkBloc: bookmarkBloc,
+            recentsCubit: BlocProvider.of<RecentBytesCubit>(context),
+            byte: byte,
+          ),
         ),
-      ),
-      child: BlocBuilder<ReadBytesCubit, ReadBytesState>(
-          builder: (context, state) {
-        final isRead = state.readByteIds.contains(byte.id);
-        return Container(
+        child: Container(
           height: 70,
+          color: Theme.of(context).colorScheme.background,
           child: Row(
             children: [
               if (isRead) ...{
@@ -115,6 +116,8 @@ class PHByteTile extends StatelessWidget {
                             iconSize: 35,
                             visualDensity: VisualDensity.compact,
                             padding: EdgeInsets.zero,
+                            splashColor:
+                                Theme.of(context).colorScheme.background,
                             onPressed: () => bookmarkBloc
                                 .add(BookmarkEvent.updateBookmark(byte)),
                             icon: Icon(
@@ -126,6 +129,8 @@ class PHByteTile extends StatelessWidget {
                           ),
                           orElse: () => IconButton(
                             iconSize: 35,
+                            splashColor:
+                                Theme.of(context).colorScheme.background,
                             visualDensity: VisualDensity.compact,
                             padding: EdgeInsets.zero,
                             onPressed: () => {},
@@ -146,8 +151,8 @@ class PHByteTile extends StatelessWidget {
               ),
             ],
           ),
-        );
-      }),
-    );
+        ),
+      );
+    });
   }
 }

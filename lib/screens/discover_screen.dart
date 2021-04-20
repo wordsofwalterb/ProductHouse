@@ -102,8 +102,8 @@ class _PHDiscoverScreenState extends State<PHDiscoverScreenView>
     setState(() {
       _currentTab = indexTapped;
       if (_currentTab == 0) {
-        context.read<FeedStreamCubit<PHByte>>().refreshFeed();
-        context.read<FeedStreamCubit<PHCollection>>().refreshFeed();
+        context.read<FeedStreamCubit<PHByte>>().setupFeed();
+        context.read<FeedStreamCubit<PHCollection>>().setupFeed();
       } else {
         context.read<FeedStreamCubit<PHByte>>().filterFeed(PHGlobal.byteRef
             .where('tags', arrayContains: categories[_currentTab]));
@@ -140,7 +140,7 @@ class _PHDiscoverScreenState extends State<PHDiscoverScreenView>
               sliver: _topSection(context)),
           SliverToBoxAdapter(
             child: TabBar(
-              labelPadding: EdgeInsets.only(left: 16),
+              labelPadding: EdgeInsets.only(left: 16, bottom: 20, top: 2),
               indicatorColor: Colors.transparent,
               isScrollable: true,
               controller: _tabController,
@@ -155,36 +155,18 @@ class _PHDiscoverScreenState extends State<PHDiscoverScreenView>
               ],
             ),
           ),
-          // SliverToBoxAdapter(
-          //   child: SizedBox(
-          //     height: 20,
-          //   ),
-          // ),
           collectionFeed.state.maybeWhen(
-            loaded: (items) {
+            loaded: (items, _) {
               return SliverToBoxAdapter(
                   child: Padding(
-                padding: const EdgeInsets.fromLTRB(16.0, 20, 16, 24),
-                child: PHSectionTitle('Collections'),
-              ));
-            },
-            reachedMax: (items) {
-              return SliverToBoxAdapter(
-                  child: Padding(
-                padding: const EdgeInsets.fromLTRB(16.0, 20, 16, 24),
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
                 child: PHSectionTitle('Collections'),
               ));
             },
             orElse: () => SliverPadding(padding: EdgeInsets.all(0)),
           ),
           collectionFeed.state.maybeWhen(
-            loaded: (items) {
-              return SliverPadding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                sliver: _collectionGrid(items.values.toList()),
-              );
-            },
-            reachedMax: (items) {
+            loaded: (items, _) {
               return SliverPadding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 sliver: _collectionGrid(items.values.toList()),
@@ -252,17 +234,6 @@ class _PHDiscoverScreenState extends State<PHDiscoverScreenView>
   Widget _byteGrid() {
     final byteFeed = context.watch<FeedStreamCubit<PHByte>>();
     return byteFeed.state.maybeWhen(
-      initial: (_) {
-        return SliverList(
-          delegate: SliverChildListDelegate(
-            [
-              const Center(
-                child: CircularProgressIndicator(),
-              ),
-            ],
-          ),
-        );
-      },
       loading: (_) {
         return SliverList(
           delegate: SliverChildListDelegate(
@@ -274,22 +245,7 @@ class _PHDiscoverScreenState extends State<PHDiscoverScreenView>
           ),
         );
       },
-      loaded: (state) {
-        final list = state.values.toList();
-        return SliverGrid(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisSpacing: 10.0,
-            crossAxisSpacing: 10.0,
-            childAspectRatio: 1.0,
-          ),
-          delegate:
-              SliverChildBuilderDelegate((BuildContext context, int index) {
-            return PHByteSquare(list[index]);
-          }, childCount: list.length),
-        );
-      },
-      reachedMax: (state) {
+      loaded: (state, _) {
         final list = state.values.toList();
         return SliverGrid(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

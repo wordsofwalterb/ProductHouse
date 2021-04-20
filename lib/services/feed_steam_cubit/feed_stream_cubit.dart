@@ -19,14 +19,7 @@ class FeedStreamCubit<T extends Model> extends Cubit<FeedStreamState<T>> {
     @required this.orderByField,
     this.desc = false,
     this.limit = 20,
-  }) : super(const FeedStreamState.initial({})) {
-    if (whereQuery != null) {
-      query = whereQuery.orderBy(orderByField, descending: desc);
-    } else {
-      query =
-          PHGlobal.collectionMapper[T].orderBy(orderByField, descending: desc);
-    }
-  }
+  }) : super(const FeedStreamState.empty({}));
 
   final FirebaseService<T> repository;
   Query whereQuery;
@@ -34,23 +27,15 @@ class FeedStreamCubit<T extends Model> extends Cubit<FeedStreamState<T>> {
   int limit;
   final bool desc;
   final String orderByField;
-  Stream<List<T>> feedStream;
-  DocumentSnapshot _lastDoc;
-  StreamController<List<T>> feedController = StreamController<List<T>>();
 
-  @override
-  Future<void> close() async {
-    await feedController.close();
-    await super.close();
-  }
-
-  Future<void> refreshFeed() async {
+  Future<void> setupFeed() async {
     if (whereQuery != null) {
       query = whereQuery.orderBy(orderByField, descending: desc);
     } else {
       query =
           PHGlobal.collectionMapper[T].orderBy(orderByField, descending: desc);
     }
+    query = query.limit(limit);
     emit(const FeedStreamState.loading({}));
 
     final streamResult = repository.getStreamFromQuery(query);
@@ -68,30 +53,32 @@ class FeedStreamCubit<T extends Model> extends Cubit<FeedStreamState<T>> {
     streamListFunc(streamResult);
   }
 
-  Future<void> setupFeed() async {
-    query = query.limit(limit);
-    emit(const FeedStreamState.loading({}));
+  // Future<void> setupFeed() async {
+  //   query = query.limit(limit);
+  //   emit(const FeedStreamState.loading({}));
 
-    final streamResult = repository.getStreamFromQuery(query);
+  //   final streamResult = repository.getStreamFromQuery(query);
 
-    streamListFunc(streamResult);
-  }
+  //   streamListFunc(streamResult);
+  // }
 
   Future<void> fetchPage() async {
     state.maybeWhen(
-      reachedMax: (items) async {
-        emit(FeedStreamState.loadingMore(items));
-        limit = limit + limit;
-        final values =
-            items.values.map((item) => item.toJson()[orderByField]).toList();
+      loaded: (items, hasMoreItems) async {
+        if (!hasMoreItems) {
+          // emit(FeedStreamState.loading(items));
+          limit = limit + limit;
+          final values =
+              items.values.map((item) => item.toJson()[orderByField]).toList();
 
-        query = PHGlobal.collectionMapper[T]
-            .orderBy(orderByField, descending: desc)
-            .startAfter([values.last]).limit(limit);
+          query = PHGlobal.collectionMapper[T]
+              .orderBy(orderByField, descending: desc)
+              .startAfter([values.last]).limit(limit);
 
-        final streamResult = repository.getStreamFromQuery(query);
+          final streamResult = repository.getStreamFromQuery(query);
 
-        streamListFunc(streamResult);
+          streamListFunc(streamResult);
+        }
       },
       orElse: () => {},
     );
@@ -117,8 +104,8 @@ class FeedStreamCubit<T extends Model> extends Cubit<FeedStreamState<T>> {
         front.addAll(end);
 
         (itemList.length == limit)
-            ? emit(FeedStreamState.reachedMax(front))
-            : emit(FeedStreamState.loaded(front));
+            ? emit(FeedStreamState.loaded(front, hasMoreItems: false))
+            : emit(FeedStreamState.loaded(front, hasMoreItems: true));
       }
     }).onError((error) {
       log(error.toString());

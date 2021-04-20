@@ -87,6 +87,7 @@ class PHByteSquare extends StatelessWidget {
                             visualDensity: VisualDensity.compact,
                             alignment: Alignment.topRight,
                             padding: EdgeInsets.zero,
+                            splashColor: Theme.of(context).colorScheme.surface,
                             onPressed: () => bookmarkBloc
                                 .add(BookmarkEvent.updateBookmark(byte)),
                             icon: Icon(

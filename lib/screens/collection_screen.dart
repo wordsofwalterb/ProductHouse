@@ -74,24 +74,7 @@ class CollectionScreenView extends StatelessWidget {
   Widget _buildList(BuildContext context) {
     final byteFeed = context.watch<FeedStreamCubit<PHByte>>();
     return byteFeed.state.maybeWhen(
-      loaded: (items) {
-        return SliverPadding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          sliver: SliverGrid(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 10.0,
-              crossAxisSpacing: 10.0,
-              childAspectRatio: 1.0,
-            ),
-            delegate:
-                SliverChildBuilderDelegate((BuildContext context, int index) {
-              return PHByteSquare(items.values.toList()[index]);
-            }, childCount: items.length),
-          ),
-        );
-      },
-      reachedMax: (items) {
+      loaded: (items, _) {
         return SliverPadding(
           padding: EdgeInsets.symmetric(horizontal: 16),
           sliver: SliverGrid(

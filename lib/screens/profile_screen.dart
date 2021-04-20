@@ -1,5 +1,6 @@
 import 'package:ProductByte/blocs/user_bloc/user_bloc.dart';
 import 'package:ProductByte/util/global.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sfsymbols/flutter_sfsymbols.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -78,7 +79,7 @@ class ProfileScreen extends StatelessWidget {
                         .bodyText2
                         .copyWith(fontSize: 18),
                   ),
-                  trailing: Switch(
+                  trailing: CupertinoSwitch(
                     value: user.hasDarkMode,
                     onChanged: (change) => userBloc.add(
                       UserEvent.updateUser(hasDarkMode: change),

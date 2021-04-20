@@ -14,13 +14,6 @@ class _$FeedStreamStateTearOff {
   const _$FeedStreamStateTearOff();
 
 // ignore: unused_element
-  _Initial<T> initial<T extends Model>(Map<String, T> itemIds) {
-    return _Initial<T>(
-      itemIds,
-    );
-  }
-
-// ignore: unused_element
   _Loading<T> loading<T extends Model>(Map<String, T> itemIds) {
     return _Loading<T>(
       itemIds,
@@ -28,23 +21,11 @@ class _$FeedStreamStateTearOff {
   }
 
 // ignore: unused_element
-  _Success<T> loaded<T extends Model>(Map<String, T> itemIds) {
+  _Success<T> loaded<T extends Model>(Map<String, T> itemIds,
+      {bool hasMoreItems = true}) {
     return _Success<T>(
       itemIds,
-    );
-  }
-
-// ignore: unused_element
-  _LoadingMore<T> loadingMore<T extends Model>(Map<String, T> itemIds) {
-    return _LoadingMore<T>(
-      itemIds,
-    );
-  }
-
-// ignore: unused_element
-  _ReachedMax<T> reachedMax<T extends Model>(Map<String, T> itemIds) {
-    return _ReachedMax<T>(
-      itemIds,
+      hasMoreItems: hasMoreItems,
     );
   }
 
@@ -73,42 +54,30 @@ mixin _$FeedStreamState<T extends Model> {
 
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult initial(Map<String, T> itemIds),
     @required TResult loading(Map<String, T> itemIds),
-    @required TResult loaded(Map<String, T> itemIds),
-    @required TResult loadingMore(Map<String, T> itemIds),
-    @required TResult reachedMax(Map<String, T> itemIds),
+    @required TResult loaded(Map<String, T> itemIds, bool hasMoreItems),
     @required TResult empty(Map<String, T> itemIds),
     @required TResult failure(Map<String, T> itemIds),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult initial(Map<String, T> itemIds),
     TResult loading(Map<String, T> itemIds),
-    TResult loaded(Map<String, T> itemIds),
-    TResult loadingMore(Map<String, T> itemIds),
-    TResult reachedMax(Map<String, T> itemIds),
+    TResult loaded(Map<String, T> itemIds, bool hasMoreItems),
     TResult empty(Map<String, T> itemIds),
     TResult failure(Map<String, T> itemIds),
     @required TResult orElse(),
   });
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult initial(_Initial<T> value),
     @required TResult loading(_Loading<T> value),
     @required TResult loaded(_Success<T> value),
-    @required TResult loadingMore(_LoadingMore<T> value),
-    @required TResult reachedMax(_ReachedMax<T> value),
     @required TResult empty(_Empty<T> value),
     @required TResult failure(_Failure<T> value),
   });
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult initial(_Initial<T> value),
     TResult loading(_Loading<T> value),
     TResult loaded(_Success<T> value),
-    TResult loadingMore(_LoadingMore<T> value),
-    TResult reachedMax(_ReachedMax<T> value),
     TResult empty(_Empty<T> value),
     TResult failure(_Failure<T> value),
     @required TResult orElse(),
@@ -143,156 +112,6 @@ class _$FeedStreamStateCopyWithImpl<T extends Model, $Res>
       itemIds: itemIds == freezed ? _value.itemIds : itemIds as Map<String, T>,
     ));
   }
-}
-
-/// @nodoc
-abstract class _$InitialCopyWith<T extends Model, $Res>
-    implements $FeedStreamStateCopyWith<T, $Res> {
-  factory _$InitialCopyWith(
-          _Initial<T> value, $Res Function(_Initial<T>) then) =
-      __$InitialCopyWithImpl<T, $Res>;
-  @override
-  $Res call({Map<String, T> itemIds});
-}
-
-/// @nodoc
-class __$InitialCopyWithImpl<T extends Model, $Res>
-    extends _$FeedStreamStateCopyWithImpl<T, $Res>
-    implements _$InitialCopyWith<T, $Res> {
-  __$InitialCopyWithImpl(_Initial<T> _value, $Res Function(_Initial<T>) _then)
-      : super(_value, (v) => _then(v as _Initial<T>));
-
-  @override
-  _Initial<T> get _value => super._value as _Initial<T>;
-
-  @override
-  $Res call({
-    Object itemIds = freezed,
-  }) {
-    return _then(_Initial<T>(
-      itemIds == freezed ? _value.itemIds : itemIds as Map<String, T>,
-    ));
-  }
-}
-
-/// @nodoc
-class _$_Initial<T extends Model> implements _Initial<T> {
-  const _$_Initial(this.itemIds) : assert(itemIds != null);
-
-  @override
-  final Map<String, T> itemIds;
-
-  @override
-  String toString() {
-    return 'FeedStreamState<$T>.initial(itemIds: $itemIds)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is _Initial<T> &&
-            (identical(other.itemIds, itemIds) ||
-                const DeepCollectionEquality().equals(other.itemIds, itemIds)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(itemIds);
-
-  @JsonKey(ignore: true)
-  @override
-  _$InitialCopyWith<T, _Initial<T>> get copyWith =>
-      __$InitialCopyWithImpl<T, _Initial<T>>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    @required TResult initial(Map<String, T> itemIds),
-    @required TResult loading(Map<String, T> itemIds),
-    @required TResult loaded(Map<String, T> itemIds),
-    @required TResult loadingMore(Map<String, T> itemIds),
-    @required TResult reachedMax(Map<String, T> itemIds),
-    @required TResult empty(Map<String, T> itemIds),
-    @required TResult failure(Map<String, T> itemIds),
-  }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(loaded != null);
-    assert(loadingMore != null);
-    assert(reachedMax != null);
-    assert(empty != null);
-    assert(failure != null);
-    return initial(itemIds);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult initial(Map<String, T> itemIds),
-    TResult loading(Map<String, T> itemIds),
-    TResult loaded(Map<String, T> itemIds),
-    TResult loadingMore(Map<String, T> itemIds),
-    TResult reachedMax(Map<String, T> itemIds),
-    TResult empty(Map<String, T> itemIds),
-    TResult failure(Map<String, T> itemIds),
-    @required TResult orElse(),
-  }) {
-    assert(orElse != null);
-    if (initial != null) {
-      return initial(itemIds);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    @required TResult initial(_Initial<T> value),
-    @required TResult loading(_Loading<T> value),
-    @required TResult loaded(_Success<T> value),
-    @required TResult loadingMore(_LoadingMore<T> value),
-    @required TResult reachedMax(_ReachedMax<T> value),
-    @required TResult empty(_Empty<T> value),
-    @required TResult failure(_Failure<T> value),
-  }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(loaded != null);
-    assert(loadingMore != null);
-    assert(reachedMax != null);
-    assert(empty != null);
-    assert(failure != null);
-    return initial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult initial(_Initial<T> value),
-    TResult loading(_Loading<T> value),
-    TResult loaded(_Success<T> value),
-    TResult loadingMore(_LoadingMore<T> value),
-    TResult reachedMax(_ReachedMax<T> value),
-    TResult empty(_Empty<T> value),
-    TResult failure(_Failure<T> value),
-    @required TResult orElse(),
-  }) {
-    assert(orElse != null);
-    if (initial != null) {
-      return initial(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Initial<T extends Model> implements FeedStreamState<T> {
-  const factory _Initial(Map<String, T> itemIds) = _$_Initial<T>;
-
-  @override
-  Map<String, T> get itemIds;
-  @override
-  @JsonKey(ignore: true)
-  _$InitialCopyWith<T, _Initial<T>> get copyWith;
 }
 
 /// @nodoc
@@ -357,19 +176,13 @@ class _$_Loading<T extends Model> implements _Loading<T> {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult initial(Map<String, T> itemIds),
     @required TResult loading(Map<String, T> itemIds),
-    @required TResult loaded(Map<String, T> itemIds),
-    @required TResult loadingMore(Map<String, T> itemIds),
-    @required TResult reachedMax(Map<String, T> itemIds),
+    @required TResult loaded(Map<String, T> itemIds, bool hasMoreItems),
     @required TResult empty(Map<String, T> itemIds),
     @required TResult failure(Map<String, T> itemIds),
   }) {
-    assert(initial != null);
     assert(loading != null);
     assert(loaded != null);
-    assert(loadingMore != null);
-    assert(reachedMax != null);
     assert(empty != null);
     assert(failure != null);
     return loading(itemIds);
@@ -378,11 +191,8 @@ class _$_Loading<T extends Model> implements _Loading<T> {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult initial(Map<String, T> itemIds),
     TResult loading(Map<String, T> itemIds),
-    TResult loaded(Map<String, T> itemIds),
-    TResult loadingMore(Map<String, T> itemIds),
-    TResult reachedMax(Map<String, T> itemIds),
+    TResult loaded(Map<String, T> itemIds, bool hasMoreItems),
     TResult empty(Map<String, T> itemIds),
     TResult failure(Map<String, T> itemIds),
     @required TResult orElse(),
@@ -397,19 +207,13 @@ class _$_Loading<T extends Model> implements _Loading<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult initial(_Initial<T> value),
     @required TResult loading(_Loading<T> value),
     @required TResult loaded(_Success<T> value),
-    @required TResult loadingMore(_LoadingMore<T> value),
-    @required TResult reachedMax(_ReachedMax<T> value),
     @required TResult empty(_Empty<T> value),
     @required TResult failure(_Failure<T> value),
   }) {
-    assert(initial != null);
     assert(loading != null);
     assert(loaded != null);
-    assert(loadingMore != null);
-    assert(reachedMax != null);
     assert(empty != null);
     assert(failure != null);
     return loading(this);
@@ -418,11 +222,8 @@ class _$_Loading<T extends Model> implements _Loading<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult initial(_Initial<T> value),
     TResult loading(_Loading<T> value),
     TResult loaded(_Success<T> value),
-    TResult loadingMore(_LoadingMore<T> value),
-    TResult reachedMax(_ReachedMax<T> value),
     TResult empty(_Empty<T> value),
     TResult failure(_Failure<T> value),
     @required TResult orElse(),
@@ -452,7 +253,7 @@ abstract class _$SuccessCopyWith<T extends Model, $Res>
           _Success<T> value, $Res Function(_Success<T>) then) =
       __$SuccessCopyWithImpl<T, $Res>;
   @override
-  $Res call({Map<String, T> itemIds});
+  $Res call({Map<String, T> itemIds, bool hasMoreItems});
 }
 
 /// @nodoc
@@ -468,23 +269,31 @@ class __$SuccessCopyWithImpl<T extends Model, $Res>
   @override
   $Res call({
     Object itemIds = freezed,
+    Object hasMoreItems = freezed,
   }) {
     return _then(_Success<T>(
       itemIds == freezed ? _value.itemIds : itemIds as Map<String, T>,
+      hasMoreItems:
+          hasMoreItems == freezed ? _value.hasMoreItems : hasMoreItems as bool,
     ));
   }
 }
 
 /// @nodoc
 class _$_Success<T extends Model> implements _Success<T> {
-  const _$_Success(this.itemIds) : assert(itemIds != null);
+  const _$_Success(this.itemIds, {this.hasMoreItems = true})
+      : assert(itemIds != null),
+        assert(hasMoreItems != null);
 
   @override
   final Map<String, T> itemIds;
+  @JsonKey(defaultValue: true)
+  @override
+  final bool hasMoreItems;
 
   @override
   String toString() {
-    return 'FeedStreamState<$T>.loaded(itemIds: $itemIds)';
+    return 'FeedStreamState<$T>.loaded(itemIds: $itemIds, hasMoreItems: $hasMoreItems)';
   }
 
   @override
@@ -492,12 +301,18 @@ class _$_Success<T extends Model> implements _Success<T> {
     return identical(this, other) ||
         (other is _Success<T> &&
             (identical(other.itemIds, itemIds) ||
-                const DeepCollectionEquality().equals(other.itemIds, itemIds)));
+                const DeepCollectionEquality()
+                    .equals(other.itemIds, itemIds)) &&
+            (identical(other.hasMoreItems, hasMoreItems) ||
+                const DeepCollectionEquality()
+                    .equals(other.hasMoreItems, hasMoreItems)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(itemIds);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(itemIds) ^
+      const DeepCollectionEquality().hash(hasMoreItems);
 
   @JsonKey(ignore: true)
   @override
@@ -507,39 +322,30 @@ class _$_Success<T extends Model> implements _Success<T> {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult initial(Map<String, T> itemIds),
     @required TResult loading(Map<String, T> itemIds),
-    @required TResult loaded(Map<String, T> itemIds),
-    @required TResult loadingMore(Map<String, T> itemIds),
-    @required TResult reachedMax(Map<String, T> itemIds),
+    @required TResult loaded(Map<String, T> itemIds, bool hasMoreItems),
     @required TResult empty(Map<String, T> itemIds),
     @required TResult failure(Map<String, T> itemIds),
   }) {
-    assert(initial != null);
     assert(loading != null);
     assert(loaded != null);
-    assert(loadingMore != null);
-    assert(reachedMax != null);
     assert(empty != null);
     assert(failure != null);
-    return loaded(itemIds);
+    return loaded(itemIds, hasMoreItems);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult initial(Map<String, T> itemIds),
     TResult loading(Map<String, T> itemIds),
-    TResult loaded(Map<String, T> itemIds),
-    TResult loadingMore(Map<String, T> itemIds),
-    TResult reachedMax(Map<String, T> itemIds),
+    TResult loaded(Map<String, T> itemIds, bool hasMoreItems),
     TResult empty(Map<String, T> itemIds),
     TResult failure(Map<String, T> itemIds),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (loaded != null) {
-      return loaded(itemIds);
+      return loaded(itemIds, hasMoreItems);
     }
     return orElse();
   }
@@ -547,19 +353,13 @@ class _$_Success<T extends Model> implements _Success<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult initial(_Initial<T> value),
     @required TResult loading(_Loading<T> value),
     @required TResult loaded(_Success<T> value),
-    @required TResult loadingMore(_LoadingMore<T> value),
-    @required TResult reachedMax(_ReachedMax<T> value),
     @required TResult empty(_Empty<T> value),
     @required TResult failure(_Failure<T> value),
   }) {
-    assert(initial != null);
     assert(loading != null);
     assert(loaded != null);
-    assert(loadingMore != null);
-    assert(reachedMax != null);
     assert(empty != null);
     assert(failure != null);
     return loaded(this);
@@ -568,11 +368,8 @@ class _$_Success<T extends Model> implements _Success<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult initial(_Initial<T> value),
     TResult loading(_Loading<T> value),
     TResult loaded(_Success<T> value),
-    TResult loadingMore(_LoadingMore<T> value),
-    TResult reachedMax(_ReachedMax<T> value),
     TResult empty(_Empty<T> value),
     TResult failure(_Failure<T> value),
     @required TResult orElse(),
@@ -586,315 +383,15 @@ class _$_Success<T extends Model> implements _Success<T> {
 }
 
 abstract class _Success<T extends Model> implements FeedStreamState<T> {
-  const factory _Success(Map<String, T> itemIds) = _$_Success<T>;
+  const factory _Success(Map<String, T> itemIds, {bool hasMoreItems}) =
+      _$_Success<T>;
 
   @override
   Map<String, T> get itemIds;
+  bool get hasMoreItems;
   @override
   @JsonKey(ignore: true)
   _$SuccessCopyWith<T, _Success<T>> get copyWith;
-}
-
-/// @nodoc
-abstract class _$LoadingMoreCopyWith<T extends Model, $Res>
-    implements $FeedStreamStateCopyWith<T, $Res> {
-  factory _$LoadingMoreCopyWith(
-          _LoadingMore<T> value, $Res Function(_LoadingMore<T>) then) =
-      __$LoadingMoreCopyWithImpl<T, $Res>;
-  @override
-  $Res call({Map<String, T> itemIds});
-}
-
-/// @nodoc
-class __$LoadingMoreCopyWithImpl<T extends Model, $Res>
-    extends _$FeedStreamStateCopyWithImpl<T, $Res>
-    implements _$LoadingMoreCopyWith<T, $Res> {
-  __$LoadingMoreCopyWithImpl(
-      _LoadingMore<T> _value, $Res Function(_LoadingMore<T>) _then)
-      : super(_value, (v) => _then(v as _LoadingMore<T>));
-
-  @override
-  _LoadingMore<T> get _value => super._value as _LoadingMore<T>;
-
-  @override
-  $Res call({
-    Object itemIds = freezed,
-  }) {
-    return _then(_LoadingMore<T>(
-      itemIds == freezed ? _value.itemIds : itemIds as Map<String, T>,
-    ));
-  }
-}
-
-/// @nodoc
-class _$_LoadingMore<T extends Model> implements _LoadingMore<T> {
-  const _$_LoadingMore(this.itemIds) : assert(itemIds != null);
-
-  @override
-  final Map<String, T> itemIds;
-
-  @override
-  String toString() {
-    return 'FeedStreamState<$T>.loadingMore(itemIds: $itemIds)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is _LoadingMore<T> &&
-            (identical(other.itemIds, itemIds) ||
-                const DeepCollectionEquality().equals(other.itemIds, itemIds)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(itemIds);
-
-  @JsonKey(ignore: true)
-  @override
-  _$LoadingMoreCopyWith<T, _LoadingMore<T>> get copyWith =>
-      __$LoadingMoreCopyWithImpl<T, _LoadingMore<T>>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    @required TResult initial(Map<String, T> itemIds),
-    @required TResult loading(Map<String, T> itemIds),
-    @required TResult loaded(Map<String, T> itemIds),
-    @required TResult loadingMore(Map<String, T> itemIds),
-    @required TResult reachedMax(Map<String, T> itemIds),
-    @required TResult empty(Map<String, T> itemIds),
-    @required TResult failure(Map<String, T> itemIds),
-  }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(loaded != null);
-    assert(loadingMore != null);
-    assert(reachedMax != null);
-    assert(empty != null);
-    assert(failure != null);
-    return loadingMore(itemIds);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult initial(Map<String, T> itemIds),
-    TResult loading(Map<String, T> itemIds),
-    TResult loaded(Map<String, T> itemIds),
-    TResult loadingMore(Map<String, T> itemIds),
-    TResult reachedMax(Map<String, T> itemIds),
-    TResult empty(Map<String, T> itemIds),
-    TResult failure(Map<String, T> itemIds),
-    @required TResult orElse(),
-  }) {
-    assert(orElse != null);
-    if (loadingMore != null) {
-      return loadingMore(itemIds);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    @required TResult initial(_Initial<T> value),
-    @required TResult loading(_Loading<T> value),
-    @required TResult loaded(_Success<T> value),
-    @required TResult loadingMore(_LoadingMore<T> value),
-    @required TResult reachedMax(_ReachedMax<T> value),
-    @required TResult empty(_Empty<T> value),
-    @required TResult failure(_Failure<T> value),
-  }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(loaded != null);
-    assert(loadingMore != null);
-    assert(reachedMax != null);
-    assert(empty != null);
-    assert(failure != null);
-    return loadingMore(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult initial(_Initial<T> value),
-    TResult loading(_Loading<T> value),
-    TResult loaded(_Success<T> value),
-    TResult loadingMore(_LoadingMore<T> value),
-    TResult reachedMax(_ReachedMax<T> value),
-    TResult empty(_Empty<T> value),
-    TResult failure(_Failure<T> value),
-    @required TResult orElse(),
-  }) {
-    assert(orElse != null);
-    if (loadingMore != null) {
-      return loadingMore(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _LoadingMore<T extends Model> implements FeedStreamState<T> {
-  const factory _LoadingMore(Map<String, T> itemIds) = _$_LoadingMore<T>;
-
-  @override
-  Map<String, T> get itemIds;
-  @override
-  @JsonKey(ignore: true)
-  _$LoadingMoreCopyWith<T, _LoadingMore<T>> get copyWith;
-}
-
-/// @nodoc
-abstract class _$ReachedMaxCopyWith<T extends Model, $Res>
-    implements $FeedStreamStateCopyWith<T, $Res> {
-  factory _$ReachedMaxCopyWith(
-          _ReachedMax<T> value, $Res Function(_ReachedMax<T>) then) =
-      __$ReachedMaxCopyWithImpl<T, $Res>;
-  @override
-  $Res call({Map<String, T> itemIds});
-}
-
-/// @nodoc
-class __$ReachedMaxCopyWithImpl<T extends Model, $Res>
-    extends _$FeedStreamStateCopyWithImpl<T, $Res>
-    implements _$ReachedMaxCopyWith<T, $Res> {
-  __$ReachedMaxCopyWithImpl(
-      _ReachedMax<T> _value, $Res Function(_ReachedMax<T>) _then)
-      : super(_value, (v) => _then(v as _ReachedMax<T>));
-
-  @override
-  _ReachedMax<T> get _value => super._value as _ReachedMax<T>;
-
-  @override
-  $Res call({
-    Object itemIds = freezed,
-  }) {
-    return _then(_ReachedMax<T>(
-      itemIds == freezed ? _value.itemIds : itemIds as Map<String, T>,
-    ));
-  }
-}
-
-/// @nodoc
-class _$_ReachedMax<T extends Model> implements _ReachedMax<T> {
-  const _$_ReachedMax(this.itemIds) : assert(itemIds != null);
-
-  @override
-  final Map<String, T> itemIds;
-
-  @override
-  String toString() {
-    return 'FeedStreamState<$T>.reachedMax(itemIds: $itemIds)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is _ReachedMax<T> &&
-            (identical(other.itemIds, itemIds) ||
-                const DeepCollectionEquality().equals(other.itemIds, itemIds)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(itemIds);
-
-  @JsonKey(ignore: true)
-  @override
-  _$ReachedMaxCopyWith<T, _ReachedMax<T>> get copyWith =>
-      __$ReachedMaxCopyWithImpl<T, _ReachedMax<T>>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    @required TResult initial(Map<String, T> itemIds),
-    @required TResult loading(Map<String, T> itemIds),
-    @required TResult loaded(Map<String, T> itemIds),
-    @required TResult loadingMore(Map<String, T> itemIds),
-    @required TResult reachedMax(Map<String, T> itemIds),
-    @required TResult empty(Map<String, T> itemIds),
-    @required TResult failure(Map<String, T> itemIds),
-  }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(loaded != null);
-    assert(loadingMore != null);
-    assert(reachedMax != null);
-    assert(empty != null);
-    assert(failure != null);
-    return reachedMax(itemIds);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult initial(Map<String, T> itemIds),
-    TResult loading(Map<String, T> itemIds),
-    TResult loaded(Map<String, T> itemIds),
-    TResult loadingMore(Map<String, T> itemIds),
-    TResult reachedMax(Map<String, T> itemIds),
-    TResult empty(Map<String, T> itemIds),
-    TResult failure(Map<String, T> itemIds),
-    @required TResult orElse(),
-  }) {
-    assert(orElse != null);
-    if (reachedMax != null) {
-      return reachedMax(itemIds);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    @required TResult initial(_Initial<T> value),
-    @required TResult loading(_Loading<T> value),
-    @required TResult loaded(_Success<T> value),
-    @required TResult loadingMore(_LoadingMore<T> value),
-    @required TResult reachedMax(_ReachedMax<T> value),
-    @required TResult empty(_Empty<T> value),
-    @required TResult failure(_Failure<T> value),
-  }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(loaded != null);
-    assert(loadingMore != null);
-    assert(reachedMax != null);
-    assert(empty != null);
-    assert(failure != null);
-    return reachedMax(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult initial(_Initial<T> value),
-    TResult loading(_Loading<T> value),
-    TResult loaded(_Success<T> value),
-    TResult loadingMore(_LoadingMore<T> value),
-    TResult reachedMax(_ReachedMax<T> value),
-    TResult empty(_Empty<T> value),
-    TResult failure(_Failure<T> value),
-    @required TResult orElse(),
-  }) {
-    assert(orElse != null);
-    if (reachedMax != null) {
-      return reachedMax(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _ReachedMax<T extends Model> implements FeedStreamState<T> {
-  const factory _ReachedMax(Map<String, T> itemIds) = _$_ReachedMax<T>;
-
-  @override
-  Map<String, T> get itemIds;
-  @override
-  @JsonKey(ignore: true)
-  _$ReachedMaxCopyWith<T, _ReachedMax<T>> get copyWith;
 }
 
 /// @nodoc
@@ -958,19 +455,13 @@ class _$_Empty<T extends Model> implements _Empty<T> {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult initial(Map<String, T> itemIds),
     @required TResult loading(Map<String, T> itemIds),
-    @required TResult loaded(Map<String, T> itemIds),
-    @required TResult loadingMore(Map<String, T> itemIds),
-    @required TResult reachedMax(Map<String, T> itemIds),
+    @required TResult loaded(Map<String, T> itemIds, bool hasMoreItems),
     @required TResult empty(Map<String, T> itemIds),
     @required TResult failure(Map<String, T> itemIds),
   }) {
-    assert(initial != null);
     assert(loading != null);
     assert(loaded != null);
-    assert(loadingMore != null);
-    assert(reachedMax != null);
     assert(empty != null);
     assert(failure != null);
     return empty(itemIds);
@@ -979,11 +470,8 @@ class _$_Empty<T extends Model> implements _Empty<T> {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult initial(Map<String, T> itemIds),
     TResult loading(Map<String, T> itemIds),
-    TResult loaded(Map<String, T> itemIds),
-    TResult loadingMore(Map<String, T> itemIds),
-    TResult reachedMax(Map<String, T> itemIds),
+    TResult loaded(Map<String, T> itemIds, bool hasMoreItems),
     TResult empty(Map<String, T> itemIds),
     TResult failure(Map<String, T> itemIds),
     @required TResult orElse(),
@@ -998,19 +486,13 @@ class _$_Empty<T extends Model> implements _Empty<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult initial(_Initial<T> value),
     @required TResult loading(_Loading<T> value),
     @required TResult loaded(_Success<T> value),
-    @required TResult loadingMore(_LoadingMore<T> value),
-    @required TResult reachedMax(_ReachedMax<T> value),
     @required TResult empty(_Empty<T> value),
     @required TResult failure(_Failure<T> value),
   }) {
-    assert(initial != null);
     assert(loading != null);
     assert(loaded != null);
-    assert(loadingMore != null);
-    assert(reachedMax != null);
     assert(empty != null);
     assert(failure != null);
     return empty(this);
@@ -1019,11 +501,8 @@ class _$_Empty<T extends Model> implements _Empty<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult initial(_Initial<T> value),
     TResult loading(_Loading<T> value),
     TResult loaded(_Success<T> value),
-    TResult loadingMore(_LoadingMore<T> value),
-    TResult reachedMax(_ReachedMax<T> value),
     TResult empty(_Empty<T> value),
     TResult failure(_Failure<T> value),
     @required TResult orElse(),
@@ -1108,19 +587,13 @@ class _$_Failure<T extends Model> implements _Failure<T> {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult initial(Map<String, T> itemIds),
     @required TResult loading(Map<String, T> itemIds),
-    @required TResult loaded(Map<String, T> itemIds),
-    @required TResult loadingMore(Map<String, T> itemIds),
-    @required TResult reachedMax(Map<String, T> itemIds),
+    @required TResult loaded(Map<String, T> itemIds, bool hasMoreItems),
     @required TResult empty(Map<String, T> itemIds),
     @required TResult failure(Map<String, T> itemIds),
   }) {
-    assert(initial != null);
     assert(loading != null);
     assert(loaded != null);
-    assert(loadingMore != null);
-    assert(reachedMax != null);
     assert(empty != null);
     assert(failure != null);
     return failure(itemIds);
@@ -1129,11 +602,8 @@ class _$_Failure<T extends Model> implements _Failure<T> {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult initial(Map<String, T> itemIds),
     TResult loading(Map<String, T> itemIds),
-    TResult loaded(Map<String, T> itemIds),
-    TResult loadingMore(Map<String, T> itemIds),
-    TResult reachedMax(Map<String, T> itemIds),
+    TResult loaded(Map<String, T> itemIds, bool hasMoreItems),
     TResult empty(Map<String, T> itemIds),
     TResult failure(Map<String, T> itemIds),
     @required TResult orElse(),
@@ -1148,19 +618,13 @@ class _$_Failure<T extends Model> implements _Failure<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult initial(_Initial<T> value),
     @required TResult loading(_Loading<T> value),
     @required TResult loaded(_Success<T> value),
-    @required TResult loadingMore(_LoadingMore<T> value),
-    @required TResult reachedMax(_ReachedMax<T> value),
     @required TResult empty(_Empty<T> value),
     @required TResult failure(_Failure<T> value),
   }) {
-    assert(initial != null);
     assert(loading != null);
     assert(loaded != null);
-    assert(loadingMore != null);
-    assert(reachedMax != null);
     assert(empty != null);
     assert(failure != null);
     return failure(this);
@@ -1169,11 +633,8 @@ class _$_Failure<T extends Model> implements _Failure<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult initial(_Initial<T> value),
     TResult loading(_Loading<T> value),
     TResult loaded(_Success<T> value),
-    TResult loadingMore(_LoadingMore<T> value),
-    TResult reachedMax(_ReachedMax<T> value),
     TResult empty(_Empty<T> value),
     TResult failure(_Failure<T> value),
     @required TResult orElse(),
