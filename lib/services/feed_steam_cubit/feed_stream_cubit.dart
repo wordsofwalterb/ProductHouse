@@ -65,7 +65,7 @@ class FeedStreamCubit<T extends Model> extends Cubit<FeedStreamState<T>> {
   Future<void> fetchPage() async {
     state.maybeWhen(
       loaded: (items, hasMoreItems) async {
-        if (!hasMoreItems) {
+        if (hasMoreItems) {
           // emit(FeedStreamState.loading(items));
           limit = limit + limit;
           final values =
@@ -89,23 +89,35 @@ class FeedStreamCubit<T extends Model> extends Cubit<FeedStreamState<T>> {
       if (itemList.isEmpty) {
         emit(const FeedStreamState.empty({}));
       } else {
-        final end = Map<String, T>.from(state.itemIds);
+        // if (desc) {
+        //   final end = Map<String, T>.from(state.itemIds);
 
-        Map<String, T> front = {};
+        //   Map<String, T> front = {};
+
+        //   for (final item in itemList) {
+        //     if (!state.itemIds.containsKey(item.id)) {
+        //       front.addAll({item.id: item});
+        //     } else {
+        //       end.addAll({item.id: item});
+        //     }
+        //   }
+
+        //   front.addAll(end);
+
+        //   (itemList.length == limit)
+        //       ? emit(FeedStreamState.loaded(front))
+        //       : emit(FeedStreamState.loaded(front, hasMoreItems: false));
+        // } else {
+        final current = Map<String, T>.from(state.itemIds);
 
         for (final item in itemList) {
-          if (!state.itemIds.containsKey(item.id)) {
-            front.addAll({item.id: item});
-          } else {
-            end.addAll({item.id: item});
-          }
+          current.addAll({item.id: item});
         }
 
-        front.addAll(end);
-
         (itemList.length == limit)
-            ? emit(FeedStreamState.loaded(front, hasMoreItems: false))
-            : emit(FeedStreamState.loaded(front, hasMoreItems: true));
+            ? emit(FeedStreamState.loaded(current))
+            : emit(FeedStreamState.loaded(current, hasMoreItems: false));
+        // }
       }
     }).onError((error) {
       log(error.toString());

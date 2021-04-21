@@ -34,7 +34,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     PHUser updatedUser;
     state.maybeWhen(
       authenticatedAnonymously: (user) {
-        updatedUser = (user as PHUser).copyWith(hasDarkMode: event.hasDarkMode);
+        updatedUser = user.copyWith(hasDarkMode: event.hasDarkMode);
       },
       orElse: () => print('error'),
     );

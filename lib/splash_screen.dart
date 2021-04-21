@@ -5,9 +5,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      body: Center(
-        child: Container(),
-      ),
+      body: Container(),
     );
   }
 }

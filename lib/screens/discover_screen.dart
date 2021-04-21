@@ -142,6 +142,14 @@ class _PHDiscoverScreenState extends State<PHDiscoverScreenView>
             child: TabBar(
               labelPadding: EdgeInsets.only(left: 16, bottom: 20, top: 2),
               indicatorColor: Colors.transparent,
+              labelColor: Colors.transparent,
+              overlayColor: MaterialStateProperty.resolveWith<Color>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.pressed))
+                    return Colors.transparent;
+                  return null; // Use the component's default.
+                },
+              ),
               isScrollable: true,
               controller: _tabController,
               onTap: _onTabItemTapped,
