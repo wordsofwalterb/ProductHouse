@@ -132,7 +132,8 @@ class _PHDiscoverScreenState extends State<PHDiscoverScreenView>
           SliverPadding(
             padding: EdgeInsets.symmetric(horizontal: 16),
             sliver: SliverToBoxAdapter(
-              child: SizedBox(height: MediaQuery.of(context).viewPadding.top),
+              child:
+                  SizedBox(height: MediaQuery.of(context).viewPadding.top + 10),
             ),
           ),
           SliverPadding(
@@ -198,8 +199,8 @@ class _PHDiscoverScreenState extends State<PHDiscoverScreenView>
 
   Widget _collectionGrid(List<PHCollection> list) {
     return SliverGrid(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
+      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: 300,
         mainAxisSpacing: 10.0,
         crossAxisSpacing: 10.0,
         childAspectRatio: 1.0,
@@ -256,8 +257,8 @@ class _PHDiscoverScreenState extends State<PHDiscoverScreenView>
       loaded: (state, _) {
         final list = state.values.toList();
         return SliverGrid(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
+          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 300,
             mainAxisSpacing: 10.0,
             crossAxisSpacing: 10.0,
             childAspectRatio: 1.0,

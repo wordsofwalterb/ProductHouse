@@ -78,8 +78,8 @@ class CollectionScreenView extends StatelessWidget {
         return SliverPadding(
           padding: EdgeInsets.symmetric(horizontal: 16),
           sliver: SliverGrid(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
+            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 200,
               mainAxisSpacing: 10.0,
               crossAxisSpacing: 10.0,
               childAspectRatio: 1.0,

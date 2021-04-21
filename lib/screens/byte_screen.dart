@@ -28,7 +28,7 @@ class PHByteScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Spacer(
-                  flex: 5,
+                  flex: 4,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 12.0),
