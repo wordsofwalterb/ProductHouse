@@ -27,12 +27,11 @@ class PHByteScreen extends StatelessWidget {
             flexibleSpace: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Spacer(
-                  flex: 1,
+                const Spacer(
+                  flex: 5,
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 12.0, vertical: 25),
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
                   child: Text(
                     byte.title,
                     style: TextStyle(
@@ -44,6 +43,7 @@ class PHByteScreen extends StatelessWidget {
                     textAlign: TextAlign.left,
                   ),
                 ),
+                const Spacer(),
               ],
             ),
           ),
