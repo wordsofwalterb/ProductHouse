@@ -51,7 +51,7 @@ class PHApp extends StatelessWidget {
     FlutterUxcam.startWithKey("ce7u1x50dr9hm60");
     return BlocBuilder<UserBloc, UserState>(builder: (context, state) {
       return MaterialApp(
-        title: 'ProductByte',
+        title: 'Byte',
         debugShowCheckedModeBanner: false,
         navigatorObservers: [
           FirebaseAnalyticsObserver(analytics: PHGlobal.analytics),

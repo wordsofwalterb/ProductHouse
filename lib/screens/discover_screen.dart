@@ -20,10 +20,9 @@ const categories = [
   'Trending',
   'Strategy',
   'Design',
-  'Analytics',
-  'Dark Pattern',
-  'Prioritization',
-  'Discovery'
+  'Discovery',
+  'Delivery',
+  'Data Science',
 ];
 
 class PHDiscoverScreen extends StatelessWidget {
