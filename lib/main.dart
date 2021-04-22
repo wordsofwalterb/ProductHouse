@@ -48,7 +48,7 @@ class PHApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FlutterUxcam.optIntoSchematicRecordings();
-    FlutterUxcam.startWithKey("8ly265sltxzg33i");
+    FlutterUxcam.startWithKey("ce7u1x50dr9hm60");
     return BlocBuilder<UserBloc, UserState>(builder: (context, state) {
       return MaterialApp(
         title: 'ProductByte',

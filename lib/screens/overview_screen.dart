@@ -27,15 +27,15 @@ class PHOverviewScreen extends StatelessWidget {
         slivers: [
           _appSearchBar(),
           _dailyByte(),
-          _recents(),
-          _bookmarks(),
           SliverToBoxAdapter(
             child: const Padding(
               padding: EdgeInsets.symmetric(vertical: 22.0),
-              child: PHSectionTitle('Suggested'),
+              child: PHSectionTitle("Bytes you'll ❤️"),
             ),
           ),
           _suggested(),
+          _recents(),
+          _bookmarks(),
         ],
       ),
     ));
