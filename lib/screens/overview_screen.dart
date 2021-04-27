@@ -30,7 +30,7 @@ class PHOverviewScreen extends StatelessWidget {
           SliverToBoxAdapter(
             child: const Padding(
               padding: EdgeInsets.symmetric(vertical: 22.0),
-              child: PHSectionTitle("Bytes you'll ❤️"),
+              child: PHSectionTitle("Trending This Week"),
             ),
           ),
           _suggested(),
