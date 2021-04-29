@@ -10,6 +10,7 @@ import 'package:ProductByte/widgets/byte_square.dart';
 import 'package:ProductByte/widgets/byte_tile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CollectionScreen extends StatelessWidget {
   const CollectionScreen(this.collection);
