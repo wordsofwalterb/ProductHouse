@@ -71,7 +71,7 @@ class PHOverviewScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 24),
-                  PHSectionTitle('Daily Byte'),
+                  PHSectionTitle('Picked For You'),
                   SizedBox(height: 17.5),
                   PHFeaturedByte(result.data),
                 ],
